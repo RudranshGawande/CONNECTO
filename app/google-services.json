@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "133242299675",
+    "project_id": "urban-space-69",
+    "storage_bucket": "urban-space-69.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:133242299675:android:7a13f6cd9140df1443dfbe",
+        "android_client_info": {
+          "package_name": "com.megaproject.urbanspace"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCe93jhsgmtpbeuHMkn-qAf1MqgyudM1Yo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
