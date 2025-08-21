@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="primaryColor">#90CAF9</color>
+    <color name="primaryDarkColor">#42A5F5</color>
+    <color name="onPrimaryColor">#000000</color>
+
+    <color name="secondaryColor">#FFD54F</color>
+    <color name="onSecondaryColor">#000000</color>
+
+    <color name="background">#FFFFFF</color>
+    <color name="surface">#F5F5F5</color>
+    <color name="onSurface">#000000</color>
+    <color name="blue">#2196F3</color>
+    <color name="green">#4DBE1C</color>
+    <color name="red">#F44336</color>
+    <color name="purple">#8536F4</color>
+</resources>
