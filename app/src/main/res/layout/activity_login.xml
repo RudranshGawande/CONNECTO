@@ -8,6 +8,8 @@
     android:layout_gravity="center"
     android:orientation="vertical"
     android:padding="24dp">
+
+
     <!-- Card container (rounded) -->
     <soup.neumorphism.NeumorphCardView
         android:id="@+id/card"
