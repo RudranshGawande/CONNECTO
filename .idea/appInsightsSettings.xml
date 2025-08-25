@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.megaproject.urbanspace" />
+                  <option name="mobileSdkAppId" value="1:133242299675:android:7a13f6cd9140df1443dfbe" />
+                  <option name="projectId" value="urban-space-69" />
+                  <option name="projectNumber" value="133242299675" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

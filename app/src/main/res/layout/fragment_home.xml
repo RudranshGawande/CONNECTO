@@ -1,298 +1,243 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:neu="http://schemas.android.com/apk/res-auto"
-    xmlns:app="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp"
-    android:background="#E0E0E0">
+    android:background="#E0E0E0"
+    android:padding="16dp">
 
-    <!-- Card 1 -->
+    <!-- Transport Card -->
     <soup.neumorphism.NeumorphCardView
-        android:id="@+id/card1"
+        android:id="@+id/transportCard"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        neu:neumorph_shapeType="flat"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_height="150dp"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/card2"
-        app:layout_constraintWidth_percent="0.47">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/wasteCard"
+        app:layout_constraintWidth_percent="0.48"
+        neu:neumorph_shapeType="flat"
+        neu:neumorph_shadowElevation="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center"
-            android:padding="16dp">
+            android:gravity="center">
 
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/ic_home"
-                android:contentDescription="Icon 1" />
+                android:src="@drawable/ic_transport"
+                />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Card 1"
-                android:textColor="#333"
+                android:text="Transport"
                 android:textSize="16sp"
-                android:layout_marginTop="8dp" />
+                android:textStyle="bold"
+                android:layout_marginTop="8dp"/>
         </LinearLayout>
-
     </soup.neumorphism.NeumorphCardView>
 
-    <!-- Card 2 -->
+    <!-- Waste Card -->
     <soup.neumorphism.NeumorphCardView
-        android:id="@+id/card2"
+        android:id="@+id/wasteCard"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        neu:neumorph_shapeType="flat"
-        app:layout_constraintStart_toEndOf="@id/card1"
+        android:layout_height="150dp"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/transportCard"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.47">
+        app:layout_constraintWidth_percent="0.48"
+        neu:neumorph_shapeType="flat"
+        neu:neumorph_shadowElevation="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center"
-            android:padding="16dp">
+            android:gravity="center">
 
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/ic_home"
-                android:contentDescription="Icon 2" />
+                android:src="@drawable/ic_waste" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Card 2"
-                android:textColor="#333"
+                android:text="Waste"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 android:layout_marginTop="8dp" />
         </LinearLayout>
-
     </soup.neumorphism.NeumorphCardView>
 
-    <!-- Card 3 -->
+    <!-- Events Card -->
     <soup.neumorphism.NeumorphCardView
-        android:id="@+id/card3"
+        android:id="@+id/eventsCard"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        neu:neumorph_shapeType="flat"
+        android:layout_height="150dp"
+        app:layout_constraintTop_toBottomOf="@id/transportCard"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card1"
-        app:layout_constraintEnd_toStartOf="@+id/card4"
-        app:layout_constraintWidth_percent="0.47">
+        app:layout_constraintEnd_toStartOf="@+id/lostFoundCard"
+        app:layout_constraintWidth_percent="0.48"
+        neu:neumorph_shapeType="flat"
+        neu:neumorph_shadowElevation="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center"
-            android:padding="16dp">
+            android:gravity="center">
 
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/ic_home"
-                android:contentDescription="Icon 3" />
+                android:src="@drawable/ic_event" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Card 3"
-                android:textColor="#333"
+                android:text="Events"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 android:layout_marginTop="8dp" />
         </LinearLayout>
-
     </soup.neumorphism.NeumorphCardView>
 
-    <!-- Card 4 -->
+    <!-- Lost & Found Card -->
     <soup.neumorphism.NeumorphCardView
-        android:id="@+id/card4"
+        android:id="@+id/lostFoundCard"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        neu:neumorph_shapeType="flat"
-        app:layout_constraintStart_toEndOf="@id/card3"
-        app:layout_constraintTop_toBottomOf="@id/card2"
+        android:layout_height="150dp"
+        app:layout_constraintTop_toBottomOf="@id/wasteCard"
+        app:layout_constraintStart_toEndOf="@id/eventsCard"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.47">
+        app:layout_constraintWidth_percent="0.48"
+        neu:neumorph_shapeType="flat"
+        neu:neumorph_shadowElevation="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center"
-            android:padding="16dp">
+            android:gravity="center">
 
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/ic_home"
-                android:contentDescription="Icon 4" />
+                android:src="@drawable/ic_lostfound" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Card 4"
-                android:textColor="#333"
+                android:text="Lost &amp; Found"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 android:layout_marginTop="8dp" />
         </LinearLayout>
-
     </soup.neumorphism.NeumorphCardView>
 
-    <!-- Card 5 -->
+    <!-- Report Issue Card -->
     <soup.neumorphism.NeumorphCardView
-        android:id="@+id/card5"
+        android:id="@+id/reportIssueCard"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        neu:neumorph_shapeType="flat"
+        android:layout_height="150dp"
+        app:layout_constraintTop_toBottomOf="@id/eventsCard"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card3"
-        app:layout_constraintEnd_toStartOf="@+id/card6"
-        app:layout_constraintWidth_percent="0.47">
+        app:layout_constraintEnd_toStartOf="@+id/emergencyCard"
+        app:layout_constraintWidth_percent="0.48"
+        neu:neumorph_shapeType="flat"
+        neu:neumorph_shadowElevation="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center"
-            android:padding="16dp">
+            android:gravity="center">
 
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/ic_home"
-                android:contentDescription="Icon 5" />
+                android:src="@drawable/ic_report"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Card 5"
-                android:textColor="#333"
+                android:text="Report Issue"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 android:layout_marginTop="8dp" />
         </LinearLayout>
-
     </soup.neumorphism.NeumorphCardView>
 
-    <!-- Card 6 -->
+    <!-- Emergency Card -->
     <soup.neumorphism.NeumorphCardView
-        android:id="@+id/card6"
+        android:id="@+id/emergencyCard"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        neu:neumorph_shapeType="flat"
-        app:layout_constraintStart_toEndOf="@id/card5"
-        app:layout_constraintTop_toBottomOf="@id/card4"
+        android:layout_height="150dp"
+        app:layout_constraintTop_toBottomOf="@id/lostFoundCard"
+        app:layout_constraintStart_toEndOf="@id/reportIssueCard"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.47">
+        app:layout_constraintWidth_percent="0.48"
+        neu:neumorph_shapeType="flat"
+        neu:neumorph_shadowElevation="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center"
-            android:padding="16dp">
+            android:gravity="center">
 
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/ic_home"
-                android:contentDescription="Icon 6" />
+                android:src="@drawable/ic_emergency" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Card 6"
-                android:textColor="#333"
+                android:text="Emergency"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 android:layout_marginTop="8dp" />
         </LinearLayout>
-
     </soup.neumorphism.NeumorphCardView>
 
-    <!-- Card 7 -->
+    <!-- Community Chat Card -->
     <soup.neumorphism.NeumorphCardView
-        android:id="@+id/card7"
+        android:id="@+id/chatCard"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        neu:neumorph_shapeType="flat"
+        android:layout_height="150dp"
+        app:layout_constraintTop_toBottomOf="@id/reportIssueCard"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/card5"
-        app:layout_constraintEnd_toStartOf="@+id/card8"
-        app:layout_constraintWidth_percent="0.47">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:padding="16dp">
-
-            <ImageView
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:src="@drawable/ic_home"
-                android:contentDescription="Icon 7" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Card 7"
-                android:textColor="#333"
-                android:textSize="16sp"
-                android:layout_marginTop="8dp" />
-        </LinearLayout>
-
-    </soup.neumorphism.NeumorphCardView>
-
-    <!-- Card 8 -->
-    <soup.neumorphism.NeumorphCardView
-        android:id="@+id/card8"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        neu:neumorph_shapeType="flat"
-        app:layout_constraintStart_toEndOf="@id/card7"
-        app:layout_constraintTop_toBottomOf="@id/card6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.47">
+        app:layout_constraintWidth_percent="0.98"
+        neu:neumorph_shapeType="flat"
+        neu:neumorph_shadowElevation="8dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:gravity="center"
-            android:padding="16dp">
+            android:gravity="center">
 
             <ImageView
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:src="@drawable/ic_home"
-                android:contentDescription="Icon 8" />
+                android:src="@drawable/ic_chat" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Card 8"
-                android:textColor="#333"
+                android:text="Community Chat"
                 android:textSize="16sp"
+                android:textStyle="bold"
                 android:layout_marginTop="8dp" />
         </LinearLayout>
-
     </soup.neumorphism.NeumorphCardView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
