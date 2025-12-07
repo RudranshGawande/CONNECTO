@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.megaproject.urbanspace">
-
     <!-- Internet permission (needed for APIs, login, etc.) -->
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -16,7 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UrbanSpace"
         tools:replace="android:allowBackup,android:supportsRtl">
-
+        <activity
+            android:name=".ProfileActivity"
+            android:exported="false" />
         <activity
             android:name=".SignUpActivity"
             android:exported="false" />
@@ -31,6 +32,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

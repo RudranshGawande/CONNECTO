@@ -48,7 +48,7 @@
                         android:layout_height="100dp"
                         android:layout_gravity="center"
                         android:src="@drawable/logo_bg"
-                        android:backgroundTint="@color/blue"
+                        android:backgroundTint="@color/blue_500"
                         android:scaleType="centerCrop" />
                 </FrameLayout>
 

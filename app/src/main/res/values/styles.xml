@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="FilterButtonStyle" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="android:textAllCaps">false</item>
+        <item name="android:letterSpacing">0.02</item>
+        <item name="android:textStyle">normal</item>
+        <item name="rippleColor">@color/filter_active_pressed</item>
+        <item name="backgroundTint">@null</item>
+    </style>
+</resources>

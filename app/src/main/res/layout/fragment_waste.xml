@@ -1,14 +1,345 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.WasteFragment">
+    android:background="@color/background_gradient">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
 
-</FrameLayout>
+        <!-- Header -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Waste Management"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Track pickup schedules and manage your waste efficiently"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginTop="4dp" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_notifications"
+                    app:tint="@color/text_secondary" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📍 Your area: Sector 7, Block A"
+                android:textSize="12sp"
+                android:textColor="@color/text_secondary"
+                android:layout_marginTop="16dp" />
+
+        </LinearLayout>
+
+        <!-- Stats Cards -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="@drawable/card_background"
+                android:padding="16dp"
+                android:layout_marginEnd="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Total Collected"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_secondary" />
+
+                <TextView
+                    android:id="@+id/totalCollectedText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="847 kg"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginTop="4dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="@drawable/card_background"
+                android:padding="16dp"
+                android:layout_marginStart="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Recycling Rate"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_secondary" />
+
+                <TextView
+                    android:id="@+id/recyclingRateText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="68%"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginTop="4dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="@drawable/card_background"
+                android:padding="16dp"
+                android:layout_marginEnd="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Waste Reduced"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_secondary" />
+
+                <TextView
+                    android:id="@+id/wasteReducedText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="23%"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginTop="4dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:background="@drawable/card_background"
+                android:padding="16dp"
+                android:layout_marginStart="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Next Pickup"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_secondary" />
+
+                <TextView
+                    android:id="@+id/nextPickupText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tomorrow at 7:00 AM"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:layout_marginTop="4dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Filter Buttons with Horizontal Scroll -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/filter_container_background"
+                android:padding="6dp"
+                android:elevation="2dp">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/filterAllBtn"
+                    style="@style/FilterButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="All"
+                    android:textSize="11sp"
+                    android:textColor="@drawable/filter_button_text_selector"
+                    android:background="@drawable/filter_button_selector"
+                    android:layout_marginEnd="3dp"
+                    android:stateListAnimator="@null"
+                    android:elevation="0dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/filterGeneralBtn"
+                    style="@style/FilterButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="General"
+                    android:textSize="11sp"
+                    android:textColor="@drawable/filter_button_text_selector"
+                    android:background="@drawable/filter_button_selector"
+                    android:layout_marginHorizontal="3dp"
+                    android:stateListAnimator="@null"
+                    android:elevation="0dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/filterRecyclingBtn"
+                    style="@style/FilterButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="Recycling"
+                    android:textSize="11sp"
+                    android:textColor="@drawable/filter_button_text_selector"
+                    android:background="@drawable/filter_button_selector"
+                    android:layout_marginHorizontal="3dp"
+                    android:stateListAnimator="@null"
+                    android:elevation="0dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/filterOrganicBtn"
+                    style="@style/FilterButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="Organic"
+                    android:textSize="11sp"
+                    android:textColor="@drawable/filter_button_text_selector"
+                    android:background="@drawable/filter_button_selector"
+                    android:layout_marginHorizontal="3dp"
+                    android:stateListAnimator="@null"
+                    android:elevation="0dp" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/filterHazardousBtn"
+                    style="@style/FilterButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="36dp"
+                    android:text="Hazardous"
+                    android:textSize="11sp"
+                    android:textColor="@drawable/filter_button_text_selector"
+                    android:background="@drawable/filter_button_selector"
+                    android:layout_marginStart="3dp"
+                    android:stateListAnimator="@null"
+                    android:elevation="0dp" />
+
+            </LinearLayout>
+        </HorizontalScrollView>
+
+
+
+        <!-- Upcoming Pickups Alert -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/alert_background"
+            android:padding="16dp"
+            android:layout_marginBottom="24dp">
+
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_notifications"
+                android:background="@drawable/alert_icon_background"
+                android:padding="12dp"
+                android:layout_marginEnd="16dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Upcoming Pickups"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+
+                <TextView
+                    android:id="@+id/upcomingPickupsText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="General Waste - Tomorrow (7:00 AM - 9:00 AM)\nOrganic Waste - In 2 days (6:00 AM - 8:00 AM)"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_secondary"
+                    android:layout_marginTop="8dp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- Schedule Title -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Collection Schedule"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:layout_marginBottom="16dp" />
+
+        <!-- RecyclerView -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false" />
+
+    </LinearLayout>
+
+</ScrollView>
