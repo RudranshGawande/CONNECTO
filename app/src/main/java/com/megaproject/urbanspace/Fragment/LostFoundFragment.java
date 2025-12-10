@@ -1,66 +1,94 @@
 package com.megaproject.urbanspace.Fragment;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.button.MaterialButton;
+import com.megaproject.urbanspace.Adapter.LostFoundAdapter;
 import com.megaproject.urbanspace.R;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link LostFoundFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class LostFoundFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private LostFoundViewModel viewModel;
+    private MaterialButton tabLost;
+    private MaterialButton tabFound;
+    private LinearLayout contentLost;
+    private LinearLayout contentFound;
+    private TextView emptyFound;
+    private LostFoundAdapter adapter;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public LostFoundFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment LostFoundFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static LostFoundFragment newInstance(String param1, String param2) {
-        LostFoundFragment fragment = new LostFoundFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_lost_found, container, false);
+
+        viewModel = new ViewModelProvider(this).get(LostFoundViewModel.class);
+
+        tabLost = view.findViewById(R.id.tabLost);
+        tabFound = view.findViewById(R.id.tabFound);
+        contentLost = view.findViewById(R.id.contentLost);
+        contentFound = view.findViewById(R.id.contentFound);
+        emptyFound = view.findViewById(R.id.emptyFound);
+        ImageButton menu = view.findViewById(R.id.buttonLfMenu);
+
+        RecyclerView foundList = view.findViewById(R.id.foundList);
+        foundList.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new LostFoundAdapter();
+        foundList.setAdapter(adapter);
+
+        tabLost.setOnClickListener(v -> viewModel.setActiveTab(LostFoundViewModel.Tab.LOST));
+        tabFound.setOnClickListener(v -> viewModel.setActiveTab(LostFoundViewModel.Tab.FOUND));
+
+        menu.setOnClickListener(v -> {
+            // placeholder hook for menu, can be wired to drawer later
+        });
+
+        viewModel.getActiveTab().observe(getViewLifecycleOwner(), tab -> updateTabs(tab));
+        viewModel.getFoundItems().observe(getViewLifecycleOwner(), items -> {
+            adapter.submit(items);
+            emptyFound.setVisibility(items.isEmpty() ? View.VISIBLE : View.GONE);
+        });
+
+        // initialize default tab
+        viewModel.setActiveTab(LostFoundViewModel.Tab.LOST);
+
+        return view;
+    }
+
+    private void updateTabs(LostFoundViewModel.Tab tab) {
+        // Active tab: white background with dark text (always visible)
+        // Inactive tab: light gray background with dark text (always visible)
+        int activeBg = R.drawable.tab_active_lostfound;
+        int inactiveBg = R.drawable.tab_inactive_lostfound;
+        int textColor = ContextCompat.getColor(requireContext(), R.color.text_primary);
+
+        if (tab == LostFoundViewModel.Tab.LOST) {
+            tabLost.setBackgroundResource(activeBg);
+            tabLost.setTextColor(textColor);
+            tabFound.setBackgroundResource(inactiveBg);
+            tabFound.setTextColor(textColor);
+            contentLost.setVisibility(View.VISIBLE);
+            contentFound.setVisibility(View.GONE);
+        } else {
+            tabFound.setBackgroundResource(activeBg);
+            tabFound.setTextColor(textColor);
+            tabLost.setBackgroundResource(inactiveBg);
+            tabLost.setTextColor(textColor);
+            contentLost.setVisibility(View.GONE);
+            contentFound.setVisibility(View.VISIBLE);
         }
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lost_found, container, false);
     }
 }

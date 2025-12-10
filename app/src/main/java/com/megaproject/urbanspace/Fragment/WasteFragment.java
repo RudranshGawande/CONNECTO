@@ -18,8 +18,16 @@ import com.megaproject.urbanspace.Adapter.WasteScheduleAdapter;
 import com.megaproject.urbanspace.Model.WasteSchedule;
 import com.megaproject.urbanspace.R;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class WasteFragment extends Fragment {
 
@@ -117,6 +125,9 @@ public class WasteFragment extends Fragment {
             }
         }
 
+        // Sort by next pickup time ascending
+        Collections.sort(filteredList, Comparator.comparingLong(this::getPickupTimestamp));
+
         if (filteredList.isEmpty()) {
             Toast.makeText(getContext(), "No schedules found for " + type, Toast.LENGTH_SHORT).show();
         }
@@ -127,13 +138,66 @@ public class WasteFragment extends Fragment {
     // Highlight selected button
     private void setSelectedFilter(MaterialButton selectedButton) {
         // Reset all buttons
+        int inactiveText = getResources().getColor(R.color.filter_inactive_text);
         filterAllBtn.setBackgroundResource(R.drawable.filter_button_selector);
+        filterAllBtn.setTextColor(inactiveText);
         filterGeneralBtn.setBackgroundResource(R.drawable.filter_button_selector);
+        filterGeneralBtn.setTextColor(inactiveText);
         filterRecyclingBtn.setBackgroundResource(R.drawable.filter_button_selector);
+        filterRecyclingBtn.setTextColor(inactiveText);
         filterOrganicBtn.setBackgroundResource(R.drawable.filter_button_selector);
+        filterOrganicBtn.setTextColor(inactiveText);
         filterHazardousBtn.setBackgroundResource(R.drawable.filter_button_selector);
+        filterHazardousBtn.setTextColor(inactiveText);
 
         // Set selected button style
         selectedButton.setBackgroundResource(R.drawable.filter_button_active);
+        selectedButton.setTextColor(getResources().getColor(R.color.filter_active_text));
+    }
+
+    private long getPickupTimestamp(WasteSchedule item) {
+        Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.SECOND, 0);
+        cal.set(Calendar.MILLISECOND, 0);
+
+        // Date handling
+        String dateText = item.getDate().toLowerCase(Locale.US);
+        if (dateText.contains("today")) {
+            // no change
+        } else if (dateText.contains("tomorrow")) {
+            cal.add(Calendar.DAY_OF_YEAR, 1);
+        } else if (dateText.contains("next week")) {
+            cal.add(Calendar.DAY_OF_YEAR, 7);
+        } else if (dateText.contains("next monday")) {
+            int today = cal.get(Calendar.DAY_OF_WEEK);
+            int target = Calendar.MONDAY;
+            int diff = (target - today + 7) % 7;
+            if (diff == 0) diff = 7;
+            cal.add(Calendar.DAY_OF_YEAR, diff);
+        } else {
+            Matcher m = Pattern.compile("in (\\d+) days").matcher(dateText);
+            if (m.find()) {
+                int days = Integer.parseInt(m.group(1));
+                cal.add(Calendar.DAY_OF_YEAR, days);
+            }
+        }
+
+        // Time handling: take start time before the dash and set hour/minute while keeping date
+        String timeRange = item.getTime();
+        String startPart = timeRange.split("-")[0].trim();
+        SimpleDateFormat fmt = new SimpleDateFormat("h:mm a", Locale.US);
+        try {
+            java.util.Date parsed = fmt.parse(startPart);
+            if (parsed != null) {
+                Calendar parsedCal = Calendar.getInstance();
+                parsedCal.setTime(parsed);
+                cal.set(Calendar.HOUR_OF_DAY, parsedCal.get(Calendar.HOUR_OF_DAY));
+                cal.set(Calendar.MINUTE, parsedCal.get(Calendar.MINUTE));
+            }
+        } catch (ParseException e) {
+            // fallback to existing time if parse fails
+        }
+
+        return cal.getTimeInMillis();
     }
 }

@@ -4,4 +4,13 @@
     <!-- Drawer toggle strings -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <!-- Accessibility -->
+    <string name="aria_go_home">Go to home, Urban Space</string>
+    <string name="aria_notifications">Notifications</string>
+    <string name="aria_open_menu">Open menu</string>
+
+    <!-- TopBar strings -->
+    <string name="brand_title">Urban Space</string>
+    <string name="brand_subtitle">Smart Urban Living</string>
 </resources>

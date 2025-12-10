@@ -3,6 +3,10 @@ package com.megaproject.urbanspace;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +27,7 @@ public class HomeActivity extends AppCompatActivity {
 
     public boolean doubletap = false;
     private DrawerLayout drawerLayout;
+    private boolean menuOpen = false;
 
     // Fragments
     TransportFragment transportFragment = new TransportFragment();
@@ -38,10 +43,31 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.topBar);
         setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+        }
 
         drawerLayout = findViewById(R.id.drawerLayout);
+
+        View brandGroup = findViewById(R.id.brandGroup);
+        if (brandGroup != null) {
+            brandGroup.setOnClickListener(v -> finishAffinity());
+            brandGroup.setOnKeyListener((v, keyCode, event) -> {
+                if (event.getAction() == KeyEvent.ACTION_UP &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.KEYCODE_SPACE)) {
+                    brandGroup.performClick();
+                    return true;
+                }
+                return false;
+            });
+        }
+
+        ImageButton buttonMenu = findViewById(R.id.buttonMenu);
+        if (buttonMenu != null) {
+            buttonMenu.setOnClickListener(v -> toggleMenu());
+        }
 
         // Load HomeFragment initially
         if (savedInstanceState == null) {
@@ -49,6 +75,15 @@ public class HomeActivity extends AppCompatActivity {
                     .replace(R.id.fragment_container, new HomeFragment())
                     .commit();
         }
+    }
+
+    private void toggleMenu() {
+        menuOpen = !menuOpen;
+        Toolbar toolbar = findViewById(R.id.topBar);
+        if (toolbar != null) {
+            toolbar.setElevation(menuOpen ? 8f : 2f);
+        }
+        Log.d("TopBar", "menu toggle");
     }
 
     @SuppressLint("GestureBackNavigation")

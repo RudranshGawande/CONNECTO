@@ -14,21 +14,18 @@
         android:fitsSystemWindows="true">
 
         <!-- Toolbar -->
+
+        <!-- Fragment Container -->
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/primaryColor"
-            android:fitsSystemWindows="true">
+            android:background="@color/white"
+            android:elevation="2dp">
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:theme="@style/ThemeOverlay.Material3.Dark.ActionBar"
-                app:title="UrbanSpace" />
+            <include
+                layout="@layout/include_topbar" />
         </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- Fragment Container -->
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"

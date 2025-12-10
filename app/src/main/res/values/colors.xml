@@ -3,14 +3,24 @@
 
     <color name="white">#ffffff</color>
 
-    <!-- Primary Colors -->
-    <color name="text_primary">#1F2937</color>
-    <color name="text_secondary">#6B7280</color>
-    <color name="background_gradient">#F9FAFB</color>
+    <!-- Brand Colors -->
+    <color name="primaryColor">#0D8BD9</color>
+    <color name="primaryDarkColor">#0B6AAD</color>
+    <color name="onPrimaryColor">#FFFFFF</color>
+    <color name="secondaryColor">#F59E0B</color>
+    <color name="onSecondaryColor">#000000</color>
+
+    <!-- Text & Background -->
+    <color name="text_primary">#222222</color>
+    <color name="text_secondary">#7A7A7A</color>
+    <color name="background_gradient">#F4F7FB</color>
+    <color name="surface_light">#F8FAFC</color>
 
     <!-- Card Colors -->
     <color name="card_background">#FFFFFF</color>
     <color name="card_border">#E5E7EB</color>
+    <color name="card_shadow">#E3E8EF</color>
+    <color name="iconTint">#333333</color>
 
     <!-- Waste Type Colors -->
     <color name="gray_500">#6B7280</color>

@@ -4,12 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import soup.neumorphism.NeumorphCardView;
+import com.google.android.material.card.MaterialCardView;
 import com.megaproject.urbanspace.R;
 
 public class HomeFragment extends Fragment {
@@ -26,58 +27,41 @@ public class HomeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        // Initialize all cards
-        NeumorphCardView transportCard = view.findViewById(R.id.transportCard);
-        NeumorphCardView wasteCard = view.findViewById(R.id.wasteCard);
-        NeumorphCardView eventsCard = view.findViewById(R.id.eventsCard);
-        NeumorphCardView lostFoundCard = view.findViewById(R.id.lostFoundCard);
-        NeumorphCardView reportIssueCard = view.findViewById(R.id.reportIssueCard);
-        NeumorphCardView emergencyCard = view.findViewById(R.id.emergencyCard);
-        NeumorphCardView chatCard = view.findViewById(R.id.chatCard);
+        MaterialCardView cardLiveTransport = view.findViewById(R.id.cardLiveTransport);
+        MaterialCardView cardWaste = view.findViewById(R.id.cardWaste);
+        MaterialCardView cardReportIssue = view.findViewById(R.id.cardReportIssue);
+        MaterialCardView cardLostFound = view.findViewById(R.id.cardLostFound);
+        MaterialCardView cardEvents = view.findViewById(R.id.cardEvents);
+        MaterialCardView cardEmergency = view.findViewById(R.id.cardEmergency);
+        MaterialCardView cardCommunity = view.findViewById(R.id.cardCommunity);
 
-        // Click Listeners
-        transportCard.setOnClickListener(v ->
-                requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new TransportFragment())
-                        .addToBackStack(null)
-                        .commit());
+        LinearLayout navHome = view.findViewById(R.id.navHome);
+        LinearLayout navTransport = view.findViewById(R.id.navTransport);
+        LinearLayout navWaste = view.findViewById(R.id.navWaste);
+        LinearLayout navReport = view.findViewById(R.id.navReport);
 
-        wasteCard.setOnClickListener(v ->
-                requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new WasteFragment())
-                        .addToBackStack(null)
-                        .commit());
+        cardLiveTransport.setOnClickListener(v -> navigateTo(new TransportFragment()));
+        cardWaste.setOnClickListener(v -> navigateTo(new WasteFragment()));
+        cardReportIssue.setOnClickListener(v -> navigateTo(new ReportIssueFragment()));
+        cardLostFound.setOnClickListener(v -> navigateTo(new LostFoundFragment()));
+        cardEvents.setOnClickListener(v -> navigateTo(new EventsFragment()));
+        cardEmergency.setOnClickListener(v -> navigateTo(new EmergencyFragment()));
+        cardCommunity.setOnClickListener(v -> navigateTo(new CommunityChatFragment()));
 
-        eventsCard.setOnClickListener(v ->
-                requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new EventsFragment())
-                        .addToBackStack(null)
-                        .commit());
-
-        lostFoundCard.setOnClickListener(v ->
-                requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new LostFoundFragment())
-                        .addToBackStack(null)
-                        .commit());
-
-        reportIssueCard.setOnClickListener(v ->
-                requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new ReportIssueFragment())
-                        .addToBackStack(null)
-                        .commit());
-
-        emergencyCard.setOnClickListener(v ->
-                requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new EmergencyFragment())
-                        .addToBackStack(null)
-                        .commit());
-
-        chatCard.setOnClickListener(v ->
-                requireActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragment_container, new CommunityChatFragment())
-                        .addToBackStack(null)
-                        .commit());
+        navHome.setOnClickListener(v -> {
+            // stay on home
+        });
+        navTransport.setOnClickListener(v -> navigateTo(new TransportFragment()));
+        navWaste.setOnClickListener(v -> navigateTo(new WasteFragment()));
+        navReport.setOnClickListener(v -> navigateTo(new ReportIssueFragment()));
 
         return view;
+    }
+
+    private void navigateTo(@NonNull Fragment fragment) {
+        requireActivity().getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, fragment)
+                .addToBackStack(null)
+                .commit();
     }
 }
