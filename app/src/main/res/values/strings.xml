@@ -9,8 +9,14 @@
     <string name="aria_go_home">Go to home, Urban Space</string>
     <string name="aria_notifications">Notifications</string>
     <string name="aria_open_menu">Open menu</string>
+    <string name="aria_close_menu">Close menu</string>
 
     <!-- TopBar strings -->
     <string name="brand_title">Urban Space</string>
     <string name="brand_subtitle">Smart Urban Living</string>
+
+    <!-- Lost & Found strings -->
+    <string name="search_icon">Search icon</string>
+    <string name="item_image">Item image</string>
+    <string name="delete">Delete</string>
 </resources>

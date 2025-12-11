@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.megaproject.urbanspace.Fragment.CommunityChatFragment;
@@ -50,10 +51,25 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         drawerLayout = findViewById(R.id.drawerLayout);
+        if (drawerLayout != null) {
+            drawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+                @Override
+                public void onDrawerOpened(@NonNull View drawerView) {
+                    menuOpen = true;
+                    updateMenuButtonState();
+                }
+
+                @Override
+                public void onDrawerClosed(@NonNull View drawerView) {
+                    menuOpen = false;
+                    updateMenuButtonState();
+                }
+            });
+        }
 
         View brandGroup = findViewById(R.id.brandGroup);
         if (brandGroup != null) {
-            brandGroup.setOnClickListener(v -> finishAffinity());
+            brandGroup.setOnClickListener(v -> navigateHome());
             brandGroup.setOnKeyListener((v, keyCode, event) -> {
                 if (event.getAction() == KeyEvent.ACTION_UP &&
                         (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.KEYCODE_SPACE)) {
@@ -66,7 +82,7 @@ public class HomeActivity extends AppCompatActivity {
 
         ImageButton buttonMenu = findViewById(R.id.buttonMenu);
         if (buttonMenu != null) {
-            buttonMenu.setOnClickListener(v -> toggleMenu());
+            buttonMenu.setOnClickListener(this::onToggleMenu);
         }
 
         // Load HomeFragment initially
@@ -77,18 +93,73 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
+    public void onToggleMenu(View v) {
+        toggleMenu();
+    }
+
     private void toggleMenu() {
-        menuOpen = !menuOpen;
+        if (drawerLayout == null) return;
+
+        // Avoid crashes if no START drawer view is configured yet
+        if (!hasStartDrawer()) {
+            Log.w("TopBar", "No start drawer configured in DrawerLayout; ignoring hamburger toggle.");
+            return;
+        }
+
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+            menuOpen = false;
+        } else {
+            drawerLayout.openDrawer(GravityCompat.START);
+            menuOpen = true;
+        }
+
         Toolbar toolbar = findViewById(R.id.topBar);
         if (toolbar != null) {
             toolbar.setElevation(menuOpen ? 8f : 2f);
         }
-        Log.d("TopBar", "menu toggle");
+
+        updateMenuButtonState();
+        Log.d("TopBar", "menu toggle: " + (menuOpen ? "open" : "closed"));
+    }
+
+    private boolean hasStartDrawer() {
+        if (drawerLayout == null) return false;
+
+        for (int i = 0; i < drawerLayout.getChildCount(); i++) {
+            View child = drawerLayout.getChildAt(i);
+            DrawerLayout.LayoutParams lp = (DrawerLayout.LayoutParams) child.getLayoutParams();
+            if ((lp.gravity & GravityCompat.START) == GravityCompat.START) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void updateMenuButtonState() {
+        ImageButton buttonMenu = findViewById(R.id.buttonMenu);
+        if (buttonMenu != null) {
+            int descRes = menuOpen ? R.string.aria_close_menu : R.string.aria_open_menu;
+            buttonMenu.setContentDescription(getString(descRes));
+        }
+    }
+
+    private void navigateHome() {
+        getSupportFragmentManager().popBackStack(null, getSupportFragmentManager().POP_BACK_STACK_INCLUSIVE);
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fragment_container, new HomeFragment())
+                .commit();
     }
 
     @SuppressLint("GestureBackNavigation")
     @Override
     public void onBackPressed() {
+        // If there are fragments in the back stack, pop one instead of exiting
+        if (getSupportFragmentManager().getBackStackEntryCount() > 0) {
+            getSupportFragmentManager().popBackStack();
+            return;
+        }
+
         if (doubletap) {
             super.onBackPressed();
             finishAffinity();

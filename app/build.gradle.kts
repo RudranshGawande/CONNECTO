@@ -44,5 +44,6 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
 
     implementation ("com.github.fornewid:neumorphism:0.3.2")
+    implementation("com.squareup.picasso:picasso:2.8")
 
 }

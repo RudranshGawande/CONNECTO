@@ -25,7 +25,11 @@
             android:layout_height="match_parent"
             android:layout_gravity="start|center_vertical"
             android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:focusable="true"
+            android:clickable="true"
+            android:contentDescription="@string/aria_go_home"
+            android:importantForAccessibility="yes">
 
             <!-- Logo container with gradient -->
             <FrameLayout
@@ -38,7 +42,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:src="@drawable/logo"
-                    android:contentDescription="@null" />
+                    android:contentDescription="@null"
+                    android:importantForAccessibility="no" />
             </FrameLayout>
 
             <!-- Title and subtitle -->
@@ -81,10 +86,16 @@
             android:src="@drawable/ic_menu"
             android:contentDescription="@string/aria_open_menu"
             android:background="@android:color/transparent"
-            app:tint="@color/gray_500"
+            app:tint="@color/iconTint"
             android:focusable="true"
-            android:importantForAccessibility="yes"
-            />
+            android:importantForAccessibility="yes" />
+
+        <!-- Subtle bottom divider -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_gravity="bottom"
+            android:background="@color/card_border" />
 
     </FrameLayout>
 
