@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="8dp"
-    app:cardBackgroundColor="@color/card_background"
-    app:cardCornerRadius="8dp"
+    app:cardBackgroundColor="#F9FAFB"
+    app:cardCornerRadius="6dp"
     app:cardElevation="0dp"
     app:strokeColor="#EEEEEE"
     app:strokeWidth="1dp">
@@ -64,22 +64,21 @@
                     android:layout_weight="1"
                     android:ellipsize="end"
                     android:maxLines="1"
-                    android:textColor="@color/text_primary"
+                    android:textColor="#111827"
                     android:textSize="16sp"
                     android:textStyle="bold"
                     tools:text="Silver ring with blue stone"/>
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/statusChip"
-                    style="@style/Widget.MaterialComponents.Chip.Chip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"
                     android:text="Open"
                     android:textAllCaps="true"
-                    android:textSize="10sp"
+                    android:textSize="12sp"
                     app:chipBackgroundColor="@color/status_open"
-                    app:chipMinHeight="20dp"
+                    app:chipMinHeight="24dp"
                     app:chipStrokeWidth="0dp"
                     app:rippleColor="@null"/>
             </LinearLayout>
@@ -93,12 +92,11 @@
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/categoryChip"
-                    style="@style/Widget.MaterialComponents.Chip.Chip"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Accessories"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="10sp"
+                    android:textColor="#374151"
+                    android:textSize="12sp"
                     app:chipBackgroundColor="@color/chip_background"
                     app:chipMinHeight="20dp"
                     app:chipStrokeWidth="0dp"
@@ -124,8 +122,8 @@
                 android:layout_marginTop="4dp"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:textColor="@color/text_secondary"
-                android:textSize="12sp"
+                android:textColor="#9CA3AF"
+                android:textSize="14sp"
                 tools:text="It is a diamond ring with a blue stone in the center. Found near the main entrance."/>
 
             <!-- Contact Section -->
@@ -141,7 +139,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Contact"
-                    android:textColor="@color/text_secondary"
+                    android:textColor="#6B7280"
                     android:textSize="12sp"/>
 
                 <LinearLayout
@@ -155,7 +153,7 @@
                         style="@style/TextAppearance.AppCompat.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="#2563EB"
                         android:textStyle="bold"
                         tools:text="RudranshGawande"/>
 
@@ -170,7 +168,7 @@
                         style="@style/TextAppearance.AppCompat.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="#2563EB"
                         tools:text="rudranshgawande007@gmail.com"/>
 
                     <View
@@ -184,7 +182,7 @@
                         style="@style/TextAppearance.AppCompat.Small"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="@color/colorPrimary"
+                        android:textColor="#2563EB"
                         tools:text="1234567890"/>
                 </LinearLayout>
             </LinearLayout>
@@ -208,6 +206,8 @@
                 android:text="Change status"
                 android:textAllCaps="false"
                 android:textSize="10sp"
+                android:textColor="#4B5563"
+                app:backgroundTint="#E5E7EB"
                 app:icon="@drawable/ic_arrow_drop_down"
                 app:iconGravity="end"
                 app:iconPadding="0dp"
@@ -222,7 +222,7 @@
                 android:contentDescription="@string/delete"
                 android:padding="6dp"
                 android:src="@drawable/ic_delete"
-                app:tint="@color/error"/>
+                app:tint="#EF4444"/>
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

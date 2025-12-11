@@ -157,7 +157,7 @@ public class LostFoundItem {
     }
 
     // Legacy field for backward compatibility
-    private final String meta;
+    private String meta;
 
     public String getMeta() { return meta; }
 }

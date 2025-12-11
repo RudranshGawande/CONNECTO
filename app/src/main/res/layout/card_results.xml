@@ -10,7 +10,8 @@
     android:layout_marginHorizontal="16dp"
     android:layout_marginBottom="16dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="#FFFFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,20 +33,19 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Results"
-                android:textColor="@color/text_primary"
-                android:textSize="18sp"
+                android:textColor="#111827"
+                android:textSize="20sp"
                 android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/resultsCount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:background="@drawable/bg_rounded_blue"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="2dp"
+                android:gravity="center"
                 android:text="0"
                 android:textColor="@android:color/white"
-                android:textSize="14sp"/>
+                android:textSize="12sp"/>
         </LinearLayout>
 
         <!-- Results List -->

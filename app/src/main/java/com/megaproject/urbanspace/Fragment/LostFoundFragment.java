@@ -16,8 +16,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -72,6 +75,7 @@ public class LostFoundFragment extends Fragment {
 
     private SwitchMaterial switchAllowContact;
     private View contactFieldsContainer;
+    private TextInputLayout inputTitleLayout;
     private TextInputLayout inputContactNameLayout;
     private TextInputLayout inputContactEmailLayout;
     private TextInputLayout inputContactPhoneLayout;
@@ -189,6 +193,7 @@ public class LostFoundFragment extends Fragment {
 
         switchAllowContact = view.findViewById(R.id.switchAllowContact);
         contactFieldsContainer = view.findViewById(R.id.contactFieldsContainer);
+        inputTitleLayout = view.findViewById(R.id.inputTitleLayout);
         inputContactNameLayout = view.findViewById(R.id.inputContactNameLayout);
         inputContactEmailLayout = view.findViewById(R.id.inputContactEmailLayout);
         inputContactPhoneLayout = view.findViewById(R.id.inputContactPhoneLayout);
@@ -264,10 +269,7 @@ public class LostFoundFragment extends Fragment {
                     }
                 }
 
-                // TODO: hook up actual post logic when backend is ready
-                if (getContext() != null) {
-                    Toast.makeText(getContext(), "Post submitted", Toast.LENGTH_SHORT).show();
-                }
+                handleCreateLostItem();
             });
         }
 
@@ -557,7 +559,7 @@ public class LostFoundFragment extends Fragment {
                 statusFilter.setOnItemClickListener((parent, view1, position, id) -> filterResults());
             }
         }
-        
+
         // Initialize results card views
         if (resultsCard != null) {
             resultsRecyclerView = resultsCard.findViewById(R.id.resultsRecyclerView);
@@ -603,11 +605,13 @@ public class LostFoundFragment extends Fragment {
                 resultsRecyclerView.setAdapter(resultsAdapter);
             }
         }
-        
-        // Initialize with sample data
-        initializeSampleData();
+
+        // Start with empty list; items will be added when user posts or when backend is wired
+        allItems = new ArrayList<>();
+        filteredItems = new ArrayList<>();
+        updateResultsDisplay();
     }
-    
+
     private void filterResults() {
         String searchQuery = searchInput != null && searchInput.getText() != null ? 
             searchInput.getText().toString().toLowerCase().trim() : "";
@@ -619,10 +623,16 @@ public class LostFoundFragment extends Fragment {
         filteredItems.clear();
         
         for (LostFoundItem item : allItems) {
+            if (item == null) continue;
+
+            String title = item.getTitle() != null ? item.getTitle().toLowerCase() : "";
+            String description = item.getDescription() != null ? item.getDescription().toLowerCase() : "";
+            String location = item.getLocation() != null ? item.getLocation().toLowerCase() : "";
+
             boolean matchesSearch = searchQuery.isEmpty() || 
-                item.getTitle().toLowerCase().contains(searchQuery) ||
-                item.getDescription().toLowerCase().contains(searchQuery) ||
-                (item.getLocation() != null && item.getLocation().toLowerCase().contains(searchQuery));
+                title.contains(searchQuery) ||
+                description.contains(searchQuery) ||
+                location.contains(searchQuery);
             
             boolean matchesCategory = selectedCategory.equals("All Categories") || 
                 item.getCategory().equals(selectedCategory);
@@ -653,33 +663,87 @@ public class LostFoundFragment extends Fragment {
         }
     }
     
-    private void initializeSampleData() {
-        // Create sample data for testing
-        allItems = new ArrayList<>();
-        
-        // Sample lost items
-        allItems.add(new LostFoundItem(
-            "1", "Silver ring with blue stone", "Diamond ring with blue stone found near railway station", 
-            "Railway station", "Accessories", "Open", "12/10/2025, 2:17:19 PM", 
-            true, "RudranshGawande", "rudranshgawande007@gmail.com", "1234567890",
-            new ArrayList<>(), "lost"
-        ));
-        
-        allItems.add(new LostFoundItem(
-            "2", "Wireless earbuds", "Black wireless earbuds in charging case", 
-            "Bus stop", "Electronics", "Found", "12/10/2025, 3:45:00 PM", 
-            true, "John Doe", "john@example.com", "9876543210",
-            new ArrayList<>(), "lost"
-        ));
-        
-        allItems.add(new LostFoundItem(
-            "3", "Leather wallet", "Brown leather wallet with ID cards", 
-            "Shopping mall", "Accessories", "Closed", "12/09/2025, 10:30:00 AM", 
-            false, "", "", "", new ArrayList<>(), "found"
-        ));
-        
-        // Initialize filtered items with all items
-        filteredItems = new ArrayList<>(allItems);
-        updateResultsDisplay();
+    private void handleCreateLostItem() {
+        View root = getView();
+        if (root == null || getContext() == null) {
+            return;
+        }
+
+        TextInputEditText inputTitle = root.findViewById(R.id.inputTitle);
+        TextInputEditText inputDescription = root.findViewById(R.id.inputDescription);
+        TextInputEditText inputLastLocation = root.findViewById(R.id.inputLastLocation);
+
+        String title = inputTitle != null && inputTitle.getText() != null
+                ? inputTitle.getText().toString().trim() : "";
+        String description = inputDescription != null && inputDescription.getText() != null
+                ? inputDescription.getText().toString().trim() : "";
+        String location = inputLastLocation != null && inputLastLocation.getText() != null
+                ? inputLastLocation.getText().toString().trim() : "";
+
+        if (title.isEmpty()) {
+            if (inputTitleLayout != null) {
+                inputTitleLayout.setError("Title is required");
+            }
+            return;
+        } else if (inputTitleLayout != null) {
+            inputTitleLayout.setError(null);
+        }
+
+        String category = selectedCategoryText != null
+                ? selectedCategoryText.getText().toString()
+                : "Other";
+
+        boolean allowContact = switchAllowContact != null && switchAllowContact.isChecked();
+        String contactName = allowContact && inputContactName != null && inputContactName.getText() != null
+                ? inputContactName.getText().toString().trim() : "";
+        String contactEmail = allowContact && inputContactEmail != null && inputContactEmail.getText() != null
+                ? inputContactEmail.getText().toString().trim() : "";
+        String contactPhone = allowContact && inputContactPhone != null && inputContactPhone.getText() != null
+                ? inputContactPhone.getText().toString().trim() : "";
+
+        List<String> imageUrisStrings = new ArrayList<>();
+        for (Uri uri : selectedImageUris) {
+            if (uri != null) {
+                imageUrisStrings.add(uri.toString());
+            }
+        }
+
+        String id = String.valueOf(System.currentTimeMillis());
+        String dateTime = new SimpleDateFormat("MM/dd/yyyy, h:mm:ss a", Locale.getDefault())
+                .format(new Date());
+
+        LostFoundItem item = new LostFoundItem(
+                id,
+                title,
+                description,
+                location,
+                category,
+                "open",
+                dateTime,
+                allowContact,
+                contactName,
+                contactEmail,
+                contactPhone,
+                imageUrisStrings,
+                "lost"
+        );
+
+        allItems.add(0, item);
+        filterResults();
+
+        // Clear form and photos after posting
+        if (inputTitle != null) inputTitle.setText(null);
+        if (inputDescription != null) inputDescription.setText(null);
+        if (inputLastLocation != null) inputLastLocation.setText(null);
+        if (switchAllowContact != null) switchAllowContact.setChecked(false);
+        clearContactFields();
+
+        selectedImageUris.clear();
+        if (photoThumbnailAdapter != null) {
+            photoThumbnailAdapter.notifyDataSetChanged();
+        }
+        updatePhotosCount();
+
+        Toast.makeText(getContext(), "Item posted", Toast.LENGTH_SHORT).show();
     }
 }

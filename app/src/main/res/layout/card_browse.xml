@@ -9,7 +9,8 @@
     android:layout_marginTop="16dp"
     android:layout_marginHorizontal="16dp"
     app:cardCornerRadius="8dp"
-    app:cardElevation="4dp">
+    app:cardElevation="4dp"
+    app:cardBackgroundColor="#FFFFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,8 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Browse"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp"
+            android:textColor="#111827"
+            android:textSize="20sp"
             android:textStyle="bold"
             android:layout_marginBottom="4dp"/>
 
@@ -33,7 +34,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Search and filter items."
-            android:textColor="@color/text_secondary"
+            android:textColor="#6B7280"
             android:textSize="14sp"
             android:layout_marginBottom="16dp"/>
 
@@ -44,17 +45,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Search title, description, location..."
-            app:boxBackgroundColor="#F5F5F5"
+            app:boxBackgroundColor="#F3F4F6"
             app:boxCornerRadiusBottomEnd="8dp"
             app:boxCornerRadiusBottomStart="8dp"
             app:boxCornerRadiusTopEnd="8dp"
             app:boxCornerRadiusTopStart="8dp"
-            app:boxStrokeColor="#E0E0E0"
+            app:boxStrokeColor="#E5E7EB"
             app:boxStrokeWidth="1dp"
             app:hintEnabled="false"
-            app:hintTextColor="@color/text_secondary"
+            app:hintTextColor="#9CA3AF"
             app:startIconDrawable="@drawable/ic_search"
-            app:startIconTint="@color/text_secondary">
+            app:startIconTint="#9CA3AF">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/searchInput"
@@ -63,7 +64,10 @@
                 android:background="@null"
                 android:inputType="text"
                 android:maxLines="1"
-                android:paddingVertical="12dp"/>
+                android:paddingVertical="12dp"
+                android:paddingHorizontal="16dp"
+                android:textColor="#111827"
+                android:textColorHint="#9CA3AF"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <!-- Filter Row -->
@@ -81,16 +85,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="4dp"
                 android:layout_weight="1"
-                app:boxBackgroundColor="#F5F5F5"
+                app:boxBackgroundColor="#F3F4F6"
                 app:boxCornerRadiusBottomEnd="8dp"
                 app:boxCornerRadiusBottomStart="8dp"
                 app:boxCornerRadiusTopEnd="8dp"
                 app:boxCornerRadiusTopStart="8dp"
-                app:boxStrokeColor="#E0E0E0"
+                app:boxStrokeColor="#E5E7EB"
                 app:endIconDrawable="@drawable/ic_arrow_drop_down"
-                app:endIconTint="@color/text_secondary"
+                app:endIconTint="#9CA3AF"
                 app:hintEnabled="false"
-                app:hintTextColor="@color/text_secondary">
+                app:hintTextColor="#9CA3AF">
 
                 <AutoCompleteTextView
                     android:id="@+id/categoryFilter"
@@ -102,7 +106,7 @@
                     android:inputType="text"
                     android:paddingVertical="12dp"
                     android:text="All Categories"
-                    android:textColor="@color/text_primary"
+                    android:textColor="#111827"
                     android:textSize="14sp"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -114,16 +118,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_weight="1"
-                app:boxBackgroundColor="#F5F5F5"
+                app:boxBackgroundColor="#F3F4F6"
                 app:boxCornerRadiusBottomEnd="8dp"
                 app:boxCornerRadiusBottomStart="8dp"
                 app:boxCornerRadiusTopEnd="8dp"
                 app:boxCornerRadiusTopStart="8dp"
-                app:boxStrokeColor="#E0E0E0"
+                app:boxStrokeColor="#E5E7EB"
                 app:endIconDrawable="@drawable/ic_arrow_drop_down"
-                app:endIconTint="@color/text_secondary"
+                app:endIconTint="#9CA3AF"
                 app:hintEnabled="false"
-                app:hintTextColor="@color/text_secondary">
+                app:hintTextColor="#9CA3AF">
 
                 <AutoCompleteTextView
                     android:id="@+id/statusFilter"
@@ -135,7 +139,7 @@
                     android:inputType="text"
                     android:paddingVertical="12dp"
                     android:text="All Statuses"
-                    android:textColor="@color/text_primary"
+                    android:textColor="#111827"
                     android:textSize="14sp"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
