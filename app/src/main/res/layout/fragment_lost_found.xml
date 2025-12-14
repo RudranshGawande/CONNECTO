@@ -164,6 +164,7 @@
                         android:layout_height="wrap_content"
                         app:boxBackgroundMode="filled"
                         app:boxBackgroundColor="#F5F5F7"
+                        android:textColorHint="#9CA3AF"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
                         app:boxCornerRadiusTopStart="8dp"
@@ -268,6 +269,7 @@
                         android:layout_marginTop="6dp"
                         app:boxBackgroundMode="filled"
                         app:boxBackgroundColor="#F5F5F7"
+                        android:textColorHint="#9CA3AF"
                         app:boxStrokeWidth="0dp"
                         app:boxStrokeWidthFocused="0dp"
                         app:boxCornerRadiusTopStart="8dp"
@@ -365,18 +367,21 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/photosLabel">
 
-                        <LinearLayout
+                        <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:orientation="vertical">
+                            android:layout_height="match_parent">
 
                             <ImageView
                                 android:id="@+id/photoUploadIcon"
                                 android:layout_width="24dp"
                                 android:layout_height="24dp"
                                 android:src="@drawable/ic_upload"
-                                android:tint="@color/text_secondary" />
+                                android:tint="@color/text_secondary"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toTopOf="@id/photoUploadText"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintVertical_chainStyle="packed" />
 
                             <TextView
                                 android:id="@+id/photoUploadText"
@@ -385,8 +390,12 @@
                                 android:layout_marginTop="4dp"
                                 android:text="Upload"
                                 android:textColor="@color/text_secondary"
-                                android:textSize="13sp" />
-                        </LinearLayout>
+                                android:textSize="13sp"
+                                app:layout_constraintTop_toBottomOf="@id/photoUploadIcon"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
                     </androidx.cardview.widget.CardView>
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -451,12 +460,11 @@
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toTopOf="parent" />
 
-                            <LinearLayout
+                            <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/contactFieldsContainer"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="16dp"
-                                android:orientation="vertical"
                                 android:visibility="gone"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintStart_toStartOf="parent"
@@ -469,11 +477,13 @@
                                     android:text="Name"
                                     android:textColor="@color/text_primary"
                                     android:textSize="14sp"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     android:id="@+id/inputContactNameLayout"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="6dp"
                                     app:boxBackgroundMode="filled"
@@ -484,7 +494,10 @@
                                     app:boxCornerRadiusTopEnd="8dp"
                                     app:boxCornerRadiusBottomStart="8dp"
                                     app:boxCornerRadiusBottomEnd="8dp"
-                                    app:hintEnabled="false">
+                                    app:hintEnabled="false"
+                                    app:layout_constraintTop_toBottomOf="@id/contactNameLabel"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent">
 
                                     <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/inputContactName"
@@ -501,11 +514,13 @@
                                     android:text="Email"
                                     android:textColor="@color/text_primary"
                                     android:textSize="14sp"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    app:layout_constraintTop_toBottomOf="@id/inputContactNameLayout"
+                                    app:layout_constraintStart_toStartOf="parent" />
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     android:id="@+id/inputContactEmailLayout"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="6dp"
                                     app:boxBackgroundMode="filled"
@@ -516,7 +531,10 @@
                                     app:boxCornerRadiusTopEnd="8dp"
                                     app:boxCornerRadiusBottomStart="8dp"
                                     app:boxCornerRadiusBottomEnd="8dp"
-                                    app:hintEnabled="false">
+                                    app:hintEnabled="false"
+                                    app:layout_constraintTop_toBottomOf="@id/contactEmailLabel"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent">
 
                                     <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/inputContactEmail"
@@ -534,11 +552,13 @@
                                     android:text="Phone"
                                     android:textColor="@color/text_primary"
                                     android:textSize="14sp"
-                                    android:textStyle="bold" />
+                                    android:textStyle="bold"
+                                    app:layout_constraintTop_toBottomOf="@id/inputContactEmailLayout"
+                                    app:layout_constraintStart_toStartOf="parent" />
 
                                 <com.google.android.material.textfield.TextInputLayout
                                     android:id="@+id/inputContactPhoneLayout"
-                                    android:layout_width="match_parent"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="6dp"
                                     app:boxBackgroundMode="filled"
@@ -549,7 +569,10 @@
                                     app:boxCornerRadiusTopEnd="8dp"
                                     app:boxCornerRadiusBottomStart="8dp"
                                     app:boxCornerRadiusBottomEnd="8dp"
-                                    app:hintEnabled="false">
+                                    app:hintEnabled="false"
+                                    app:layout_constraintTop_toBottomOf="@id/contactPhoneLabel"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent">
 
                                     <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/inputContactPhone"
@@ -558,15 +581,13 @@
                                         android:hint="+1 234 567 8900"
                                         android:inputType="phone" />
                                 </com.google.android.material.textfield.TextInputLayout>
-                            </LinearLayout>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
 
-                            <LinearLayout
+                            <androidx.constraintlayout.widget.ConstraintLayout
                                 android:id="@+id/contactButtonsRow"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="16dp"
-                                android:gravity="end"
-                                android:orientation="horizontal"
                                 app:layout_constraintEnd_toEndOf="parent"
                                 app:layout_constraintTop_toBottomOf="@id/contactFieldsContainer">
 
@@ -577,7 +598,10 @@
                                     android:text="Reset"
                                     android:textAllCaps="false"
                                     android:textColor="@color/text_secondary"
-                                    android:backgroundTint="#F3F4F6" />
+                                    android:backgroundTint="#F3F4F6"
+                                    app:layout_constraintEnd_toStartOf="@id/buttonPost"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent" />
 
                                 <com.google.android.material.button.MaterialButton
                                     android:id="@+id/buttonPost"
@@ -590,8 +614,11 @@
                                     android:backgroundTint="?attr/colorPrimary"
                                     app:icon="@drawable/ic_check_white"
                                     app:iconTint="@android:color/white"
-                                    app:iconPadding="8dp" />
-                            </LinearLayout>
+                                    app:iconPadding="8dp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
 
                         </androidx.constraintlayout.widget.ConstraintLayout>
                     </com.google.android.material.card.MaterialCardView>
@@ -639,7 +666,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="12dp"
-                app:cardElevation="2dp"
+                app:cardElevation="1dp"
+                app:cardBackgroundColor="@color/card_background"
                 app:strokeColor="@color/card_border"
                 app:strokeWidth="1dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -667,17 +695,28 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="Help reunite items with their owners by sharing details."
+                        android:text="Provide details to help others identify and claim their item."
                         android:textColor="@color/text_secondary"
                         android:textSize="13sp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/formTitleFound" />
 
+                    <TextView
+                        android:id="@+id/titleLabelFound"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Item Title"
+                        android:textColor="@color/text_primary"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/formSubtitleFound" />
+
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/inputTitleFoundLayout"
+                        android:id="@+id/inputTitleLayoutFound"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="16dp"
                         app:boxBackgroundMode="filled"
                         app:boxBackgroundColor="#F5F5F7"
                         app:boxStrokeWidth="0dp"
@@ -689,50 +728,13 @@
                         app:hintEnabled="false"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/formSubtitleFound">
+                        app:layout_constraintTop_toBottomOf="@id/titleLabelFound">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/inputTitleFound"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="e.g. Silver ring with blue stone" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <TextView
-                        android:id="@+id/locationLabelFound"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="12dp"
-                        android:text="Location"
-                        android:textColor="@color/text_primary"
-                        android:textSize="14sp"
-                        android:textStyle="bold"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/inputTitleFoundLayout" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/inputLocationFoundLayout"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        app:boxBackgroundMode="filled"
-                        app:boxBackgroundColor="#F5F5F7"
-                        app:boxStrokeWidth="0dp"
-                        app:boxStrokeWidthFocused="0dp"
-                        app:boxCornerRadiusTopStart="8dp"
-                        app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusBottomStart="8dp"
-                        app:boxCornerRadiusBottomEnd="8dp"
-                        app:hintEnabled="false"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/locationLabelFound">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/inputLocationFound"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="e.g. Near the main gate, Bus Stop B, Cafeteria" />
+                            android:hint="e.g. Black wallet with initials RG" />
                     </com.google.android.material.textfield.TextInputLayout>
 
                     <TextView
@@ -745,34 +747,62 @@
                         android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/inputLocationFoundLayout" />
+                        app:layout_constraintTop_toBottomOf="@id/inputTitleLayoutFound" />
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/inputCategoryFoundLayout"
+                    <RelativeLayout
+                        android:id="@+id/categoryDropdownContainerFound"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        app:boxBackgroundMode="filled"
-                        app:boxBackgroundColor="#F5F5F7"
-                        app:boxStrokeWidth="0dp"
-                        app:boxStrokeWidthFocused="0dp"
-                        app:boxCornerRadiusTopStart="8dp"
-                        app:boxCornerRadiusTopEnd="8dp"
-                        app:boxCornerRadiusBottomStart="8dp"
-                        app:boxCornerRadiusBottomEnd="8dp"
-                        app:hintEnabled="false"
+                        android:background="@drawable/dropdown_background"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:padding="14dp"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/categoryLabelFound">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/inputCategoryFound"
+                        <TextView
+                            android:id="@+id/selectedCategoryTextFound"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Electronics"
+                            android:textColor="#000000"
+                            android:textSize="15sp"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true" />
+
+                        <ImageView
+                            android:id="@+id/dropdownChevronFound"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/ic_chevron_down"
+                            android:tint="#757575"
+                            android:layout_alignParentEnd="true"
+                            android:layout_centerVertical="true" />
+
+                    </RelativeLayout>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/categoryDropdownListFound"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:visibility="gone"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="8dp"
+                        app:cardBackgroundColor="@android:color/white"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/categoryDropdownContainerFound">
+
+                        <ListView
+                            android:id="@+id/categoryListViewFound"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:focusable="false"
-                            android:clickable="true"
-                            android:hint="Electronics" />
-                    </com.google.android.material.textfield.TextInputLayout>
+                            android:divider="@null"
+                            android:dividerHeight="0dp" />
+
+                    </androidx.cardview.widget.CardView>
 
                     <TextView
                         android:id="@+id/descriptionLabelFound"
@@ -784,10 +814,10 @@
                         android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/inputCategoryFoundLayout" />
+                        app:layout_constraintTop_toBottomOf="@id/categoryDropdownListFound" />
 
                     <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/inputDescriptionFoundLayout"
+                        android:id="@+id/inputDescriptionLayoutFound"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="6dp"
@@ -809,37 +839,368 @@
                             android:layout_width="match_parent"
                             android:layout_height="120dp"
                             android:gravity="top"
-                            android:hint="Describe the item and where you found it."
+                            android:hint="Describe the item, distinctive marks, when and where it was found."
                             android:inputType="textMultiLine"
                             android:paddingTop="12dp" />
                     </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/lastLocationLabelFound"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:text="Found location"
+                        android:textColor="@color/text_primary"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/inputDescriptionLayoutFound" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/inputLastLocationLayoutFound"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="6dp"
+                        app:boxBackgroundMode="filled"
+                        app:boxBackgroundColor="#F5F5F7"
+                        app:boxStrokeWidth="0dp"
+                        app:boxStrokeWidthFocused="0dp"
+                        app:boxCornerRadiusTopStart="8dp"
+                        app:boxCornerRadiusTopEnd="8dp"
+                        app:boxCornerRadiusBottomStart="8dp"
+                        app:boxCornerRadiusBottomEnd="8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/lastLocationLabelFound">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/inputLastLocationFound"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top"
+                            android:hint="e.g. Near North Gate, ITK campus"
+                            android:inputType="textMultiLine"
+                            android:paddingTop="12dp" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <TextView
+                        android:id="@+id/photosLabelFound"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Photos"
+                        android:textColor="@color/text_primary"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/inputLastLocationLayoutFound" />
+
+                    <TextView
+                        android:id="@+id/photosLimitTextFound"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Up to 5 images"
+                        android:textColor="@color/text_secondary"
+                        android:textSize="12sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBaseline_toBaselineOf="@id/photosLabelFound" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/photoUploadCardFound"
+                        android:layout_width="0dp"
+                        android:layout_height="220dp"
+                        android:layout_marginTop="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?attr/selectableItemBackground"
+                        app:cardBackgroundColor="#F5F5F7"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="0dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/photosLabelFound">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                            <ImageView
+                                android:id="@+id/photoUploadIconFound"
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_upload"
+                                android:tint="@color/text_secondary"
+                                app:layout_constraintTop_toTopOf="parent"
+                                app:layout_constraintBottom_toTopOf="@id/photoUploadTextFound"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintVertical_chainStyle="packed" />
+
+                            <TextView
+                                android:id="@+id/photoUploadTextFound"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="4dp"
+                                android:text="Upload"
+                                android:textColor="@color/text_secondary"
+                                android:textSize="13sp"
+                                app:layout_constraintTop_toBottomOf="@id/photoUploadIconFound"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent" />
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/photosRecyclerViewFound"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="12dp"
+                        android:nestedScrollingEnabled="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/photoUploadCardFound" />
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/allowContactCardFound"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        app:cardBackgroundColor="@android:color/white"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="1dp"
+                        app:strokeColor="@color/card_border"
+                        app:strokeWidth="1dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/photosRecyclerViewFound">
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:id="@+id/allowContactLabelFound"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Allow contact"
+                                android:textColor="@color/text_primary"
+                                android:textSize="14sp"
+                                android:textStyle="bold"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/allowContactDescriptionFound"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="2dp"
+                                android:text="Share your info so owners can reach you."
+                                android:textColor="@color/text_secondary"
+                                android:textSize="12sp"
+                                app:layout_constraintEnd_toStartOf="@id/switchAllowContactFound"
+                                app:layout_constraintStart_toStartOf="@id/allowContactLabelFound"
+                                app:layout_constraintTop_toBottomOf="@id/allowContactLabelFound" />
+
+                            <com.google.android.material.switchmaterial.SwitchMaterial
+                                android:id="@+id/switchAllowContactFound"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:checked="false"
+                                app:thumbTint="@color/switch_thumb_selector"
+                                app:trackTint="@color/switch_track_selector"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/contactFieldsContainerFound"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                android:visibility="gone"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/allowContactDescriptionFound">
+
+                                <TextView
+                                    android:id="@+id/contactNameLabelFound"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Name"
+                                    android:textColor="@color/text_primary"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/inputContactNameLayoutFound"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="6dp"
+                                    app:boxBackgroundMode="filled"
+                                    app:boxBackgroundColor="#F5F5F7"
+                                    app:boxStrokeWidth="0dp"
+                                    app:boxStrokeWidthFocused="0dp"
+                                    app:boxCornerRadiusTopStart="8dp"
+                                    app:boxCornerRadiusTopEnd="8dp"
+                                    app:boxCornerRadiusBottomStart="8dp"
+                                    app:boxCornerRadiusBottomEnd="8dp"
+                                    app:hintEnabled="false"
+                                    app:layout_constraintTop_toBottomOf="@id/contactNameLabelFound"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/inputContactNameFound"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="Your name" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <TextView
+                                    android:id="@+id/contactEmailLabelFound"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="12dp"
+                                    android:text="Email"
+                                    android:textColor="@color/text_primary"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintTop_toBottomOf="@id/inputContactNameLayoutFound"
+                                    app:layout_constraintStart_toStartOf="parent" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/inputContactEmailLayoutFound"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="6dp"
+                                    app:boxBackgroundMode="filled"
+                                    app:boxBackgroundColor="#F5F5F7"
+                                    app:boxStrokeWidth="0dp"
+                                    app:boxStrokeWidthFocused="0dp"
+                                    app:boxCornerRadiusTopStart="8dp"
+                                    app:boxCornerRadiusTopEnd="8dp"
+                                    app:boxCornerRadiusBottomStart="8dp"
+                                    app:boxCornerRadiusBottomEnd="8dp"
+                                    app:hintEnabled="false"
+                                    app:layout_constraintTop_toBottomOf="@id/contactEmailLabelFound"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/inputContactEmailFound"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="you@example.com"
+                                        android:inputType="textEmailAddress" />
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <TextView
+                                    android:id="@+id/contactPhoneLabelFound"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="12dp"
+                                    android:text="Phone"
+                                    android:textColor="@color/text_primary"
+                                    android:textSize="14sp"
+                                    android:textStyle="bold"
+                                    app:layout_constraintTop_toBottomOf="@id/inputContactEmailLayoutFound"
+                                    app:layout_constraintStart_toStartOf="parent" />
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/inputContactPhoneLayoutFound"
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="6dp"
+                                    app:boxBackgroundMode="filled"
+                                    app:boxBackgroundColor="#F5F5F7"
+                                    app:boxStrokeWidth="0dp"
+                                    app:boxStrokeWidthFocused="0dp"
+                                    app:boxCornerRadiusTopStart="8dp"
+                                    app:boxCornerRadiusTopEnd="8dp"
+                                    app:boxCornerRadiusBottomStart="8dp"
+                                    app:boxCornerRadiusBottomEnd="8dp"
+                                    app:hintEnabled="false"
+                                    app:layout_constraintTop_toBottomOf="@id/contactPhoneLabelFound"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintEnd_toEndOf="parent">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/inputContactPhoneFound"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:hint="+1 234 567 8900"
+                                        android:inputType="phone" />
+                                </com.google.android.material.textfield.TextInputLayout>
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                            <androidx.constraintlayout.widget.ConstraintLayout
+                                android:id="@+id/contactButtonsRowFound"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="16dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/contactFieldsContainerFound">
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/buttonResetFound"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Reset"
+                                    android:textAllCaps="false"
+                                    android:textColor="@color/text_secondary"
+                                    android:backgroundTint="#F3F4F6"
+                                    app:layout_constraintEnd_toStartOf="@id/buttonPostFound"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                                <com.google.android.material.button.MaterialButton
+                                    android:id="@+id/buttonPostFound"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="12dp"
+                                    android:text="Post"
+                                    android:textAllCaps="false"
+                                    android:textColor="@android:color/white"
+                                    android:backgroundTint="?attr/colorPrimary"
+                                    app:icon="@drawable/ic_check_white"
+                                    app:iconTint="@android:color/white"
+                                    app:iconPadding="8dp"
+                                    app:layout_constraintEnd_toEndOf="parent"
+                                    app:layout_constraintTop_toTopOf="parent"
+                                    app:layout_constraintBottom_toBottomOf="parent" />
+                            </androidx.constraintlayout.widget.ConstraintLayout>
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/foundList"
+            <!-- Browse Card: placed below the Post buttons card / cardFound -->
+            <include
+                android:id="@+id/browseCardFound"
+                layout="@layout/card_browse"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:nestedScrollingEnabled="false"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardFound" />
 
-            <TextView
-                android:id="@+id/emptyFound"
+            <!-- Results Card: placed below the Browse card -->
+            <include
+                android:id="@+id/resultsCardFound"
+                layout="@layout/card_results"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:padding="12dp"
-                android:gravity="center"
-                android:text="No items yet."
-                android:textColor="@color/text_secondary"
-                android:textSize="14sp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/foundList" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/browseCardFound" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

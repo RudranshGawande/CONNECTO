@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.megaproject.urbanspace.FullScreenVideoView
+    <com.megaproject.connecto.FullScreenVideoView
         android:id="@+id/splashVideo"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -16,3 +16,4 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+

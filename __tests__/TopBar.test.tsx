@@ -5,7 +5,7 @@ import TopBar from "../src/components/TopBar";
 describe("TopBar", () => {
   it("renders brand text and hamburger button", () => {
     render(<TopBar />);
-    expect(screen.getByText("Urban Space")).toBeInTheDocument();
+    expect(screen.getByText("Connecto")).toBeInTheDocument();
     const button = screen.getByLabelText("Open menu");
     expect(button).toBeInTheDocument();
   });
@@ -21,6 +21,8 @@ describe("TopBar", () => {
     expect(screen.getByLabelText("Open menu")).toHaveAttribute("aria-expanded", "true");
   });
 });
+
+
 
 
 

@@ -6,48 +6,49 @@
 
     <fragment
         android:id="@+id/homeFragment"
-        android:name="com.megaproject.urbanspace.Fragment.HomeFragment"
+        android:name="com.megaproject.connecto.Fragment.HomeFragment"
         android:label="Home" />
 
     <fragment
         android:id="@+id/transportFragment"
-        android:name="com.megaproject.urbanspace.Fragment.TransportFragment"
+        android:name="com.megaproject.connecto.Fragment.TransportFragment"
         android:label="Transport" />
 
     <fragment
         android:id="@+id/wasteFragment"
-        android:name="com.megaproject.urbanspace.Fragment.WasteFragment"
+        android:name="com.megaproject.connecto.Fragment.WasteFragment"
         android:label="Waste" />
 
     <fragment
         android:id="@+id/eventsFragment"
-        android:name="com.megaproject.urbanspace.Fragment.EventsFragment"
+        android:name="com.megaproject.connecto.Fragment.EventsFragment"
         android:label="Events" />
 
     <fragment
         android:id="@+id/emergencyFragment"
-        android:name="com.megaproject.urbanspace.Fragment.EmergencyFragment"
+        android:name="com.megaproject.connecto.Fragment.EmergencyFragment"
         android:label="Emergency" />
 
     <fragment
         android:id="@+id/lostFoundFragment"
-        android:name="com.megaproject.urbanspace.Fragment.LostFoundFragment"
+        android:name="com.megaproject.connecto.Fragment.LostFoundFragment"
         android:label="Lost &amp; Found" />
 
     <fragment
         android:id="@+id/communityChatFragment"
-        android:name="com.megaproject.urbanspace.Fragment.CommunityChatFragment"
+        android:name="com.megaproject.connecto.Fragment.CommunityChatFragment"
         android:label="Community Chat" />
 
     <fragment
         android:id="@+id/reportIssueFragment"
-        android:name="com.megaproject.urbanspace.Fragment.ReportIssueFragment"
+        android:name="com.megaproject.connecto.Fragment.ReportIssueFragment"
         android:label="Report Issue" />
 
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.megaproject.urbanspace.Fragment.ProfileFragment"
+        android:name="com.megaproject.connecto.Fragment.ProfileFragment"
         android:label="Profile" />
 
 </navigation>
+
 

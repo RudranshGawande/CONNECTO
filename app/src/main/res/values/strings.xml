@@ -1,22 +1,38 @@
 <resources>
-    <string name="app_name">UrbanSpace</string>
+    <string name="app_name">Connecto</string>
 
     <!-- Drawer toggle strings -->
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <!-- Accessibility -->
-    <string name="aria_go_home">Go to home, Urban Space</string>
+    <string name="aria_go_home">Go to home, Connecto</string>
     <string name="aria_notifications">Notifications</string>
     <string name="aria_open_menu">Open menu</string>
     <string name="aria_close_menu">Close menu</string>
 
     <!-- TopBar strings -->
-    <string name="brand_title">Urban Space</string>
+    <string name="brand_title">Connecto</string>
     <string name="brand_subtitle">Smart Urban Living</string>
 
     <!-- Lost & Found strings -->
     <string name="search_icon">Search icon</string>
     <string name="item_image">Item image</string>
     <string name="delete">Delete</string>
+
+    <!-- Profile Strings -->
+    <string name="profile_photo_desc">Profile photo, tap to change</string>
+    <string name="tap_to_change_photo">Tap to change photo</string>
+    <string name="full_name">Full Name</string>
+    <string name="gender">Gender</string>
+    <string name="select_gender">Select gender</string>
+    <string name="birthdate">Birthdate</string>
+    <string name="select_birthdate">Select birthdate</string>
+    <string name="gender_male">Male</string>
+    <string name="gender_female">Female</string>
+    <string name="gender_other">Other</string>
+    <string name="gender_prefer_not_say">Prefer not to say</string>
+    <string name="weight_label">Weight (kg)</string>
+    <string name="blood_group_label">Blood Group</string>
+    <string name="sign_out">Sign Out</string>
 </resources>

@@ -1,6 +1,6 @@
-# Urban Space TopBar
+# Connecto TopBar
 
-This repository includes a reusable TopBar component that matches the provided Urban Space header spec, along with a demo page and unit tests.
+This repository includes a reusable TopBar component that matches the provided Connecto header spec, along with a demo page and unit tests.
 
 ## Quick start
 1. Install dependencies: `npm install`
@@ -19,6 +19,8 @@ This repository includes a reusable TopBar component that matches the provided U
 - Component is mobile-first: 56px height on mobile, 64px on md+.
 - Uses Tailwind utility classes; includes focus-visible outlines for accessibility.
 - No extra header icons are rendered here—only brand link and hamburger menu.
+
+
 
 
 

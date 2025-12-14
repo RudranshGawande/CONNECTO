@@ -1,13 +1,13 @@
-plugins {
+﻿plugins {
     alias(libs.plugins.android.application)
 }
 
 android {
-    namespace = "com.megaproject.urbanspace"
+    namespace = "com.megaproject.connecto"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.megaproject.urbanspace"
+        applicationId = "com.megaproject.connecto"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -45,5 +45,8 @@ dependencies {
 
     implementation ("com.github.fornewid:neumorphism:0.3.2")
     implementation("com.squareup.picasso:picasso:2.8")
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+    implementation("com.github.yalantis:ucrop:2.2.8")
 
 }
+

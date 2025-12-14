@@ -49,7 +49,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="15dp"
-                    android:text="Welcome to Urban Space"
+                    android:text="Welcome to Connecto"
                     android:textColor="@color/text_primary"
                     android:textSize="22sp"
                     android:textStyle="bold"

@@ -22,7 +22,7 @@ try {
 }
 
 /**
- * Single, reusable top bar that matches the Urban Space spec.
+ * Single, reusable top bar that matches the Connecto spec.
  * Accessibility: focus-visible rings, meaningful aria labels, and keyboard-activatable controls.
  * No duplicate notification/action icons are rendered here; keep the header minimal.
  */
@@ -52,7 +52,7 @@ export default function TopBar({
     >
       <LinkComponent
         href="/"
-        aria-label="Go to home, Urban Space"
+        aria-label="Go to home, Connecto"
         className="flex items-center focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[rgba(45,140,255,0.16)]"
       >
         <div
@@ -64,7 +64,7 @@ export default function TopBar({
           <LocationPin className="text-white" />
         </div>
         <span className="ml-3 font-bold text-[16px] md:text-[18px] text-[#222222]">
-          Urban Space
+          Connecto
         </span>
       </LinkComponent>
 
@@ -84,4 +84,5 @@ export default function TopBar({
     </header>
   );
 }
+
 

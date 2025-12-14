@@ -1,0 +1,55 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="800dp"
+    android:height="400dp"
+    android:viewportWidth="800"
+    android:viewportHeight="400">
+    
+    <!-- Sky Background -->
+    <path
+        android:fillColor="#E3F2FD"
+        android:pathData="M0,0h800v400h-800z"/>
+        
+    <!-- Street/Ground -->
+    <path
+        android:fillColor="#9E9E9E"
+        android:pathData="M0,300h800v100h-800z"/>
+        
+    <!-- Blue Bin -->
+    <path
+        android:fillColor="#2196F3"
+        android:pathData="M100,320h100v-150h-100z"/>
+    <path
+        android:fillColor="#1976D2"
+        android:pathData="M90,170h120v20h-120z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M140,220h20v20h-20z M140,250h20v20h-20z"/>
+        
+    <!-- Green Bin -->
+    <path
+        android:fillColor="#4CAF50"
+        android:pathData="M250,320h100v-150h-100z"/>
+    <path
+        android:fillColor="#388E3C"
+        android:pathData="M240,170h120v20h-120z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M290,220h20v20h-20z M290,250h20v20h-20z"/>
+
+    <!-- Yellow Bin -->
+    <path
+        android:fillColor="#FFC107"
+        android:pathData="M400,320h100v-150h-100z"/>
+    <path
+        android:fillColor="#FFA000"
+        android:pathData="M390,170h120v20h-120z"/>
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M440,220h20v20h-20z M440,250h20v20h-20z"/>
+
+    <!-- Shadow details -->
+    <path
+        android:fillColor="#60000000"
+        android:pathData="M100,320h100l20,20h-140z M250,320h100l20,20h-140z M400,320h100l20,20h-140z"/>
+
+</vector>

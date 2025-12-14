@@ -76,19 +76,38 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Right hamburger menu -->
-        <ImageButton
-            android:id="@+id/buttonMenu"
-            style="?attr/borderlessButtonStyle"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
+        <!-- Right side controls -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="end|center_vertical"
-            android:src="@drawable/ic_menu"
-            android:contentDescription="@string/aria_open_menu"
-            android:background="@android:color/transparent"
-            app:tint="@color/iconTint"
-            android:focusable="true"
-            android:importantForAccessibility="yes" />
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageButton
+                android:id="@+id/themeToggle"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@drawable/ic_dark_mode"
+                android:contentDescription="Toggle Theme"
+                android:background="@android:color/transparent"
+                app:tint="@color/iconTint"
+                android:focusable="true"
+                android:importantForAccessibility="yes" />
+
+            <ImageButton
+                android:id="@+id/buttonMenu"
+                style="?attr/borderlessButtonStyle"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:src="@drawable/ic_menu"
+                android:contentDescription="@string/aria_open_menu"
+                android:background="@android:color/transparent"
+                app:tint="@color/iconTint"
+                android:focusable="true"
+                android:importantForAccessibility="yes" />
+        </LinearLayout>
 
         <!-- Subtle bottom divider -->
         <View

@@ -2,6 +2,7 @@
 <resources>
 
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
 
     <!-- Brand Colors -->
     <color name="primaryColor">#0D8BD9</color>
@@ -70,4 +71,50 @@
     <color name="divider">#E5E7EB</color>
     <color name="error">#EF4444</color>
 
+    <!-- Waste Management Colors -->
+    <color name="primary">#135bec</color>
+    <color name="surface_color">#FFFFFF</color>
+    <color name="text_tertiary">#9CA3AF</color>
+    <color name="divider_color">#E5E7EB</color>
+    <color name="card_stroke_color">#E5E7EB</color>
+    
+    <!-- Icon Background Colors -->
+    <color name="circle_primary">#135bec</color>
+    <color name="circle_orange">#FED7AA</color>
+    <color name="circle_gray">#F3F4F6</color>
+    <color name="circle_yellow">#FEF3C7</color>
+    <color name="circle_green">#D1FAE5</color>
+    <color name="circle_purple">#EDE9FE</color>
+    <color name="circle_light_gray">#F3F4F6</color>
+    
+    <!-- Icon Tint Colors -->
+    <color name="icon_orange">#F59E0B</color>
+    <color name="icon_gray">#6B7280</color>
+    <color name="icon_yellow">#F59E0B</color>
+    <color name="icon_green">#10B981</color>
+    <color name="icon_purple">#8B5CF6</color>
+    
+    <!-- Status Colors -->
+    <color name="status_upcoming">#10B981</color>
+    <color name="status_today">#F59E0B</color>
+    <color name="status_missed">#EF4444</color>
+    <color name="status_active">#10B981</color>
+    
+    <!-- Emergency/SOS Colors -->
+    <color name="emergency_red">#f20d0d</color>
+    <color name="emergency_red_light">#1Af20d0d</color>
+    <color name="emergency_medical">#3B82F6</color>
+    <color name="emergency_fire">#FF9800</color>
+    <color name="emergency_police">#5E35B1</color>
+    
+    <!-- Browse & Results Colors -->
+    <color name="browse_primary">#f20d0d</color>
+    <color name="browse_primary_light">#1Af20d0d</color>
+    <color name="browse_background_light">#f8f5f5</color>
+    <color name="browse_surface_dark">#271b1b</color>
+    <color name="browse_input_dark">#392828</color>
+    <color name="browse_text_muted">#ba9c9c</color>
+
 </resources>
+
+

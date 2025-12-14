@@ -10,4 +10,19 @@
     <color name="background">#121212</color>
     <color name="surface">#1E1E1E</color>
     <color name="onSurface">#FFFFFF</color>
+    
+    <!-- Browse & Results Colors -->
+    <color name="browse_primary">#f20d0d</color>
+    <color name="browse_primary_light">#33f20d0d</color>
+    <color name="browse_background_light">#221010</color>
+    <color name="browse_surface_dark">#271b1b</color>
+    <color name="browse_input_dark">#392828</color>
+    <color name="browse_text_muted">#ba9c9c</color>
+    
+    <!-- Also map card background for browse cards in dark mode -->
+    <color name="card_background">#271b1b</color>
+    <color name="card_border">#392828</color>
+    <color name="text_primary">#FFFFFF</color>
+    <color name="text_secondary">#ba9c9c</color>
+    <color name="iconTint">#FFFFFF</color>
 </resources>
