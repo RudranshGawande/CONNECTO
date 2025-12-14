@@ -455,7 +455,7 @@
             android:id="@+id/cardCommunity"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="29dp"
             android:foreground="?attr/selectableItemBackground"
             app:cardBackgroundColor="@color/card_background"
             app:cardCornerRadius="14dp"
