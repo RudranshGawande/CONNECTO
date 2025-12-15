@@ -9,9 +9,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="com.megaproject.connecto" />
-                  <option name="mobileSdkAppId" value="1:133242299675:android:7a13f6cd9140df1443dfbe" />
-                  <option name="projectId" value="urban-space-69" />
-                  <option name="projectNumber" value="133242299675" />
+                  <option name="mobileSdkAppId" value="1:759664115622:android:9540b33dd63b24e4d41967" />
+                  <option name="projectId" value="connecto-00" />
+                  <option name="projectNumber" value="759664115622" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

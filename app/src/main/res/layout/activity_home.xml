@@ -33,5 +33,26 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="@color/white"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@null"
+        app:menu="@menu/drawer_menu"
+        app:itemIconTint="@color/drawer_item_icon"
+        app:itemTextColor="@color/drawer_item_text"
+        app:itemBackground="@drawable/drawer_item_background"
+        app:itemIconPadding="12dp"
+        app:itemHorizontalPadding="16dp"
+        app:itemShapeFillColor="@color/drawer_item_text" 
+        />
+        <!-- Note: itemShapeFillColor is not usually needed if using itemBackground selector. 
+             But keeping it clean. Actually itemBackground selector handles the color. 
+             app:itemIconPadding adds space between icon and text.
+        -->
+
 </androidx.drawerlayout.widget.DrawerLayout>
 

@@ -27,8 +27,15 @@ public class SplashActivity extends AppCompatActivity {
         splashVideo.setVideoURI(video);
 
         splashVideo.setOnCompletionListener(mp -> {
-            // Directly go to LoginActivity
-            startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+            // Check if user is logged in
+            com.google.firebase.auth.FirebaseUser currentUser = com.google.firebase.auth.FirebaseAuth.getInstance().getCurrentUser();
+            if (currentUser != null) {
+                // User is signed in, go to Home
+                startActivity(new Intent(SplashActivity.this, HomeActivity.class));
+            } else {
+                // No user is signed in, go to Login
+                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+            }
             finish();
         });
 

@@ -1,31 +1,39 @@
 {
   "project_info": {
-    "project_number": "133242299675",
-    "project_id": "urban-space-69",
-    "storage_bucket": "urban-space-69.firebasestorage.app"
+    "project_number": "759664115622",
+    "project_id": "connecto-00",
+    "storage_bucket": "connecto-00.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:133242299675:android:7a13f6cd9140df1443dfbe",
+        "mobilesdk_app_id": "1:759664115622:android:9540b33dd63b24e4d41967",
         "android_client_info": {
           "package_name": "com.megaproject.connecto"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "759664115622-8g8tf6ohi0dok4it1tae39ngd8e36is9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyCe93jhsgmtpbeuHMkn-qAf1MqgyudM1Yo"
+          "current_key": "AIzaSyAFR_OYsuNNte08Xjw1bB4qHc6u3o6XPF0"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "759664115622-8g8tf6ohi0dok4it1tae39ngd8e36is9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
   ],
   "configuration_version": "1"
 }
-
-

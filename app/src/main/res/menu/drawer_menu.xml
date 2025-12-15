@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="Home"
+        android:contentDescription="Go to Home" />
+    <item
+        android:id="@+id/nav_transport"
+        android:icon="@drawable/ic_transport"
+        android:title="Transport"
+        android:contentDescription="Open Transport" />
+    <item
+        android:id="@+id/nav_waste"
+        android:icon="@drawable/ic_waste"
+        android:title="Waste"
+        android:contentDescription="Open Waste Management" />
+    <item
+        android:id="@+id/nav_report_issue"
+        android:icon="@drawable/ic_report"
+        android:title="Report Issue"
+        android:contentDescription="Open Report Issue" />
+    <item
+        android:id="@+id/nav_lost_found"
+        android:icon="@drawable/ic_lostfound"
+        android:title="Lost &amp; Found"
+        android:contentDescription="Open Lost and Found" />
+    <item
+        android:id="@+id/nav_events"
+        android:icon="@drawable/ic_event"
+        android:title="Events"
+        android:contentDescription="Open Events" />
+    <item
+        android:id="@+id/nav_emergency"
+        android:icon="@drawable/ic_emergency"
+        android:title="Emergency"
+        android:contentDescription="Open Emergency" />
+    <item
+        android:id="@+id/nav_community"
+        android:icon="@drawable/ic_chat"
+        android:title="Community"
+        android:contentDescription="Open Community" />
+    <item
+        android:id="@+id/nav_sign_out"
+        android:icon="@drawable/ic_logout"
+        android:title="Sign Out" />
+</menu>

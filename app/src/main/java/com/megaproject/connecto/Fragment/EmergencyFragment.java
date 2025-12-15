@@ -24,7 +24,11 @@ import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.Priority;
 import com.google.android.material.card.MaterialCardView;
 import com.megaproject.connecto.R;
 
@@ -46,6 +50,11 @@ public class EmergencyFragment extends Fragment {
     private ImageButton backButton, contactsButton;
 
     private FusedLocationProviderClient fusedLocationClient;
+    private LocationRequest locationRequest;
+    private LocationCallback locationCallback;
+    private Location bestLocation;
+    private static final float REQUIRED_ACCURACY = 20.0f; // meters
+
     private Handler sosHandler;
     private Runnable sosRunnable;
     private boolean isSosPressed = false;
@@ -94,6 +103,55 @@ public class EmergencyFragment extends Fragment {
 
     private void setupLocationServices() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity());
+        
+        // create location request
+        locationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 5000)
+                .setMinUpdateIntervalMillis(2000)
+                .setWaitForAccurateLocation(true)
+                .setMaxUpdates(20) // Stop after 20 updates if not stopped manually to save battery
+                .build();
+
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(@NonNull LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
+                for (Location location : locationResult.getLocations()) {
+                    if (location != null) {
+                        updateLocationUI(location);
+                    }
+                }
+            }
+        };
+    }
+
+    private void updateLocationUI(Location location) {
+        // Keep the best location found so far
+        if (bestLocation == null || location.getAccuracy() < bestLocation.getAccuracy()) {
+            bestLocation = location;
+        }
+
+        // Only update UI if this location is reasonable or better than what we have
+        // But since we want "latest, most accurate", we can show this one if it's decent.
+        
+        getAddressFromLocation(bestLocation);
+        
+        // Map accuracy to signal strength (lower meters is better)
+        float accuracy = bestLocation.getAccuracy();
+        int signalLevel;
+        if (accuracy <= 10) signalLevel = 100;       // Perfect
+        else if (accuracy <= 20) signalLevel = 85;   // Good (Target)
+        else if (accuracy <= 50) signalLevel = 60;   // Moderate
+        else if (accuracy <= 100) signalLevel = 40;  // Weak
+        else signalLevel = 20;                       // Poor
+        
+        updateGpsSignalStrength(signalLevel);
+
+        // If accuracy is good enough, we could potentially stop, 
+        // but user asked to continuously refresh until threshold.
+        // We will keep refreshing to handle movement, but maybe slow down? 
+        // For now, let it run as per request logic.
     }
 
     private void setupSosButton() {
@@ -161,20 +219,23 @@ public class EmergencyFragment extends Fragment {
             return;
         }
 
+        currentLocationText.setText("Detecting location...");
+        updateGpsSignalStrength(10); // Searching...
+
+        // 1. Get Last Known Location (Fast)
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(location -> {
                     if (location != null) {
-                        getAddressFromLocation(location);
-                        updateGpsSignalStrength(85); // Simulated strong signal
-                    } else {
-                        currentLocationText.setText("Unable to detect location");
-                        updateGpsSignalStrength(0);
+                        updateLocationUI(location);
                     }
-                })
-                .addOnFailureListener(e -> {
-                    currentLocationText.setText("Location error");
-                    updateGpsSignalStrength(0);
                 });
+
+        // 2. Request Live Updates (Accurate)
+        fusedLocationClient.requestLocationUpdates(locationRequest,
+                locationCallback,
+                Looper.getMainLooper());
+                
+        // Fallback retry mechanism logic is handled by the continuous updates
     }
 
     private void getAddressFromLocation(Location location) {
@@ -374,6 +435,9 @@ public class EmergencyFragment extends Fragment {
         super.onDestroyView();
         if (sosHandler != null && sosRunnable != null) {
             sosHandler.removeCallbacks(sosRunnable);
+        }
+        if (fusedLocationClient != null && locationCallback != null) {
+            fusedLocationClient.removeLocationUpdates(locationCallback);
         }
     }
 }
