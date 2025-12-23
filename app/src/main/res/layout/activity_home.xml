@@ -13,18 +13,7 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
-        <!-- Toolbar -->
 
-        <!-- Fragment Container -->
-        <com.google.android.material.appbar.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:elevation="2dp">
-
-            <include
-                layout="@layout/include_topbar" />
-        </com.google.android.material.appbar.AppBarLayout>
 
         <FrameLayout
             android:id="@+id/fragment_container"
@@ -38,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="end"
-        android:background="@color/white"
+        android:background="@android:color/white"
         android:fitsSystemWindows="true"
         app:headerLayout="@null"
         app:menu="@menu/drawer_menu"
@@ -47,12 +36,6 @@
         app:itemBackground="@drawable/drawer_item_background"
         app:itemIconPadding="12dp"
         app:itemHorizontalPadding="16dp"
-        app:itemShapeFillColor="@color/drawer_item_text" 
         />
-        <!-- Note: itemShapeFillColor is not usually needed if using itemBackground selector. 
-             But keeping it clean. Actually itemBackground selector handles the color. 
-             app:itemIconPadding adds space between icon and text.
-        -->
 
 </androidx.drawerlayout.widget.DrawerLayout>
-

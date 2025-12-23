@@ -23,6 +23,24 @@
     <color name="card_shadow">#E3E8EF</color>
     <color name="iconTint">#333333</color>
 
+    <!-- Home Redesign Colors -->
+    <color name="home_primary">#2b8cee</color>
+    <color name="home_background">#f6f7f8</color>
+    <color name="home_text_main">#111418</color>
+    <color name="home_text_secondary">#617589</color>
+    <color name="home_card_bg">#ffffff</color>
+    <color name="home_sos_red">#dc2626</color>
+    <color name="home_green_bg">#d1fae5</color>
+    <color name="home_green_text">#059669</color>
+    <color name="home_blue_bg">#eff6ff</color>
+    <color name="home_blue_text">#2563eb</color>
+    <color name="home_orange_bg">#fff7ed</color>
+    <color name="home_orange_text">#ea580c</color>
+    <color name="home_amber_bg">#fef3c7</color>
+    <color name="home_amber_text">#d97706</color>
+    <color name="home_red_bg">#fef2f2</color>
+    <color name="home_red_text">#dc2626</color>
+
     <!-- Waste Type Colors -->
     <color name="gray_500">#6B7280</color>
     <color name="blue_500">#3B82F6</color>
@@ -114,6 +132,16 @@
     <color name="browse_surface_dark">#271b1b</color>
     <color name="browse_input_dark">#392828</color>
     <color name="browse_text_muted">#ba9c9c</color>
+
+    <!-- Onboarding Colors from HTML -->
+    <color name="onboarding_background">#f6f7f8</color>
+    <color name="onboarding_primary">#2b8cee</color>
+    <color name="onboarding_text_dark">#111418</color>
+    <color name="onboarding_text_gray">#637588</color>
+    <color name="onboarding_dot_inactive">#dbe0e6</color>
+    
+    <color name="gray_200">#E5E7EB</color>
+    <color name="gray_300">#D1D5DB</color>
 
 </resources>
 

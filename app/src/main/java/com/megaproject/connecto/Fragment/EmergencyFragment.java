@@ -105,10 +105,10 @@ public class EmergencyFragment extends Fragment {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity());
         
         // create location request
-        locationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 5000)
-                .setMinUpdateIntervalMillis(2000)
+        locationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 2000)
+                .setMinUpdateIntervalMillis(500)
                 .setWaitForAccurateLocation(true)
-                .setMaxUpdates(20) // Stop after 20 updates if not stopped manually to save battery
+                .setMaxUpdates(100) // Increase update count for sustained tracking
                 .build();
 
         locationCallback = new LocationCallback() {
@@ -126,32 +126,78 @@ public class EmergencyFragment extends Fragment {
         };
     }
 
+    private static final int TWO_MINUTES = 1000 * 60 * 2;
+
     private void updateLocationUI(Location location) {
-        // Keep the best location found so far
-        if (bestLocation == null || location.getAccuracy() < bestLocation.getAccuracy()) {
+        if (isBetterLocation(location, bestLocation)) {
             bestLocation = location;
+            getAddressFromLocation(bestLocation);
+            
+            // Map accuracy to signal strength
+            float accuracy = bestLocation.getAccuracy();
+            int signalLevel;
+            if (accuracy <= 10) signalLevel = 100;
+            else if (accuracy <= 20) signalLevel = 85;
+            else if (accuracy <= 50) signalLevel = 60;
+            else if (accuracy <= 100) signalLevel = 40;
+            else signalLevel = 20;
+            
+            updateGpsSignalStrength(signalLevel);
+        }
+    }
+
+    /**
+     * Determines whether one Location reading is better than the current Location fix
+     * @param location  The new Location that you want to evaluate
+     * @param currentBestLocation  The current Location fix, to which you want to compare the new one
+     */
+    protected boolean isBetterLocation(Location location, Location currentBestLocation) {
+        if (currentBestLocation == null) {
+            // A new location is always better than no location
+            return true;
         }
 
-        // Only update UI if this location is reasonable or better than what we have
-        // But since we want "latest, most accurate", we can show this one if it's decent.
-        
-        getAddressFromLocation(bestLocation);
-        
-        // Map accuracy to signal strength (lower meters is better)
-        float accuracy = bestLocation.getAccuracy();
-        int signalLevel;
-        if (accuracy <= 10) signalLevel = 100;       // Perfect
-        else if (accuracy <= 20) signalLevel = 85;   // Good (Target)
-        else if (accuracy <= 50) signalLevel = 60;   // Moderate
-        else if (accuracy <= 100) signalLevel = 40;  // Weak
-        else signalLevel = 20;                       // Poor
-        
-        updateGpsSignalStrength(signalLevel);
+        // Check whether the new location fix is newer or older
+        long timeDelta = location.getTime() - currentBestLocation.getTime();
+        boolean isSignificantlyNewer = timeDelta > TWO_MINUTES;
+        boolean isSignificantlyOlder = timeDelta < -TWO_MINUTES;
+        boolean isNewer = timeDelta > 0;
 
-        // If accuracy is good enough, we could potentially stop, 
-        // but user asked to continuously refresh until threshold.
-        // We will keep refreshing to handle movement, but maybe slow down? 
-        // For now, let it run as per request logic.
+        // If it's been more than two minutes since the current location, use the new location
+        // because the user has likely moved
+        if (isSignificantlyNewer) {
+            return true;
+        } else if (isSignificantlyOlder) {
+            return false;
+        }
+
+        // Check whether the new location fix is more or less accurate
+        int accuracyDelta = (int) (location.getAccuracy() - currentBestLocation.getAccuracy());
+        boolean isLessAccurate = accuracyDelta > 0;
+        boolean isMoreAccurate = accuracyDelta < 0;
+        boolean isSignificantlyLessAccurate = accuracyDelta > 200;
+
+        // Check if the old and new location are from the same provider
+        boolean isFromSameProvider = isSameProvider(location.getProvider(),
+                currentBestLocation.getProvider());
+
+        // Determine location quality using a combination of timeliness and accuracy
+        if (isMoreAccurate) {
+            return true;
+        } else if (isNewer && !isLessAccurate) {
+            return true;
+        } else if (isNewer && !isSignificantlyLessAccurate && isFromSameProvider) {
+            return true;
+        }
+        return false;
+    }
+
+    /** Checks whether two providers are the same */
+    private boolean isSameProvider(String provider1, String provider2) {
+        if (provider1 == null) {
+            return provider2 == null;
+        }
+        return provider1.equals(provider2);
     }
 
     private void setupSosButton() {

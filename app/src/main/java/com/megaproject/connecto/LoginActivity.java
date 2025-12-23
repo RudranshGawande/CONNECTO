@@ -73,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Forgot password click
         tvForgotPassword.setOnClickListener(v ->
-                Toast.makeText(this, "Forgot password feature coming soon", Toast.LENGTH_SHORT).show()
+                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class))
         );
 
         // Sign up click
@@ -95,8 +95,22 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                         finishAffinity();
                     } else {
-                        Toast.makeText(LoginActivity.this, "Authentication failed: " + task.getException().getMessage(),
-                                Toast.LENGTH_SHORT).show();
+                        // Show Error Dialog
+                        IncorrectPasswordDialog dialog = new IncorrectPasswordDialog();
+                        dialog.setActionListener(new IncorrectPasswordDialog.ActionListener() {
+                            @Override
+                            public void onTryAgain() {
+                                // Clear password field or select it
+                                etPassword.setText("");
+                                etPassword.requestFocus();
+                            }
+
+                            @Override
+                            public void onForgotPassword() {
+                                startActivity(new Intent(LoginActivity.this, ForgotPasswordActivity.class));
+                            }
+                        });
+                        dialog.show(getSupportFragmentManager(), "IncorrectPasswordDialog");
                     }
                 });
     }

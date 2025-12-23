@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAFAFA"
+    android:padding="24dp">
+
+    <!-- Header -->
+    <ImageButton
+        android:id="@+id/btnBack"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/circle_white_bordered"
+        android:src="@drawable/ic_arrow_back_ios"
+        android:paddingStart="8dp"
+        android:padding="8dp"
+        app:tint="@color/gray_600"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:elevation="2dp" />
+    <!-- circle_white_bordered needs to be created or simulated. 
+         Screenshot shows white circle with light shadow/border.
+         I'll use a shape drawable or existing generic circle if available.
+         Using 'circle_gray' or similar might work, but let's stick to 'bg_white_rounded' or similar. 
+         I will create a quick drawable inline or reuse specific one. 
+         Actually, I will create a drawable `bg_back_button.xml` for this.
+    -->
+
+    <TextView
+        android:id="@+id/tvHeaderTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VERIFY PHONE"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="@color/gray_500"
+        android:letterSpacing="0.1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btnBack"
+        app:layout_constraintBottom_toBottomOf="@id/btnBack" />
+
+    <!-- Content -->
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Enter your phone\nnumber"
+        android:textColor="#111827"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        android:lineSpacingExtra="4dp"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@id/btnBack"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSubtitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="We will text you a code to verify your\nphone number"
+        android:textColor="@color/gray_500"
+        android:textSize="16sp"
+        android:layout_marginTop="12dp"
+        android:lineSpacingMultiplier="1.2"
+        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Phone Number Input Section -->
+    <TextView
+        android:id="@+id/tvLabelPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PHONE NUMBER"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        android:textColor="@color/gray_500"
+        android:letterSpacing="0.05"
+        android:layout_marginTop="40dp"
+        app:layout_constraintTop_toBottomOf="@id/tvSubtitle"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/layoutPhoneInput"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_white_rounded_16dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:layout_marginTop="12dp"
+        android:elevation="0dp"
+        app:layout_constraintTop_toBottomOf="@id/tvLabelPhone">
+        <!-- bg_white_rounded_16dp: Need to create or use generic. 
+             Result: I'll create `bg_white_rounded_16dp.xml` later.
+        -->
+
+        <LinearLayout
+            android:id="@+id/layoutCountrySelect"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:clickable="true"
+            android:focusable="true"
+            android:background="?attr/selectableItemBackground"
+            android:paddingStart="0dp"
+            android:paddingEnd="8dp">
+
+            <TextView
+                android:id="@+id/tvFlag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="🇺🇸"
+                android:textSize="24sp"
+                android:layout_marginEnd="4dp"/>
+
+            <TextView
+                android:id="@+id/tvCountryCode"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+1"
+                android:textColor="@color/gray_500"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:layout_marginEnd="4dp"/>
+                
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_arrow_drop_down"
+                app:tint="@color/gray_500"/>
+                
+        </LinearLayout>
+            
+        <View
+            android:layout_width="1dp"
+            android:layout_height="24dp"
+            android:background="#E5E7EB"
+            android:layout_marginEnd="12dp"/>
+
+        <EditText
+            android:id="@+id/etPhoneNumber"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@null"
+            android:hint="(555) 867-5309"
+            android:inputType="phone"
+            android:textColor="#111827"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:importantForAutofill="no" />
+            
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/ivCheck"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_check_circle_filled"
+        android:visibility="gone"
+        app:tint="#10B981"
+        android:elevation="2dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="@id/layoutPhoneInput"
+        app:layout_constraintTop_toTopOf="@id/layoutPhoneInput"
+        app:layout_constraintBottom_toBottomOf="@id/layoutPhoneInput"/>
+        
+    <!-- OTP Input Section (Initially Hidden) -->
+    <LinearLayout
+        android:id="@+id/layoutOtpInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        android:gravity="center_horizontal"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@id/layoutPhoneInput">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:weightSum="6"
+            android:layout_marginBottom="24dp">
+
+            <EditText
+                android:id="@+id/etOtp1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_otp_box_selector"
+                android:gravity="center"
+                android:hint="•"
+                android:text="4"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="#111827"
+                android:textColorHint="@color/gray_300"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_marginEnd="4dp"
+                android:paddingVertical="16dp" 
+                android:elevation="2dp"/>
+            <!-- Note: paddingVertical requires minSdk 26, using padding works too if needed, but paddingVertical is fine for most. 
+                 Using aspect ratio is harder in LinearLayout with weights, giving fixed padding/height is safer for consistency. -->
+
+            <EditText
+                android:id="@+id/etOtp2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_otp_box_selector"
+                android:gravity="center"
+                android:hint="•"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="#111827"
+                android:textColorHint="@color/gray_300"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_marginEnd="4dp"
+                android:paddingVertical="16dp" 
+                android:elevation="2dp"/>
+
+            <EditText
+                android:id="@+id/etOtp3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_otp_box_selector"
+                android:gravity="center"
+                android:hint="•"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="#111827"
+                android:textColorHint="@color/gray_300"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_marginEnd="4dp"
+                android:paddingVertical="16dp" 
+                android:elevation="2dp"/>
+
+            <EditText
+                android:id="@+id/etOtp4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_otp_box_selector"
+                android:gravity="center"
+                android:hint="•"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="#111827"
+                android:textColorHint="@color/gray_300"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_marginEnd="4dp"
+                android:paddingVertical="16dp" 
+                android:elevation="2dp"/>
+
+            <EditText
+                android:id="@+id/etOtp5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_otp_box_selector"
+                android:gravity="center"
+                android:hint="•"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="#111827"
+                android:textColorHint="@color/gray_300"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:layout_marginEnd="4dp"
+                android:paddingVertical="16dp" 
+                android:elevation="2dp"/>
+
+            <EditText
+                android:id="@+id/etOtp6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/bg_otp_box_selector"
+                android:gravity="center"
+                android:hint="•"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="#111827"
+                android:textColorHint="@color/gray_300"
+                android:textStyle="bold"
+                android:textSize="24sp"
+                android:paddingVertical="16dp" 
+                android:elevation="2dp"/>
+            
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp">
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Didn't receive the code? "
+                android:textColor="@color/gray_500"
+                android:textStyle="bold"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/tvResendOtp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Resend OTP"
+                android:textColor="#2563EB"
+                android:textStyle="bold"
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"/>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvTimer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_timer_pill"
+            android:text="00:24"
+            android:textColor="@color/gray_500"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="6dp"
+            android:letterSpacing="0.1"/>
+
+    </LinearLayout>
+
+    <!-- Bottom Button & Scale -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginBottom="24dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnMainAction"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:background="@drawable/bg_button_primary_blue"
+            android:text="Send OTP"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:drawableEnd="@drawable/ic_arrow_forward"
+            android:paddingHorizontal="24dp"
+            android:stateListAnimator="@null"
+            android:drawableTint="@color/white" 
+            /> 
+            <!-- bg_button_primary_blue needs creation. -->
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="By continuing, you agree to our Terms &amp; Conditions"
+            android:textSize="12sp"
+            android:textColor="@color/gray_500"
+            android:gravity="center"
+            android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

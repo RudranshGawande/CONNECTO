@@ -35,4 +35,59 @@
     <string name="weight_label">Weight (kg)</string>
     <string name="blood_group_label">Blood Group</string>
     <string name="sign_out">Sign Out</string>
+
+    <!-- Onboarding Strings -->
+    <string name="onboarding_headline">City Living, Simplified</string>
+    <string name="onboarding_description">Connecto is your pocket guide to urban life. From emergency SOS to real-time transport updates and waste schedules.</string>
+    <string name="onboarding_page_indicator">1 of 6</string>
+    <string name="get_started">Get Started</string>
+
+    <!-- Onboarding Step 2 -->
+    <string name="onboarding_step_2_headline">Seamless City Travel</string>
+    <string name="onboarding_step_2_description">Connecto puts the city in your pocket. Instantly locate public transport, track arrivals in real-time, and navigate with confidence.</string>
+    <string name="onboarding_step_2_indicator">Step 2 of 6</string>
+    <string name="next_step">Next Step</string>
+
+    <!-- Onboarding Step 3 -->
+    <string name="onboarding_step_3_subtitle">Waste Management</string>
+    <string name="onboarding_step_3_headline">Never miss a\npickup day again.</string>
+    <string name="onboarding_step_3_title_1">Smart Schedules</string>
+    <string name="onboarding_step_3_desc_1">Auto-sync pickup times for your specific neighborhood.</string>
+    <string name="onboarding_step_3_title_2">Daily Nudges</string>
+    <string name="onboarding_step_3_desc_2">We\'ll remind you to take out the trash at 8 PM.</string>
+    <string name="onboarding_step_3_title_3">Sorting Guide</string>
+    <string name="onboarding_step_3_desc_3">Know exactly which bin to use for plastics, organics, and glass.</string>
+    <string name="enable_reminders">Enable Reminders</string>
+    <string name="onboarding_step_3_indicator">Step 3 of 6</string>
+
+    <!-- Onboarding Step 4 (SOS) -->
+    <string name="onboarding_step_4_headline">Emergency Help in Seconds</string>
+    <string name="onboarding_step_4_description">Connecto instantly alerts local emergency services and your trusted contacts with your live location. Peace of mind is just one button press away.</string>
+    <string name="onboarding_step_4_indicator">Step 2 of 4</string>
+    <string name="next">Next</string>
+    
+    <!-- Home Screen Redesign -->
+    <string name="home_greeting">Good Morning, Alex</string>
+    <string name="home_location">Downtown, Metro City</string>
+    <string name="home_sos_title">Emergency SOS</string>
+    <string name="home_sos_subtitle">Instant help for medical or police</string>
+    <string name="home_sos_swipe">Swipe for immediate assistance</string>
+    <string name="home_sos_button">Slide to Call</string>
+    <string name="home_section_live_status">Live Status</string>
+    <string name="home_view_all">View all</string>
+    <string name="home_transport_line">Line 42 - Downtown Express</string>
+    <string name="home_transport_status">Arriving in &lt;font color="#2b8cee"&gt;&lt;b&gt;5 mins&lt;/b&gt;&lt;/font&gt; at Central Station</string>
+    <string name="home_recycling_title">Recycling Pickup</string>
+    <string name="home_recycling_status">Scheduled for &lt;b&gt;Tomorrow Morning&lt;/b&gt;</string>
+    <string name="home_section_city_services">City Services</string>
+    <string name="home_service_transport">Transport</string>
+    <string name="home_service_transport_desc">Routes &amp; schedules</string>
+    <string name="home_service_waste">Waste</string>
+    <string name="home_service_waste_desc">Pickup calendar</string>
+    <string name="home_service_lostfound">Lost &amp; Found</string>
+    <string name="home_service_lostfound_desc">Report or find items</string>
+    <string name="home_service_issues">Report Issues</string>
+    <string name="home_service_issues_desc">Quickly report city problems</string>
+    <string name="home_service_sos">Emergency SOS</string>
+    <string name="home_service_sos_desc">Instant help in emergencies</string>
 </resources>

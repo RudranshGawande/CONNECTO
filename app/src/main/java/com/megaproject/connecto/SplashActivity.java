@@ -33,8 +33,8 @@ public class SplashActivity extends AppCompatActivity {
                 // User is signed in, go to Home
                 startActivity(new Intent(SplashActivity.this, HomeActivity.class));
             } else {
-                // No user is signed in, go to Login
-                startActivity(new Intent(SplashActivity.this, LoginActivity.class));
+                // No user is signed in, go to Onboarding
+                startActivity(new Intent(SplashActivity.this, WelcomeOnboardingActivity.class));
             }
             finish();
         });

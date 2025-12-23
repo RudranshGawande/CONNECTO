@@ -66,6 +66,26 @@
             android:name=".ProfileActivity"
             android:exported="false" />
         <activity
+            android:name=".VerifyPasswordActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
+            android:name=".ChangePasswordActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
+            android:name=".EditProfileActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
+            android:name=".ForgotPasswordActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
+            android:name=".PhoneVerificationActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
             android:name=".SignUpActivity"
             android:theme="@style/Theme.UrbanSpace.Light"
             android:exported="false" />
@@ -74,6 +94,31 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
+            android:theme="@style/Theme.UrbanSpace.Light"
+            android:exported="false" />
+        <activity
+            android:name=".WelcomeOnboardingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.UrbanSpace.Light"
+            android:exported="false" />
+        <activity
+            android:name=".TransportOnboardingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.UrbanSpace.Light"
+            android:exported="false" />
+        <activity
+            android:name=".WasteOnboardingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.UrbanSpace.Light"
+            android:exported="false" />
+        <activity
+            android:name=".EmergencyOnboardingActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.UrbanSpace.Light"
+            android:exported="false" />
+        <activity
+            android:name=".LostFoundOnboardingActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.UrbanSpace.Light"
             android:exported="false" />
         <activity

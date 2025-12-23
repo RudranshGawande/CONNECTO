@@ -56,14 +56,12 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        Toolbar toolbar = findViewById(R.id.topBar);
-        setSupportActionBar(toolbar);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayShowTitleEnabled(false);
-        }
+
 
         // Setup Theme Toggle
-        setupThemeToggle();
+
+        // Setup Theme Toggle - Removed
+
 
         drawerLayout = findViewById(R.id.drawerLayout);
         if (drawerLayout != null) {
@@ -71,35 +69,23 @@ public class HomeActivity extends AppCompatActivity {
                 @Override
                 public void onDrawerOpened(@NonNull View drawerView) {
                     menuOpen = true;
-                    updateMenuButtonState();
+                    // updateMenuButtonState();
                     syncMenuSelection(); // Also sync when opened via swipe
                 }
 
                 @Override
                 public void onDrawerClosed(@NonNull View drawerView) {
                     menuOpen = false;
-                    updateMenuButtonState();
+                    // updateMenuButtonState();
                 }
             });
         }
 
-        View brandGroup = findViewById(R.id.brandGroup);
-        if (brandGroup != null) {
-            brandGroup.setOnClickListener(v -> navigateHome());
-            brandGroup.setOnKeyListener((v, keyCode, event) -> {
-                if (event.getAction() == KeyEvent.ACTION_UP &&
-                        (keyCode == KeyEvent.KEYCODE_ENTER || keyCode == KeyEvent.KEYCODE_SPACE)) {
-                    brandGroup.performClick();
-                    return true;
-                }
-                return false;
-            });
-        }
 
-        ImageButton buttonMenu = findViewById(R.id.buttonMenu);
-        if (buttonMenu != null) {
-            buttonMenu.setOnClickListener(this::onToggleMenu);
-        }
+        // BrandGroup Removed
+
+
+
 
         // Load HomeFragment initially
         if (savedInstanceState == null) {
@@ -115,89 +101,13 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    private void setupThemeToggle() {
-        ImageButton themeToggle = findViewById(R.id.themeToggle);
-        if (themeToggle != null) {
-            updateThemeIcon(themeToggle);
-            themeToggle.setOnClickListener(v -> toggleAppTheme(themeToggle));
-        }
-    }
 
-    private void updateThemeIcon(ImageButton btn) {
-        int nightMode = androidx.appcompat.app.AppCompatDelegate.getDefaultNightMode();
-        if (nightMode == androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES) {
-             btn.setImageResource(R.drawable.ic_light_mode); 
-             btn.setContentDescription("Switch to Light Mode");
-        } else {
-             btn.setImageResource(R.drawable.ic_dark_mode);
-             btn.setContentDescription("Switch to Dark Mode");
-        }
-    }
+    // Theme toggle methods removed
 
-    private void toggleAppTheme(ImageButton btn) {
-        int currentMode = androidx.appcompat.app.AppCompatDelegate.getDefaultNightMode();
-        int newMode;
-        if (currentMode == androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES) {
-            newMode = androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO;
-        } else {
-            newMode = androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES;
-        }
-        
-        androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(newMode);
-        
-        // Save preference
-        android.content.SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
-        prefs.edit().putInt("night_mode", newMode).apply();
-        
-        // Icon update happens automatically due to activity recreation, but we can set it
-        updateThemeIcon(btn); 
-    }
 
-    public void onToggleMenu(View v) {
-        // Just for safety if button click comes here
-        toggleMenu();
-    }
 
-    private void toggleMenu() {
-        if (drawerLayout == null) return;
+    // Menu toggle methods removed
 
-        // Avoid crashes if no END drawer view is configured yet
-        if (!hasEndDrawer()) {
-            Log.w("TopBar", "No end drawer configured in DrawerLayout; ignoring menu toggle.");
-            return;
-        }
-
-        if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
-            drawerLayout.closeDrawer(GravityCompat.END);
-            menuOpen = false;
-        } else {
-            // SYNC STATE BEFORE OPENING
-            syncMenuSelection();
-            drawerLayout.openDrawer(GravityCompat.END);
-            menuOpen = true;
-        }
-
-        Toolbar toolbar = findViewById(R.id.topBar);
-        if (toolbar != null) {
-            toolbar.setElevation(menuOpen ? 8f : 2f);
-        }
-
-        updateMenuButtonState();
-        Log.d("TopBar", "menu toggle: " + (menuOpen ? "open" : "closed"));
-    }
-
-    private boolean hasEndDrawer() {
-        if (drawerLayout == null) return false;
-
-        for (int i = 0; i < drawerLayout.getChildCount(); i++) {
-            View child = drawerLayout.getChildAt(i);
-            DrawerLayout.LayoutParams lp = (DrawerLayout.LayoutParams) child.getLayoutParams();
-            if ((lp.gravity & GravityCompat.END) == GravityCompat.END) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     // Determine which fragment is active and update navigationView checked item
     private void syncMenuSelection() {
@@ -227,13 +137,8 @@ public class HomeActivity extends AppCompatActivity {
         navigationView.setCheckedItem(idToCheck);
     }
 
-    private void updateMenuButtonState() {
-        ImageButton buttonMenu = findViewById(R.id.buttonMenu);
-        if (buttonMenu != null) {
-            int descRes = menuOpen ? R.string.aria_close_menu : R.string.aria_open_menu;
-            buttonMenu.setContentDescription(getString(descRes));
-        }
-    }
+    // updateMenuButtonState removed
+
 
     private void navigateHome() {
         getSupportFragmentManager().popBackStack(null, getSupportFragmentManager().POP_BACK_STACK_INCLUSIVE);

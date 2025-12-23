@@ -1,1039 +1,694 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_gradient">
+    android:background="@color/home_background">
 
+    <!-- Top Bar (Sticky) -->
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
-        android:paddingTop="24dp"
-        android:paddingBottom="24dp">
+        android:background="@color/home_card_bg"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        android:elevation="4dp"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <!-- Welcome card -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardWelcome"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/profileContainer"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:background="@drawable/bg_home_header"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/card_background"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="@color/card_border"
-            app:strokeWidth="1dp">
+            app:layout_constraintBottom_toBottomOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
+            <!-- Profile Photo with Ring -->
+            <FrameLayout
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/bg_profile_ring"
+                android:padding="3dp">
+                
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="0dp">
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/ic_default_profile"
+                        android:scaleType="centerCrop"/>
+                </androidx.cardview.widget.CardView>
+            </FrameLayout>
+
+            <!-- Title and Subtitle -->
+            <LinearLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:padding="20dp">
-
-                <ImageView
-                    android:id="@+id/welcomeIcon"
-                    android:layout_width="54dp"
-                    android:layout_height="54dp"
-                    android:background="@drawable/alert_icon_background"
-                    android:src="@drawable/logo"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                android:orientation="vertical"
+                android:layout_marginStart="12dp"
+                android:gravity="center_vertical">
 
                 <TextView
-                    android:id="@+id/welcomeTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingStart="15dp"
-                    android:text="Welcome to Connecto"
-                    android:textColor="@color/text_primary"
-                    android:textSize="22sp"
+                    android:text="Connecto"
+                    android:textColor="@color/home_text_main"
+                    android:fontFamily="sans-serif-medium"
+                    android:textSize="18sp"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Explore the city"
+                    android:textColor="@color/home_text_secondary"
+                    android:textSize="12sp"
+                    android:fontFamily="sans-serif"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- Notification Bell -->
+        <FrameLayout
+            android:id="@+id/notificationBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/bg_rounded_12dp"
+            android:backgroundTint="@color/home_background"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent">
+            
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_notifications_filled"
+                app:tint="@color/home_text_main"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Scrollable Content -->
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/topBar"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="24dp">
+
+            <!-- Header Section -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp"
+                android:paddingTop="24dp"
+                android:paddingBottom="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_greeting"
+                    android:textColor="@color/home_text_main"
+                    android:textSize="28sp"
                     android:textStyle="bold"
-                    app:layout_constraintStart_toEndOf="@id/welcomeIcon"
-                    app:layout_constraintTop_toTopOf="@id/welcomeIcon" />
-
-                <TextView
-                    android:id="@+id/welcomeSubtitle"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:lineSpacingExtra="2dp"
-                    android:text="Your smart companion for city living. Track transport, manage waste, report issues, and connect with your community."
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/welcomeIcon" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- City Services title -->
-        <TextView
-            android:id="@+id/titleCityServices"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:text="City Services"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardWelcome" />
-
-        <!-- Row 1: Live Transport and Waste Collection -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardLiveTransport"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/card_background"
-            app:cardCornerRadius="14dp"
-            app:cardElevation="1dp"
-            app:layout_constraintEnd_toStartOf="@id/cardWaste"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleCityServices"
-            app:layout_constraintWidth_percent="0.48"
-            app:strokeColor="@color/card_border"
-            app:strokeWidth="1dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="14dp">
-
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="@drawable/alert_icon_background"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_transport" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Live Transport"
-                    android:textColor="@color/text_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Real-time bus and train tracking with arrival times"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/status_default_bg"
-                    android:paddingStart="10dp"
-                    android:paddingTop="6dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="6dp"
-                    android:text="5 routes nearby"
-                    android:textColor="@color/blue_600"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardWaste"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/card_background"
-            app:cardCornerRadius="14dp"
-            app:cardElevation="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/cardLiveTransport"
-            app:layout_constraintTop_toTopOf="@id/cardLiveTransport"
-            app:layout_constraintWidth_percent="0.48"
-            app:strokeColor="@color/card_border"
-            app:strokeWidth="1dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="14dp">
-
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="@drawable/alert_icon_background"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_waste" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Waste Collection"
-                    android:textColor="@color/text_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Get alerts for pickup schedules in your area"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/status_collected_bg"
-                    android:paddingStart="10dp"
-                    android:paddingTop="6dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="6dp"
-                    android:text="Next: Tomorrow 7AM"
-                    android:textColor="@color/green_600"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Row 2: Report Issues and Lost & Found -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardReportIssue"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/card_background"
-            app:cardCornerRadius="14dp"
-            app:cardElevation="1dp"
-            app:layout_constraintEnd_toStartOf="@id/cardLostFound"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardLiveTransport"
-            app:layout_constraintWidth_percent="0.48"
-            app:strokeColor="@color/card_border"
-            app:strokeWidth="1dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="14dp">
-
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="@drawable/alert_icon_background"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_report" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Report Issues"
-                    android:textColor="@color/text_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Report infrastructure problems with photos &amp; location"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/status_default_bg"
-                    android:paddingStart="10dp"
-                    android:paddingTop="6dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="6dp"
-                    android:text="3 active reports"
-                    android:textColor="@color/orange_600"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardLostFound"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/card_background"
-            app:cardCornerRadius="14dp"
-            app:cardElevation="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/cardReportIssue"
-            app:layout_constraintTop_toTopOf="@id/cardReportIssue"
-            app:layout_constraintWidth_percent="0.48"
-            app:strokeColor="@color/card_border"
-            app:strokeWidth="1dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="14dp">
-
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="@drawable/alert_icon_background"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_lostfound" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Lost &amp; Found"
-                    android:textColor="@color/text_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Community-powered lost and found portal"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/status_default_bg"
-                    android:paddingStart="10dp"
-                    android:paddingTop="6dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="6dp"
-                    android:text="12 active listings"
-                    android:textColor="@color/purple_500"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Row 3: Local Events and Emergency -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardEvents"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="8dp"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/card_background"
-            app:cardCornerRadius="14dp"
-            app:cardElevation="1dp"
-            app:layout_constraintEnd_toStartOf="@id/cardEmergency"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardReportIssue"
-            app:layout_constraintWidth_percent="0.48"
-            app:strokeColor="@color/card_border"
-            app:strokeWidth="1dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="14dp">
-
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="@drawable/alert_icon_background"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_event" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Local Events"
-                    android:textColor="@color/text_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Discover what's happening in your neighborhood"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/status_default_bg"
-                    android:paddingStart="10dp"
-                    android:paddingTop="6dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="6dp"
-                    android:text="4 events this week"
-                    android:textColor="@color/blue_600"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardEmergency"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/card_background"
-            app:cardCornerRadius="14dp"
-            app:cardElevation="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/cardEvents"
-            app:layout_constraintTop_toTopOf="@id/cardEvents"
-            app:layout_constraintWidth_percent="0.48"
-            app:strokeColor="@color/card_border"
-            app:strokeWidth="1dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="14dp">
-
-                <ImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:background="@drawable/alert_icon_background"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_emergency" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:text="Emergency"
-                    android:textColor="@color/text_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Quick access to emergency contacts and SOS"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="13sp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/status_default_bg"
-                    android:paddingStart="10dp"
-                    android:paddingTop="6dp"
-                    android:paddingEnd="10dp"
-                    android:paddingBottom="6dp"
-                    android:text="Always available"
-                    android:textColor="@color/red_600"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Community Chat (full width) -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardCommunity"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="29dp"
-            android:foreground="?attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/card_background"
-            app:cardCornerRadius="14dp"
-            app:cardElevation="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardEvents"
-            app:strokeColor="@color/card_border"
-            app:strokeWidth="1dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="14dp">
+                    android:fontFamily="sans-serif-black"/>
 
                 <LinearLayout
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:orientation="horizontal"
                     android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
+                    android:layout_marginTop="4dp">
+                    
                     <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:background="@drawable/alert_icon_background"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_chat" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Community Chat"
-                            android:textColor="@color/text_primary"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Connect with neighbors and stay informed"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="13sp" />
-                    </LinearLayout>
-
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_location_on_filled"
+                        app:tint="@color/home_primary"/>
+                    
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/status_default_bg"
-                        android:paddingStart="10dp"
-                        android:paddingTop="6dp"
-                        android:paddingEnd="10dp"
-                        android:paddingBottom="6dp"
-                        android:text="89 active members"
-                        android:textColor="@color/purple_500"
-                        android:textSize="12sp" />
+                        android:text="@string/home_location"
+                        android:textColor="@color/home_text_secondary"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif-medium"
+                        android:layout_marginStart="4dp"/>
                 </LinearLayout>
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
 
-        <!-- Recent Transport title -->
-        <TextView
-            android:id="@+id/titleRecentTransport"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:text="Recent Transport"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardCommunity" />
-
-        <!-- Recent Transport card -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardRecentTransport"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:cardBackgroundColor="@color/card_background"
-            app:cardCornerRadius="14dp"
-            app:cardElevation="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleRecentTransport"
-            app:strokeColor="@color/card_border"
-            app:strokeWidth="1dp">
-
-            <LinearLayout
+            <!-- Emergency SOS Card -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardEmergency"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="14dp">
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="16dp"
+                app:cardCornerRadius="12dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/home_card_bg">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:background="@drawable/alert_icon_background"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_transport" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Metro Line A (A1)"
-                            android:textColor="@color/text_primary"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="on-time   ETA 7 min"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="13sp" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/status_collected_bg"
-                        android:paddingStart="10dp"
-                        android:paddingTop="6dp"
-                        android:paddingEnd="10dp"
-                        android:paddingBottom="6dp"
-                        android:text="on-time"
-                        android:textColor="@color/green_600"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginVertical="12dp"
-                    android:background="@color/card_border" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:background="@drawable/alert_icon_background"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_transport" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="East Line (B2)"
-                            android:textColor="@color/text_primary"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="on-time   ETA 15 min"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="13sp" />
-                    </LinearLayout>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:background="@drawable/status_collected_bg"
-                        android:paddingStart="10dp"
-                        android:paddingTop="6dp"
-                        android:paddingEnd="10dp"
-                        android:paddingBottom="6dp"
-                        android:text="on-time"
-                        android:textColor="@color/green_600"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="Last updated 26s ago"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="12sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Recent Events title -->
-        <TextView
-            android:id="@+id/titleRecentEvents"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:text="Recent Events"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardRecentTransport" />
-
-        <!-- Recent Events card -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardRecentEvents"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:cardBackgroundColor="@color/card_background"
-            app:cardCornerRadius="14dp"
-            app:cardElevation="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleRecentEvents"
-            app:strokeColor="@color/card_border"
-            app:strokeWidth="1dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="No events yet."
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp" />
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-        <!-- Recent Reports title -->
-        <TextView
-            android:id="@+id/titleRecentReports"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:text="Recent Reports"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardRecentEvents" />
-
-        <!-- Recent Reports card -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardRecentReports"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:cardBackgroundColor="@color/card_background"
-            app:cardCornerRadius="14dp"
-            app:cardElevation="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleRecentReports"
-            app:strokeColor="@color/card_border"
-            app:strokeWidth="1dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="14dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="36dp"
-                        android:layout_height="36dp"
-                        android:background="@drawable/alert_icon_background"
-                        android:padding="8dp"
-                        android:src="@drawable/ic_report" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="12dp"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Related to the construction."
-                            android:textColor="@color/text_primary"
-                            android:textSize="16sp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="72nd Street"
-                            android:textColor="@color/text_secondary"
-                            android:textSize="13sp" />
-
+                    <!-- Red Gradient Area -->
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:background="@drawable/bg_sos_card_gradient">
+                        
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:orientation="horizontal">
-
+                            android:orientation="vertical"
+                            android:layout_gravity="bottom|start"
+                            android:padding="16dp">
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/status_default_bg"
-                                android:paddingStart="10dp"
-                                android:paddingTop="6dp"
-                                android:paddingEnd="10dp"
-                                android:paddingBottom="6dp"
-                                android:text="Road Damage"
-                                android:textColor="@color/orange_600"
-                                android:textSize="12sp" />
-
+                                android:text="@string/home_sos_title"
+                                android:textColor="@color/white"
+                                android:textSize="18sp"
+                                android:textStyle="bold"/>
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginStart="8dp"
-                                android:background="@drawable/status_default_bg"
-                                android:paddingStart="10dp"
-                                android:paddingTop="6dp"
-                                android:paddingEnd="10dp"
-                                android:paddingBottom="6dp"
-                                android:text="submitted"
-                                android:textColor="@color/blue_600"
-                                android:textSize="12sp" />
+                                android:text="@string/home_sos_subtitle"
+                                android:textColor="#E0E0E0"
+                                android:textSize="14sp"/>
                         </LinearLayout>
+                    </FrameLayout>
+
+                    <!-- Bottom Action Area -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/home_sos_swipe"
+                            android:textColor="@color/home_text_secondary"
+                            android:textSize="14sp"/>
+
+                        <!-- Slide Button (Visual) -->
+                        <FrameLayout
+                            android:id="@+id/sosSliderTrack"
+                            android:layout_width="wrap_content"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_slide_track_bg"
+                            android:elevation="4dp">
+
+                            <!-- Progress View (Fills as you slide) -->
+                            <View
+                                android:id="@+id/sosSliderProgress"
+                                android:layout_width="40dp"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/bg_slide_button_red" />
+
+                            <!-- Text on the track (underneath handle, on top of progress?) -->
+                            <!-- Text should be visible on top of empty track, but maybe white on red progress? -->
+                            <!-- For simplicity let's keep text on top of everything except handle -->
+                            <!-- Text on the track -->
+                            <TextView
+                                android:id="@+id/sosSliderText"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:gravity="center_vertical"
+                                android:paddingStart="56dp"
+                                android:paddingEnd="16dp"
+                                android:text="@string/home_sos_button"
+                                android:textColor="@color/white"
+                                android:textStyle="bold"
+                                android:textSize="14sp"/>
+
+                            <!-- The Sliding Handle -->
+                            <LinearLayout
+                                android:id="@+id/sosSliderHandle"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:gravity="center"
+                                android:background="@drawable/bg_slide_button_red">
+                                <ImageView
+                                    android:layout_width="20dp"
+                                    android:layout_height="20dp"
+                                    android:src="@drawable/ic_emergency"
+                                    app:tint="@color/white"/>
+                            </LinearLayout>
+
+                        </FrameLayout>
                     </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="2h ago"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="12sp" />
                 </LinearLayout>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
+            </androidx.cardview.widget.CardView>
 
-        <!-- Recent Lost & Found title -->
-        <TextView
-            android:id="@+id/titleRecentLostFound"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:text="Recent Lost &amp; Found"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardRecentReports" />
-
-        <!-- Recent Lost & Found card -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardRecentLostFound"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:cardBackgroundColor="@color/card_background"
-            app:cardCornerRadius="14dp"
-            app:cardElevation="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleRecentLostFound"
-            app:strokeColor="@color/card_border"
-            app:strokeWidth="1dp">
-
+            <!-- Live Status Section -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:paddingHorizontal="16dp"
+                android:paddingTop="24dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="No items yet."
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp" />
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+                    
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/home_section_live_status"
+                        android:textColor="@color/home_text_main"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/home_view_all"
+                        android:textColor="@color/home_primary"
+                        android:textSize="14sp"
+                        android:textStyle="bold"/>
+                </LinearLayout>
+
+                <!-- Transport Card -->
+                <!-- Transport Card -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardLiveTransport"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="16dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@color/home_blue_bg"
+                    app:strokeColor="@color/home_blue_text"
+                    app:strokeWidth="1.5dp"
+                    android:layout_marginBottom="12dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:padding="16dp"
+                        android:background="@drawable/alert_background">
+
+                        <!-- Icon Container -->
+                        <FrameLayout
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:background="@drawable/bg_rounded_12dp"
+                            android:backgroundTint="@color/blue_100">
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_transport"
+                                app:tint="@color/home_blue_text"
+                                android:layout_gravity="center"/>
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="16dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/home_transport_line"
+                                android:textColor="@color/home_text_main"
+                                android:textStyle="bold"
+                                android:textSize="16sp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/home_transport_status"
+                                android:textColor="@color/home_text_secondary"
+                                android:textSize="12sp"
+                                android:layout_marginTop="4dp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+                <!-- Recycling Card -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="1dp"
+                    app:cardBackgroundColor="@color/home_card_bg"
+                    app:strokeColor="@color/gray_100"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:padding="16dp">
+                        
+                        <FrameLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_rounded_12dp"
+                            android:backgroundTint="@color/home_green_bg">
+
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                app:tint="@color/home_green_text"
+                                tools:src="@drawable/ic_delete_filled" />
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:layout_marginHorizontal="12dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/home_recycling_title"
+                                android:textColor="@color/home_text_main"
+                                android:textStyle="bold"
+                                android:textSize="14sp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/home_recycling_status"
+                                android:textColor="@color/home_text_secondary"
+                                android:textSize="12sp"/>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
 
-        <!-- Recent Community Posts title -->
-        <TextView
-            android:id="@+id/titleRecentCommunityPosts"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:text="Recent Community Posts"
-            android:textColor="@color/text_primary"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardRecentLostFound" />
-
-        <!-- Recent Community Posts card -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardRecentCommunityPosts"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            app:cardBackgroundColor="@color/card_background"
-            app:cardCornerRadius="14dp"
-            app:cardElevation="1dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/titleRecentCommunityPosts"
-            app:strokeColor="@color/card_border"
-            app:strokeWidth="1dp">
-
+            <!-- City Services Section -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="16dp">
+                android:paddingHorizontal="16dp"
+                android:paddingTop="24dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="No posts yet."
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp" />
+                    android:text="@string/home_section_city_services"
+                    android:textColor="@color/home_text_main"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Grid Row 1 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- Transport Grid Item -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardServiceTransport"
+                        android:layout_width="0dp"
+                        android:layout_height="128dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="1dp"
+                        app:cardBackgroundColor="@color/home_card_bg">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="16dp"
+                            android:gravity="start">
+                            <FrameLayout
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:background="@drawable/bg_rounded_12dp"
+                                android:backgroundTint="@color/home_blue_bg">
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_transport"
+                                    app:tint="@color/home_blue_text"
+                                    android:layout_gravity="center"/>
+                            </FrameLayout>
+                            <Space android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/home_service_transport"
+                                android:textStyle="bold"
+                                android:textColor="@color/home_text_main"
+                                android:textSize="16sp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/home_service_transport_desc"
+                                android:textColor="@color/home_text_secondary"
+                                android:textSize="12sp"
+                                android:layout_marginTop="4dp"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Waste Grid Item -->
+                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cardWaste"
+                        android:layout_width="0dp"
+                        android:layout_height="128dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="1dp"
+                        app:cardBackgroundColor="@color/home_card_bg">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="16dp"
+                            android:gravity="start">
+                            <FrameLayout
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:background="@drawable/bg_rounded_12dp"
+                                android:backgroundTint="@color/home_green_bg">
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_delete_filled"
+                                    app:tint="@color/home_green_text"
+                                    android:layout_gravity="center"/>
+                            </FrameLayout>
+                            <Space android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/home_service_waste"
+                                android:textStyle="bold"
+                                android:textColor="@color/home_text_main"
+                                android:textSize="16sp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/home_service_waste_desc"
+                                android:textColor="@color/home_text_secondary"
+                                android:textSize="12sp"
+                                android:layout_marginTop="4dp"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <!-- Grid Row 2 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- Lost & Found Grid Item -->
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardLostFound"
+                        android:layout_width="0dp"
+                        android:layout_height="128dp"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="8dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="1dp"
+                        app:cardBackgroundColor="@color/home_card_bg">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="16dp"
+                            android:gravity="start">
+                            <FrameLayout
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:background="@drawable/bg_rounded_12dp"
+                                android:backgroundTint="@color/home_orange_bg">
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_search_filled"
+                                    app:tint="@color/home_orange_text"
+                                    android:layout_gravity="center"/>
+                            </FrameLayout>
+                            <Space android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/home_service_lostfound"
+                                android:textStyle="bold"
+                                android:textColor="@color/home_text_main"
+                                android:textSize="16sp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/home_service_lostfound_desc"
+                                android:textColor="@color/home_text_secondary"
+                                android:textSize="12sp"
+                                android:layout_marginTop="4dp"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+
+                    <!-- Report Issues Grid Item -->
+                     <androidx.cardview.widget.CardView
+                        android:id="@+id/cardReportIssue"
+                        android:layout_width="0dp"
+                        android:layout_height="128dp"
+                        android:layout_weight="1"
+                        android:layout_marginStart="8dp"
+                        app:cardCornerRadius="12dp"
+                        app:cardElevation="1dp"
+                        app:cardBackgroundColor="@color/home_card_bg">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            android:padding="16dp"
+                            android:gravity="start">
+                            <FrameLayout
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:background="@drawable/bg_rounded_12dp"
+                                android:backgroundTint="@color/home_amber_bg">
+                                <ImageView
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:src="@drawable/ic_warning_filled"
+                                    app:tint="@color/home_amber_text"
+                                    android:layout_gravity="center"/>
+                            </FrameLayout>
+                            <Space android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/home_service_issues"
+                                android:textStyle="bold"
+                                android:textColor="@color/home_text_main"
+                                android:textSize="16sp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/home_service_issues_desc"
+                                android:textColor="@color/home_text_secondary"
+                                android:textSize="12sp"
+                                android:layout_marginTop="4dp"/>
+                        </LinearLayout>
+                    </androidx.cardview.widget.CardView>
+                </LinearLayout>
+
+                <!-- SOS Row Item -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardSosRow"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="1dp"
+                    app:cardBackgroundColor="@color/home_red_bg"
+                    app:strokeColor="#1ADC2626"
+                    app:strokeWidth="1dp">
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="16dp"
+                        android:gravity="center_vertical">
+                        
+                        <FrameLayout
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:background="@drawable/bg_rounded_12dp"
+                            android:backgroundTint="#26DC2626"> <!-- Red 100/200ish -->
+                            <ImageView
+                                android:layout_width="24dp"
+                                android:layout_height="24dp"
+                                android:src="@drawable/ic_emergency"
+                                app:tint="@color/home_red_text"
+                                android:layout_gravity="center"/>
+                        </FrameLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="vertical"
+                            android:layout_marginStart="14dp">
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/home_service_sos"
+                                android:textColor="@color/home_text_main"
+                                android:textStyle="bold"
+                                android:textSize="16sp"/>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/home_service_sos_desc"
+                                android:textColor="@color/home_text_secondary"
+                                android:textSize="12sp"
+                                android:layout_marginTop="2dp"/>
+                        </LinearLayout>
+
+                        <ImageView
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_chevron_right"
+                            app:tint="@color/home_red_text"/>
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
 
-        <!-- Bottom navigation actions -->
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardBottomNav"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            app:cardBackgroundColor="@color/card_background"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="4dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cardRecentCommunityPosts"
-            app:strokeColor="@color/card_border"
-            app:strokeWidth="1dp">
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingStart="12dp"
-                android:paddingTop="10dp"
-                android:paddingEnd="12dp"
-                android:paddingBottom="10dp">
-
-                <LinearLayout
-                    android:id="@+id/navHome"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_home"
-                        android:tint="@color/primaryColor" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Home"
-                        android:textColor="@color/primaryColor"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/navTransport"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_transport"
-                        android:tint="@color/text_secondary" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Transport"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/navWaste"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_waste"
-                        android:tint="@color/text_secondary" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Waste"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/navReport"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="8dp">
-
-                    <ImageView
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:src="@drawable/ic_report"
-                        android:tint="@color/text_secondary" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:text="Report Issue"
-                        android:textColor="@color/text_secondary"
-                        android:textSize="12sp" />
-                </LinearLayout>
-            </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
