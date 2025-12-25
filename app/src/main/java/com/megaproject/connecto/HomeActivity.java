@@ -48,7 +48,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         // Initialize Theme from Preferences
         android.content.SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
-        int savedMode = prefs.getInt("night_mode", androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO); // Default Light
+        int savedMode = prefs.getInt("night_mode", androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM); // Default System
         if (androidx.appcompat.app.AppCompatDelegate.getDefaultNightMode() != savedMode) {
             androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(savedMode);
         }

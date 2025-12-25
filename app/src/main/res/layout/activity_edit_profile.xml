@@ -5,20 +5,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/home_background">
 
     <!-- Top App Bar -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:background="@color/white">
+        android:background="@color/home_card_bg">
 
         <ImageButton
             android:id="@+id/btnBack"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:background="@drawable/circle_gray"
+            android:backgroundTint="@color/app_theme_icon_bg_system"
             android:src="@drawable/ic_arrow_back_ios"
             android:padding="12dp"
             app:tint="@color/home_text_main" />
@@ -120,7 +121,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:background="@drawable/bg_input_rounded"
-                    android:backgroundTint="#F3F4F6"
+                    android:backgroundTint="@color/app_theme_icon_bg_system"
                     android:paddingHorizontal="16dp"
                     android:hint="Full Name"
                     android:textColor="@color/home_text_main"
@@ -140,7 +141,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:background="@drawable/bg_input_rounded"
-                    android:backgroundTint="#E5E7EB"
+                    android:backgroundTint="@color/app_theme_icon_bg_system"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingHorizontal="16dp">
@@ -188,7 +189,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:background="@drawable/bg_input_rounded"
-                    android:backgroundTint="#F3F4F6"
+                    android:backgroundTint="@color/app_theme_icon_bg_system"
                     android:paddingHorizontal="16dp"
                     android:text="+1 (555) 012-3456"
                     android:inputType="phone"
@@ -212,7 +213,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
                     android:background="@drawable/bg_input_rounded"
-                    android:backgroundTint="#F3F4F6"
+                    android:backgroundTint="@color/app_theme_icon_bg_system"
                     android:gravity="center_vertical"
                     android:orientation="horizontal"
                     android:paddingHorizontal="16dp"
@@ -254,7 +255,7 @@
                     android:layout_height="wrap_content"
                     android:minHeight="100dp"
                     android:background="@drawable/bg_input_rounded"
-                    android:backgroundTint="#F3F4F6"
+                    android:backgroundTint="@color/app_theme_icon_bg_system"
                     android:padding="16dp"
                     android:hint="Tell us about yourself..."
                     android:text=""
@@ -272,7 +273,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="16dp"
-        android:background="@color/white"
+        android:background="@color/home_card_bg"
         android:elevation="16dp">
         
         <Button

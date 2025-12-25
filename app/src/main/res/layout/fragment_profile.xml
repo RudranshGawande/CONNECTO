@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFFFF"
+        android:background="@color/home_card_bg"
         android:paddingHorizontal="16dp"
         android:paddingVertical="12dp"
         android:elevation="1dp">
@@ -58,7 +58,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="#FFFFFFFF"
+                android:background="@color/home_card_bg"
                 android:orientation="horizontal"
                 android:padding="16dp"
                 android:gravity="center_vertical"
@@ -147,7 +147,7 @@
                 android:layout_marginBottom="24dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/white">
+                app:cardBackgroundColor="@color/home_card_bg">
                 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -190,10 +190,10 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_chevron_right"
-                            app:tint="@color/gray_300"/>
+                            app:tint="@color/home_text_secondary"/>
                     </LinearLayout>
                     
-                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/gray_100"/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/app_theme_divider"/>
 
                     <!-- Change Password -->
                     <LinearLayout
@@ -231,7 +231,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_chevron_right"
-                            app:tint="@color/gray_300"/>
+                            app:tint="@color/home_text_secondary"/>
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -254,7 +254,7 @@
                 android:layout_marginBottom="24dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/white">
+                app:cardBackgroundColor="@color/home_card_bg">
                 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -298,7 +298,7 @@
                             app:trackTint="@color/selector_switch_track_blue"/>
                     </LinearLayout>
                     
-                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/gray_100"/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/app_theme_divider"/>
 
                     <!-- Waste Reminders -->
                     <LinearLayout
@@ -337,7 +337,7 @@
                             app:trackTint="@color/selector_switch_track_blue"/>
                     </LinearLayout>
 
-                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/gray_100"/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/app_theme_divider"/>
 
                     <!-- Lost & Found -->
                     <LinearLayout
@@ -376,7 +376,7 @@
                             app:trackTint="@color/selector_switch_track_blue"/>
                     </LinearLayout>
 
-                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/gray_100"/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/app_theme_divider"/>
 
                     <!-- SOS Alerts -->
                     <LinearLayout
@@ -438,7 +438,7 @@
                 android:layout_marginBottom="24dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/white">
+                app:cardBackgroundColor="@color/home_card_bg">
                 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -487,10 +487,10 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_chevron_right"
-                            app:tint="@color/gray_300"/>
+                            app:tint="@color/home_text_secondary"/>
                     </LinearLayout>
                     
-                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/gray_100"/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/app_theme_divider"/>
 
                      <!-- Data & Storage (Placeholder Icon) -->
                     <LinearLayout
@@ -525,10 +525,10 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_chevron_right"
-                            app:tint="@color/gray_300"/>
+                            app:tint="@color/home_text_secondary"/>
                     </LinearLayout>
 
-                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/gray_100"/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/app_theme_divider"/>
 
                      <!-- Blocked Users -->
                     <LinearLayout
@@ -563,7 +563,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_chevron_right"
-                            app:tint="@color/gray_300"/>
+                            app:tint="@color/home_text_secondary"/>
                     </LinearLayout>
 
                 </LinearLayout>
@@ -587,7 +587,7 @@
                 android:layout_marginBottom="24dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/white">
+                app:cardBackgroundColor="@color/home_card_bg">
                 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -635,17 +635,19 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_chevron_right"
-                            app:tint="@color/gray_300"/>
+                            app:tint="@color/home_text_secondary"/>
                     </LinearLayout>
                     
-                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/gray_100"/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/app_theme_divider"/>
 
                     <!-- App Theme -->
                     <LinearLayout
+                        android:id="@+id/btnAppTheme"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:gravity="center_vertical"
+                        android:background="?attr/selectableItemBackground"
                         android:padding="12dp">
                         
                         <FrameLayout
@@ -670,6 +672,7 @@
                             android:layout_marginStart="12dp"/>
 
                         <TextView
+                            android:id="@+id/tvThemeStatus"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="System"
@@ -681,7 +684,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_chevron_right"
-                            app:tint="@color/gray_300"/>
+                            app:tint="@color/home_text_secondary"/>
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
@@ -704,7 +707,7 @@
                 android:layout_marginBottom="32dp"
                 app:cardCornerRadius="16dp"
                 app:cardElevation="0dp"
-                app:cardBackgroundColor="@color/white">
+                app:cardBackgroundColor="@color/home_card_bg">
                 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -744,10 +747,10 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_chevron_right"
-                            app:tint="@color/gray_300"/>
+                            app:tint="@color/home_text_secondary"/>
                     </LinearLayout>
                     
-                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/gray_100"/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/app_theme_divider"/>
                     
                     <!-- Contact Us -->
                     <LinearLayout
@@ -782,10 +785,10 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_chevron_right"
-                            app:tint="@color/gray_300"/>
+                            app:tint="@color/home_text_secondary"/>
                     </LinearLayout>
                     
-                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/gray_100"/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/app_theme_divider"/>
                     
                     <!-- Terms of Service -->
                     <LinearLayout
@@ -820,7 +823,7 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_chevron_right"
-                            app:tint="@color/gray_300"/>
+                            app:tint="@color/home_text_secondary"/>
                     </LinearLayout>
 
                 </LinearLayout>

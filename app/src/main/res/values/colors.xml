@@ -40,6 +40,11 @@
     <color name="home_amber_text">#d97706</color>
     <color name="home_red_bg">#fef2f2</color>
     <color name="home_red_text">#dc2626</color>
+    
+    <!-- Home Semantic Colors -->
+    <color name="home_card_border">#F3F4F6</color> <!-- gray_100 in Light -->
+    <color name="home_border_primary_subtle">#332b8cee</color> <!-- primary/20 -->
+    <color name="home_border_sos">#FEE2E2</color>
 
     <!-- Waste Type Colors -->
     <color name="gray_500">#6B7280</color>
@@ -142,6 +147,38 @@
     
     <color name="gray_200">#E5E7EB</color>
     <color name="gray_300">#D1D5DB</color>
+    <color name="gray_400">#9CA3AF</color>
+    <color name="gray_700">#374151</color>
+    <color name="gray_800">#1F2937</color>
+
+    <!-- App Theme Colors -->
+    <color name="theme_bg_light">#f6f7f8</color>
+    <color name="theme_bg_dark">#101922</color>
+    <color name="theme_surface_light">#ffffff</color>
+    <color name="theme_surface_dark">#1a2632</color>
+    <color name="theme_text_main_light">#111418</color>
+    <color name="theme_text_main_dark">#ffffff</color>
+    <color name="theme_text_sub_light">#617589</color>
+    <color name="theme_text_sub_dark">#9ca3af</color>
+    <color name="theme_border_light">#f3f4f6</color>
+    <color name="theme_border_dark">#1f2937</color>
+    <color name="theme_selected_blue">#2b8cee</color>
+    <color name="theme_icon_bg_system">#e5e7eb</color>
+    <color name="theme_icon_bg_system_dark">#374151</color>
+    <color name="theme_icon_bg_light">#f6f7f8</color>
+    <color name="theme_icon_bg_dark">#101922</color>
+    <color name="theme_sun_yellow">#eab308</color>
+    <color name="theme_moon_blue">#60a5fa</color>
+
+    <!-- Semantic App Theme Colors -->
+    <color name="app_theme_bg">#f6f7f8</color>
+    <color name="app_theme_surface">#ffffff</color>
+    <color name="app_theme_text_primary">#111418</color>
+    <color name="app_theme_text_secondary">#617589</color>
+    <color name="app_theme_divider">#f3f4f6</color>
+    <color name="app_theme_icon_bg_system">#e5e7eb</color>
+    <color name="app_theme_icon_bg_light">#f6f7f8</color>
+    <color name="app_theme_icon_bg_dark">#101922</color>
 
 </resources>
 

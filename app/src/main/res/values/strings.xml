@@ -90,4 +90,19 @@
     <string name="home_service_issues_desc">Quickly report city problems</string>
     <string name="home_service_sos">Emergency SOS</string>
     <string name="home_service_sos_desc">Instant help in emergencies</string>
+
+
+    <!-- App Theme -->
+    <string name="app_theme_title">App Theme</string>
+    <string name="app_theme_description">Choose how Connecto looks on your device.</string>
+    <string name="theme_system_default">System Default</string>
+    <string name="theme_system_desc">Follows your device\'s appearance settings</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_light_desc">Always use light appearance</string>
+    <string name="theme_dark">Dark</string>
+    <string name="theme_dark_desc">Always use dark appearance</string>
+    <string name="theme_preview">PREVIEW</string>
+    <string name="theme_preview_light">Light Mode</string>
+    <string name="theme_preview_dark">Dark Mode</string>
+    <string name="connecto_caps">CONNECTO</string>
 </resources>

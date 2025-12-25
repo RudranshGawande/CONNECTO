@@ -96,5 +96,50 @@ public class ProfileFragment extends Fragment {
                 startActivity(intent);
             });
         }
+
+        // App Theme
+        LinearLayout btnAppTheme = view.findViewById(R.id.btnAppTheme);
+        if (btnAppTheme != null) {
+            btnAppTheme.setOnClickListener(v -> {
+                android.content.Intent intent = new android.content.Intent(getActivity(), com.megaproject.connecto.AppThemeActivity.class);
+                startActivity(intent);
+            });
+            
+            // Update Theme Status Text
+            android.widget.TextView tvThemeStatus = view.findViewById(R.id.tvThemeStatus);
+            if (tvThemeStatus != null && getActivity() != null) {
+                android.content.SharedPreferences prefs = getActivity().getSharedPreferences("AppPrefs", android.content.Context.MODE_PRIVATE);
+                int savedMode = prefs.getInt("night_mode", androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                
+                String statusText = "System";
+                if (savedMode == androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO) {
+                    statusText = "Light";
+                } else if (savedMode == androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES) {
+                    statusText = "Dark";
+                }
+                tvThemeStatus.setText(statusText);
+            }
+        }
+    }
+    
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Refresh theme status when returning from AppThemeActivity
+        if (getView() != null) {
+            android.widget.TextView tvThemeStatus = getView().findViewById(R.id.tvThemeStatus);
+            if (tvThemeStatus != null && getActivity() != null) {
+                 android.content.SharedPreferences prefs = getActivity().getSharedPreferences("AppPrefs", android.content.Context.MODE_PRIVATE);
+                int savedMode = prefs.getInt("night_mode", androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
+                
+                String statusText = "System";
+                if (savedMode == androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO) {
+                    statusText = "Light";
+                } else if (savedMode == androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_YES) {
+                    statusText = "Dark";
+                }
+                tvThemeStatus.setText(statusText);
+            }
+        }
     }
 }

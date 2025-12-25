@@ -25,4 +25,44 @@
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#ba9c9c</color>
     <color name="iconTint">#FFFFFF</color>
+
+    <!-- Semantic App Theme Colors -->
+    <color name="app_theme_bg">#101922</color>
+    <color name="app_theme_surface">#1a2632</color>
+    <color name="app_theme_text_primary">#ffffff</color>
+    <color name="app_theme_text_secondary">#9ca3af</color>
+    <color name="app_theme_divider">#1f2937</color>
+    <color name="app_theme_icon_bg_system">#374151</color>
+    <color name="app_theme_icon_bg_light">#374151</color>
+    <color name="app_theme_icon_bg_dark">#000000</color>
+
+    <!-- App Theme Constants -->
+    <color name="theme_selected_blue">#2b8cee</color>
+    <color name="theme_sun_yellow">#eab308</color>
+    <color name="theme_moon_blue">#60a5fa</color>
+
+    <!-- Home Redesign Colors -->
+    <color name="home_primary">#2b8cee</color>
+    <color name="home_background">#101922</color>
+    <color name="home_text_main">#ffffff</color>
+    <color name="home_text_secondary">#9ca3af</color>
+    <color name="home_card_bg">#1c2936</color>
+    <color name="home_sos_red">#dc2626</color>
+    <color name="home_green_bg">#3314532d</color>
+    <color name="home_green_text">#4ade80</color>
+    <color name="home_blue_bg">#331e3a8a</color>
+    <color name="home_blue_text">#60a5fa</color>
+    <color name="home_orange_bg">#337c2d12</color>
+    <color name="home_orange_text">#fb923c</color>
+    <color name="home_amber_bg">#3378350f</color>
+    <color name="home_amber_text">#fbbf24</color>
+    <color name="home_red_bg">#1A7f1d1d</color>
+    <color name="home_red_text">#f87171</color>
+    
+    <color name="home_card_border">#1f2937</color>
+    <color name="home_border_primary_subtle">#332b8cee</color>
+    <color name="home_border_sos">#4D991b1b</color>
+    
+    <color name="alert_background">#331e3a8a</color>
+    <color name="alert_border">#332b8cee</color>
 </resources>
