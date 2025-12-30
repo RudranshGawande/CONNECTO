@@ -233,20 +233,28 @@ public class PhoneVerificationActivity extends AppCompatActivity {
     }
     
     private void updateFirestoreProfile(FirebaseUser user) {
-        // Update the phone number in Firestore if using a separate user collection
+        // Update the phone number in Firestore
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         if (user.getPhoneNumber() != null) {
              Map<String, Object> data = new HashMap<>();
              data.put("phoneNumber", user.getPhoneNumber());
              
-             db.collection("users").document(user.getUid())
-                .set(data, SetOptions.merge())
-                .addOnCompleteListener(task -> {
-                    // Navigate back regardless of firestore success (Auth consistency is key)
-                    Toast.makeText(PhoneVerificationActivity.this, "Phone Number Verified!", Toast.LENGTH_SHORT).show();
-                    btnMainAction.setText("Verified");
-                    new Handler(Looper.getMainLooper()).postDelayed(PhoneVerificationActivity.this::finish, 1000);
-                });
+             // Standardized logic: use email as document ID
+             String email = user.getEmail();
+             if (email != null) {
+                 String safeEmail = email.trim().toLowerCase(java.util.Locale.ROOT);
+                 db.collection("users").document(safeEmail)
+                    .set(data, SetOptions.merge())
+                    .addOnCompleteListener(task -> {
+                        Toast.makeText(PhoneVerificationActivity.this, "Phone Verified & Profile Updated!", Toast.LENGTH_SHORT).show();
+                        btnMainAction.setText("Verified");
+                        new Handler(Looper.getMainLooper()).postDelayed(PhoneVerificationActivity.this::finish, 1000);
+                    });
+             } else {
+                 // Fallback if no email found (rare in this flow) but we still mark verified locally
+                 Toast.makeText(PhoneVerificationActivity.this, "Phone Number Verified!", Toast.LENGTH_SHORT).show();
+                 new Handler(Looper.getMainLooper()).postDelayed(PhoneVerificationActivity.this::finish, 1000);
+             }
         } else {
              Toast.makeText(PhoneVerificationActivity.this, "Phone Number Verified!", Toast.LENGTH_SHORT).show();
              new Handler(Looper.getMainLooper()).postDelayed(PhoneVerificationActivity.this::finish, 1000);

@@ -135,31 +135,33 @@ public class EditProfileActivity extends AppCompatActivity {
                 etFullName.setText(user.getDisplayName());
             } 
             
-            // Fetch latest from Firestore to ensure we have up-to-date custom fields
-            db.collection("users").document(user.getUid()).get()
-                .addOnSuccessListener(documentSnapshot -> {
-                     if (documentSnapshot.exists()) {
-                         if (documentSnapshot.contains("fullName")) {
-                             etFullName.setText(documentSnapshot.getString("fullName"));
+            // CRITICAL FIX: Use Email as Document ID (Single Source of Truth)
+            if (email != null) {
+                String safeEmail = email.trim().toLowerCase(java.util.Locale.ROOT);
+                db.collection("users").document(safeEmail).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                         if (documentSnapshot.exists()) {
+                             if (documentSnapshot.contains("fullName")) {
+                                 etFullName.setText(documentSnapshot.getString("fullName"));
+                             }
+                             if (documentSnapshot.contains("homeCity")) {
+                                 etHomeCity.setText(documentSnapshot.getString("homeCity"));
+                             }
+                             if (documentSnapshot.contains("bio")) {
+                                 etBio.setText(documentSnapshot.getString("bio"));
+                             }
                          }
-                         if (documentSnapshot.contains("homeCity")) {
-                             etHomeCity.setText(documentSnapshot.getString("homeCity"));
-                         }
-                         if (documentSnapshot.contains("bio")) {
-                             etBio.setText(documentSnapshot.getString("bio"));
-                         }
-                         // If we wanted to double check phone from Firestore:
-                         // String fsPhone = documentSnapshot.getString("phoneNumber");
-                         // if (fsPhone != null) etProfilePhoneNumber.setText(fsPhone);
-                         // But Auth.getPhoneNumber() is the source of truth for verification.
-                     }
-                });
+                    });
+            }
         }
     }
     
     private void saveProfileChanges() {
         FirebaseUser user = mAuth.getCurrentUser();
-        if (user == null) return;
+        if (user == null || user.getEmail() == null) {
+            Toast.makeText(this, "Authentication error", Toast.LENGTH_SHORT).show();
+            return;
+        }
         
         String newName = etFullName.getText().toString().trim();
         String homeCity = etHomeCity.getText().toString().trim();
@@ -175,10 +177,14 @@ public class EditProfileActivity extends AppCompatActivity {
         if (!homeCity.isEmpty()) updates.put("homeCity", homeCity);
         if (!bio.isEmpty()) updates.put("bio", bio);
         
-        // CRITICAL: We DO NOT add "phoneNumber" to this map.
-        // This ensures the phone number is NEVER updated via this screen.
+        // CRITICAL FIX: Use Email as Document ID (Single Source of Truth)
+        // We write to users/{email} so all data (profile + lostFound) lives together.
+        String safeEmail = user.getEmail().trim().toLowerCase(java.util.Locale.ROOT);
         
-        db.collection("users").document(user.getUid())
+        // Also save the Auth UID for reference/security rules if needed later
+        updates.put("uid", user.getUid());
+
+        db.collection("users").document(safeEmail)
             .set(updates, SetOptions.merge())
             .addOnSuccessListener(aVoid -> {
                 Toast.makeText(this, "Profile Updated", Toast.LENGTH_SHORT).show();

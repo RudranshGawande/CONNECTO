@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <solid android:color="#0D2B8CEE"/> <!-- Primary / 5% roughly #0D + Primary -->
+            <!-- Actually #0D is about 5% -->
+            <corners android:radius="12dp"/>
+            <stroke android:width="2dp" android:color="@color/primary"/>
+        </shape>
+    </item>
+</layer-list>

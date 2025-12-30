@@ -117,6 +117,11 @@
             android:theme="@style/Theme.UrbanSpace.Light"
             android:exported="false" />
         <activity
+            android:name=".LostFoundNotificationsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.UrbanSpace.Light" />
+        <activity
             android:name=".LostFoundOnboardingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.UrbanSpace.Light"
@@ -134,6 +139,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".ReportLostItemActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.UrbanSpace.Light" />
+        <activity
+            android:name=".MyLostFoundActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.UrbanSpace.Light" />
     </application>
 
 </manifest>

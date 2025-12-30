@@ -20,14 +20,20 @@ public class LostFoundViewModel extends ViewModel {
         // placeholder data to mirror UI; replace with repository data when available
         List<LostFoundItem> sample = new ArrayList<>();
         sample.add(new LostFoundItem(
+                "sample_id_1",
                 "Silver ring",
-                "Electronics",
-                "Open",
                 "It is a silver ring with a diamond in it.",
-                "RudranshGawande",
+                "Railway station",
+                "Accessories",
+                "open",
+                "12/9/2025, 2:35:33 PM",
+                true,
+                "Rudransh Gawande",
                 "rudranshgawande007@gmail.com",
-                "12345677890",
-                "12/9/2025, 2:35:33 PM • Railway station"
+                "+91345677890",
+                new ArrayList<>(),
+                "lost",
+                "sample_user_id"
         ));
         foundItems.setValue(sample);
     }

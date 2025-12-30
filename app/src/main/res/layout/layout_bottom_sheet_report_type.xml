@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bottom_sheet_bg"
+    android:padding="24dp">
+
+    <!-- Handle -->
+    <View
+        android:layout_width="48dp"
+        android:layout_height="6dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bg_rounded_gray"
+        android:backgroundTint="#D1D5DB"
+        android:layout_marginBottom="24dp"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="What would you like to report?"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/home_text_main"
+        android:gravity="center"
+        android:layout_marginBottom="24dp"/>
+
+    <!-- Report Lost Item Button -->
+    <LinearLayout
+        android:id="@+id/btnReportLost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_rounded_16dp"
+        android:backgroundTint="#fef2f2"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <FrameLayout
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_circle_shape"
+            android:backgroundTint="#fee2e2">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_search_filled"
+                android:layout_gravity="center"
+                app:tint="#dc2626"/>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Report a Lost Item"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/home_text_main"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I lost something and want to find it"
+                android:textSize="12sp"
+                android:textColor="@color/home_text_secondary"
+                android:layout_marginTop="2dp"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_chevron_right"
+            app:tint="@color/gray_400"/>
+    </LinearLayout>
+
+    <!-- Report Found Item Button -->
+    <LinearLayout
+        android:id="@+id/btnReportFound"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@drawable/bg_rounded_16dp"
+        android:backgroundTint="#ecfdf5"
+        android:padding="16dp"
+        android:gravity="center_vertical"
+        android:layout_marginBottom="24dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <FrameLayout
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_circle_shape"
+            android:backgroundTint="#d1fae5">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_shield_person"
+                android:layout_gravity="center"
+                app:tint="#059669"/>
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_marginStart="16dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Report a Found Item"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/home_text_main"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="I found something and want to return it"
+                android:textSize="12sp"
+                android:textColor="@color/home_text_secondary"
+                android:layout_marginTop="2dp"/>
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_chevron_right"
+            app:tint="@color/gray_400"/>
+    </LinearLayout>
+
+    <!-- Close Button -->
+    <FrameLayout
+        android:id="@+id/btnCloseReportType"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="center_horizontal"
+        android:background="@drawable/bg_circle_shape"
+        android:backgroundTint="#f3f4f6"
+        android:clickable="true"
+        android:focusable="true">
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_close_small"
+            android:layout_gravity="center"
+            app:tint="@color/home_text_main"/>
+    </FrameLayout>
+
+</LinearLayout>
