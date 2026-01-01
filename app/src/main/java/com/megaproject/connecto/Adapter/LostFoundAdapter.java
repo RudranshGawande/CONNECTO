@@ -105,6 +105,24 @@ public class LostFoundAdapter extends RecyclerView.Adapter<LostFoundAdapter.View
         holder.ivIcon.setImageResource(iconRes);
         holder.ivIcon.setColorFilter(iconTint);
         holder.iconContainer.setBackgroundTintList(ColorStateList.valueOf(bgTint));
+
+        holder.itemView.setOnClickListener(v -> {
+            android.content.Intent intent = new android.content.Intent(context, com.megaproject.connecto.LostFoundItemDetailsActivity.class);
+            intent.putExtra("title", item.getTitle());
+            intent.putExtra("category", item.getCategory());
+            intent.putExtra("status", item.getType()); // Using type as status badge (LOST/FOUND)
+            intent.putExtra("date", item.getDateTime());
+            intent.putExtra("location", item.getLocation());
+            // Description might be null in list item, check if your model populates it, 
+            // otherwise use a placeholder or handle in activity.
+            // Model has description field.
+            intent.putExtra("description", item.getDescription() != null ? item.getDescription() : "No description provided.");
+            intent.putExtra("image_res_id", item.getImageResourceId());
+            intent.putExtra("reporter_name", item.getContactName() != null ? item.getContactName() : "Community Member");
+            
+            context.startActivity(intent);
+        });
+
     }
 
     @Override

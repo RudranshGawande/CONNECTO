@@ -149,6 +149,11 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.UrbanSpace.Light" />
+        <activity
+            android:name=".LostFoundItemDetailsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.UrbanSpace.Light" />
     </application>
 
 </manifest>
