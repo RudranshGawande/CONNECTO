@@ -55,8 +55,8 @@
                 android:paddingVertical="4dp"
                 app:layout_constraintBottom_toBottomOf="@id/cardImage"
                 app:layout_constraintEnd_toEndOf="@id/cardImage"
-                android:translationX="4dp"
-                android:translationY="4dp"/>
+                android:translationX="-6dp"
+                android:translationY="-6dp"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!-- Content Helper -->

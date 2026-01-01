@@ -52,7 +52,7 @@ public class LostFoundNotificationsActivity extends AppCompatActivity {
         
         items.add(new LostFoundNotificationItem(
             "Potential Match Found",
-            "2m ago",
+                    "2m ago",
             "A recently reported \"<b>Black Leather Wallet</b>\" matches the description of your lost item.",
             true,
             R.drawable.ic_manage_search,

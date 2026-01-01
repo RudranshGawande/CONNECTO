@@ -15,7 +15,7 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyLostFoundActivity extends AppCompatActivity {
+public class MyLostFoundActivity extends AppCompatActivity implements MyLostFoundAdapter.OnItemActionListener {
 
     private RecyclerView rvMyPosts;
     private MyLostFoundAdapter adapter;
@@ -67,7 +67,7 @@ public class MyLostFoundActivity extends AppCompatActivity {
         rvMyPosts = findViewById(R.id.rvMyPosts);
         rvMyPosts.setLayoutManager(new LinearLayoutManager(this));
         myItems = new ArrayList<>();
-        adapter = new MyLostFoundAdapter(this, myItems);
+        adapter = new MyLostFoundAdapter(this, myItems, this);
         rvMyPosts.setAdapter(adapter);
     }
 
@@ -88,5 +88,17 @@ public class MyLostFoundActivity extends AppCompatActivity {
         // Reload data in case new items were added via other flows (though here FAB is removed)
         // or just to be safe.
         loadDummyData();
+    }
+
+    @Override
+    public void onMenuClick(LostFoundItem item) {
+        UpdateStatusBottomSheet bottomSheet = UpdateStatusBottomSheet.newInstance(item.getTitle(), item.getStatus());
+        bottomSheet.setListener(newStatus -> {
+            // Update Data
+            com.megaproject.connecto.Manager.LostFoundDataManager.getInstance().updateItemStatus(item, newStatus);
+            // Refresh UI
+            loadDummyData(); // Reloads data into adapter
+        });
+        bottomSheet.show(getSupportFragmentManager(), "UpdateStatusBottomSheet");
     }
 }

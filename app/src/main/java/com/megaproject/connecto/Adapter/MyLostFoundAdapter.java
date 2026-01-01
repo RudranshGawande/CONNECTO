@@ -17,10 +17,20 @@ public class MyLostFoundAdapter extends RecyclerView.Adapter<MyLostFoundAdapter.
 
     private Context context;
     private List<LostFoundItem> items;
+    private OnItemActionListener listener;
 
-    public MyLostFoundAdapter(Context context, List<LostFoundItem> items) {
+    public interface OnItemActionListener {
+        void onMenuClick(LostFoundItem item);
+    }
+
+    public MyLostFoundAdapter(Context context, List<LostFoundItem> items, OnItemActionListener listener) {
         this.context = context;
         this.items = items;
+        this.listener = listener;
+    }
+
+    public MyLostFoundAdapter(Context context, List<LostFoundItem> items) {
+        this(context, items, null);
     }
 
     @NonNull
@@ -41,45 +51,60 @@ public class MyLostFoundAdapter extends RecyclerView.Adapter<MyLostFoundAdapter.
         if ("lost".equalsIgnoreCase(item.getType())) {
             holder.tvTypeBadge.setText("LOST");
             holder.tvTypeBadge.setTextColor(Color.parseColor("#B91C1C")); // Red 700
-            holder.tvTypeBadge.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#FEF2F2"))); // Red 50
+            holder.tvTypeBadge.setBackgroundResource(R.drawable.bg_badge_lost);
         } else {
             holder.tvTypeBadge.setText("FOUND");
             holder.tvTypeBadge.setTextColor(Color.parseColor("#047857")); // Green 700
+            holder.tvTypeBadge.setBackgroundResource(R.drawable.bg_badge_lost);
             holder.tvTypeBadge.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#ECFDF5"))); // Green 50
         }
 
-        // Status Logic for Demo
-        // Ideally LostFoundItem should have a status field. Assuming random for demo or passed in.
-        // For this demo, let's derive it or hardcode based on position for variety.
-        String status = "Active";
-        if (position == 1) status = "Recovered";
-        if (position == 2) status = "Closed";
+        // Status Logic
+        String status = item.getStatus();
+        if (status == null) status = "Active";
+        
+        // Capitalize first letter for display if needed, but assuming data is clean or we just display as is
+        // For display consistency let's title case it if it's lower case
+        if (status.length() > 0) {
+            status = status.substring(0, 1).toUpperCase() + status.substring(1).toLowerCase();
+        }
 
         holder.tvStatus.setText(status);
-        
-        // Status Colors and Icon
-        if ("Active".equals(status)) {
-            holder.viewStatusDot.setVisibility(View.VISIBLE);
-            holder.viewStatusDot.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#2b8cee"))); // Primary
-            holder.tvStatus.setTextColor(Color.parseColor("#2b8cee"));
-            ((View)holder.tvStatus.getParent()).setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#EFF6FF"))); // Blue 50
-        } else if ("Recovered".equals(status)) {
-            holder.viewStatusDot.setVisibility(View.GONE); // Use icon? Check mark ideally but dot for now or reuse view as icon not easy without changing view type.
-            // Let's keep dot but make it green/check
-             holder.viewStatusDot.setVisibility(View.VISIBLE);
-             holder.viewStatusDot.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#10B981"))); // Green
-            holder.tvStatus.setText("Recovered");
-             holder.tvStatus.setTextColor(Color.parseColor("#059669"));
-             ((View)holder.tvStatus.getParent()).setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#ECFDF5"))); // Green 50
-        } else { // Closed
-             holder.viewStatusDot.setVisibility(View.VISIBLE);
-             holder.viewStatusDot.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#6B7280"))); // Gray
-            holder.tvStatus.setText("Closed");
-             holder.tvStatus.setTextColor(Color.parseColor("#4B5563"));
-             ((View)holder.tvStatus.getParent()).setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#F3F4F6"))); // Gray 100
+        holder.btnMarkRecovered.setVisibility(View.GONE); // Default hidden
+
+        switch (status) { // Case sensitive now that we title-cased it
+            case "Active":
+                holder.viewStatusDot.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#3B82F6"))); // Blue
+                holder.tvStatus.setTextColor(Color.parseColor("#3B82F6"));
+                holder.chipStatus.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#EFF6FF"))); // Blue 50
+                holder.btnMarkRecovered.setVisibility(View.VISIBLE);
+                break;
+            case "Matched":
+                holder.viewStatusDot.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#F97316"))); // Orange
+                holder.tvStatus.setTextColor(Color.parseColor("#F97316"));
+                holder.chipStatus.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#FFF7ED"))); // Orange 50
+                holder.btnMarkRecovered.setVisibility(View.VISIBLE);
+                break;
+            case "Recovered":
+                holder.viewStatusDot.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#16A34A"))); // Green
+                holder.tvStatus.setTextColor(Color.parseColor("#16A34A"));
+                holder.chipStatus.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#F0FDF4"))); // Green 50
+                break;
+            case "Closed":
+                holder.viewStatusDot.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#6B7280"))); // Gray
+                holder.tvStatus.setTextColor(Color.parseColor("#6B7280"));
+                holder.chipStatus.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#F9FAFB"))); // Gray 50
+                break;
+            default:
+                // Default to Active style
+                holder.viewStatusDot.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#3B82F6")));
+                holder.tvStatus.setTextColor(Color.parseColor("#3B82F6"));
+                holder.chipStatus.setBackgroundTintList(android.content.res.ColorStateList.valueOf(Color.parseColor("#EFF6FF")));
+                holder.btnMarkRecovered.setVisibility(View.VISIBLE);
+                break;
         }
-        
-        // In a real app, load different images
+
+        // Image Loading
        if (item.getImageResourceId() != 0) {
             holder.ivItemImage.setImageResource(item.getImageResourceId());
             holder.ivItemImage.setPadding(0,0,0,0);
@@ -87,10 +112,22 @@ public class MyLostFoundAdapter extends RecyclerView.Adapter<MyLostFoundAdapter.
            if("lost".equalsIgnoreCase(item.getType())) {
                  holder.ivItemImage.setImageResource(R.drawable.ic_search);
            } else {
-               holder.ivItemImage.setImageResource(R.drawable.ic_person_filled); // Or shield
+               holder.ivItemImage.setImageResource(R.drawable.ic_person_filled); 
            }
             holder.ivItemImage.setPadding(20,20,20,20);
         }
+        
+        // Menu Click Listener
+        holder.btnMenu.setOnClickListener(v -> {
+            if (listener != null) {
+                listener.onMenuClick(item);
+            }
+        });
+
+        // Mark Recovered Click Listener
+        holder.btnMarkRecovered.setOnClickListener(v -> {
+            // Action to mark as recovered
+        });
     }
 
     @Override
@@ -101,7 +138,7 @@ public class MyLostFoundAdapter extends RecyclerView.Adapter<MyLostFoundAdapter.
     public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitle, tvSubtitle, tvTypeBadge, tvStatus;
         ImageView ivItemImage, btnMenu;
-        View viewStatusDot, btnMarkRecovered;
+        View viewStatusDot, btnMarkRecovered, chipStatus;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -113,6 +150,7 @@ public class MyLostFoundAdapter extends RecyclerView.Adapter<MyLostFoundAdapter.
             viewStatusDot = itemView.findViewById(R.id.viewStatusDot);
             btnMenu = itemView.findViewById(R.id.btnMenu);
             btnMarkRecovered = itemView.findViewById(R.id.btnMarkRecovered);
+            chipStatus = itemView.findViewById(R.id.chipStatus);
         }
     }
 }

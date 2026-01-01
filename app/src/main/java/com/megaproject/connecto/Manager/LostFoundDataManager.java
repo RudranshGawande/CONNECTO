@@ -40,6 +40,16 @@ public class LostFoundDataManager {
         return myItems;
     }
 
+    public void updateItemStatus(LostFoundItem item, String newStatus) {
+        // Find item in allItems and update
+        for (LostFoundItem i : allItems) {
+            if (i == item || (i.getTitle().equals(item.getTitle()) && i.getDateTime().equals(item.getDateTime()))) {
+                i.setStatus(newStatus);
+                break;
+            }
+        }
+    }
+
     private void loadDummyData() {
         // --- MY POSTS (Pre-populated) ---
         // 1. Black Leather Wallet (Lost)
