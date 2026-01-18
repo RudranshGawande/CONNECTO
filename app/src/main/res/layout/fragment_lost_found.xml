@@ -204,6 +204,7 @@
 
                 <!-- Chip Date -->
                 <LinearLayout
+                    android:id="@+id/btnFilterDate"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:background="@drawable/bg_search_input"
@@ -252,6 +253,7 @@
 
                 <!-- Chip Proximity -->
                 <LinearLayout
+                    android:id="@+id/btnFilterProximity"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:background="@drawable/bg_search_input"

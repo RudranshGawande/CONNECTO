@@ -200,45 +200,44 @@
                     android:clickable="true"
                     android:cursorVisible="false"/>
 
-                <!-- Home City -->
+                <!-- Address -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Home City"
+                    android:text="Address"
                     android:textColor="@color/home_text_main"
                     android:textStyle="bold"
                     android:layout_marginBottom="8dp"/>
                     
-                <LinearLayout
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="56dp"
-                    android:background="@drawable/bg_input_rounded"
-                    android:backgroundTint="@color/app_theme_icon_bg_system"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingHorizontal="16dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp">
                     
+                    <EditText
+                        android:id="@+id/etAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="56dp"
+                        android:background="@drawable/bg_input_rounded"
+                        android:backgroundTint="@color/app_theme_icon_bg_system"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="48dp"
+                        android:hint="Enter your street address"
+                        android:textColor="@color/home_text_main"
+                        android:textColorHint="#617589"
+                        android:inputType="textPostalAddress"/>
+                    
                     <ImageView
+                        android:id="@+id/btnPickLocation"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
-                        android:src="@drawable/ic_location_on_filled"
-                        app:tint="@color/gray_500"
-                        android:layout_marginEnd="8dp"/>
-                        
-                    <EditText
-                        android:id="@+id/etHomeCity"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:background="@null"
-                        android:hint="Select Home City"
-                        android:text=""
-                        android:textColor="@color/home_text_main"
-                        android:textSize="16sp"
-                        android:focusable="false"
+                        android:src="@drawable/ic_map_outline"
+                        android:layout_gravity="center_vertical|end"
+                        android:layout_marginEnd="16dp"
+                        app:tint="@color/home_primary"
                         android:clickable="true"
-                        android:cursorVisible="false"/>
-                </LinearLayout>
+                        android:focusable="true"/>
+                </FrameLayout>
 
                 <!-- Bio -->
                 <TextView

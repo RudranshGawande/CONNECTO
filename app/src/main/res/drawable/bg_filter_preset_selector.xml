@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Selected state -->
+    <item android:state_selected="true">
+        <shape>
+            <solid android:color="#0D2B8CEE" /> <!-- Primary 5% opacity or similar -->
+            <stroke android:width="2dp" android:color="@color/home_primary" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape>
+             <solid android:color="#F1F5F9" />
+             <corners android:radius="16dp" />
+        </shape>
+    </item>
+    <!-- Default state -->
+    <item>
+        <shape>
+            <solid android:color="@color/theme_icon_bg_system" /> <!-- gray_100 -->
+            <stroke android:width="2dp" android:color="@android:color/transparent" />
+            <corners android:radius="16dp" />
+        </shape>
+    </item>
+</selector>

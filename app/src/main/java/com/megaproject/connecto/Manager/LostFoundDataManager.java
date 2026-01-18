@@ -61,7 +61,23 @@ public class LostFoundDataManager {
         myItem1.setCategory("Personal");
         myItem1.setImageResourceId(R.drawable.ic_wallet); 
         myItem1.setMine(true);
+        myItem1.setStatus("open"); // Default status
         allItems.add(myItem1);
+
+        // EXTRA: Flash Drive Phone (Requested)
+        LostFoundItem flashDrive = new LostFoundItem();
+        flashDrive.setTitle("Flash Drive Phone");
+        flashDrive.setLocation("University Campus");
+        flashDrive.setDateTime("Yesterday");
+        flashDrive.setType("lost");
+        flashDrive.setCategory("Electronics");
+        flashDrive.setImageResourceId(R.drawable.ic_usb); // Assuming usb icon exists, or fallback to something generic if not, usually ic_smartphone or similar if usb not there. I'll check drawables. 
+        // Based on user request, it's main homepage data? 
+        // I'll stick to generic icon for now or ic_smartphone as fallback.
+        flashDrive.setImageResourceId(R.drawable.ic_smartphone); 
+        flashDrive.setMine(true);
+        flashDrive.setStatus("open");
+        allItems.add(flashDrive);
 
         // 2. Golden Retriever (Found)
         LostFoundItem myItem2 = new LostFoundItem();
@@ -72,6 +88,7 @@ public class LostFoundDataManager {
         myItem2.setCategory("Pets");
         myItem2.setImageResourceId(R.drawable.ic_pets);
         myItem2.setMine(true);
+        myItem2.setStatus("open");
         allItems.add(myItem2);
 
         // 3. iPhone 13 Pro (Lost)
@@ -83,6 +100,7 @@ public class LostFoundDataManager {
          myItem3.setCategory("Electronics");
         myItem3.setImageResourceId(R.drawable.ic_smartphone);
         myItem3.setMine(true);
+        myItem3.setStatus("open");
         allItems.add(myItem3);
 
         // 4. Blue Hiking Backpack (Found)
@@ -94,6 +112,7 @@ public class LostFoundDataManager {
          myItem4.setCategory("Accessories");
         myItem4.setImageResourceId(R.drawable.ic_backpack);
         myItem4.setMine(true);
+        myItem4.setStatus("open");
         allItems.add(myItem4);
 
 
@@ -106,6 +125,7 @@ public class LostFoundDataManager {
         others1.setLocation("Main St. Parking Lot");
         others1.setType("found");
         others1.setMine(false);
+        others1.setStatus("open");
         allItems.add(others1);
 
         // 6. Ray-Ban Sunglasses (Found)
@@ -116,6 +136,7 @@ public class LostFoundDataManager {
         others2.setLocation("Central Park Bench");
         others2.setType("found");
         others2.setMine(false);
+        others2.setStatus("open");
         allItems.add(others2);
         
         // 7. Kids School Bag (Lost)
@@ -126,6 +147,7 @@ public class LostFoundDataManager {
         others3.setLocation("City Library, Main Hall");
         others3.setType("lost");
         others3.setMine(false);
+        others3.setStatus("open");
         allItems.add(others3);
     }
 }

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp">
+
+    <!-- Range Highlight (applies to rect) -->
+    <View
+        android:id="@+id/viewRangeHighlight"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="4dp"
+        android:background="@color/primary"
+        android:alpha="0.2"
+        android:visibility="invisible"/>
+
+    <!-- Left/Right rounded corners for range ends -->
+    <View
+        android:id="@+id/viewRangeStart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="4dp"
+        android:background="@drawable/bg_calendar_range_start"
+        android:visibility="invisible"/>
+    
+    <View
+        android:id="@+id/viewRangeEnd"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginVertical="4dp"
+        android:background="@drawable/bg_calendar_range_end"
+        android:visibility="invisible"/>
+
+    <!-- Circle Selection (Start/End/Single) -->
+    <TextView
+        android:id="@+id/tvDay"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="@color/home_text_main"
+        android:textSize="14sp"
+        android:text="1"/>
+
+</FrameLayout>

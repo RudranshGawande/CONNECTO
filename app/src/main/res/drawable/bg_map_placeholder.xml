@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Gray Background -->
+    <item>
+        <shape>
+            <solid android:color="#F3F4F6"/> <!-- gray_100 -->
+            <corners android:radius="8dp"/>
+        </shape>
+    </item>
+    <!-- Dot Pattern Simulation -->
+    <!-- Using a rotated dotted line or tiles is complex in bare XML. 
+         We'll simulate it with a simple gradient overlay or noise if possible, but standard shapes are safer.
+         I'll use a radial gradient to give it some texture. -->
+    <item>
+        <shape>
+            <gradient
+                android:type="radial"
+                android:gradientRadius="200dp"
+                android:startColor="#11000000"
+                android:endColor="#00000000"
+                android:centerX="0.5"
+                android:centerY="0.5"/>
+            <corners android:radius="8dp"/>
+        </shape>
+    </item>
+</layer-list>
