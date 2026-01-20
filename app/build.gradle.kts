@@ -44,6 +44,7 @@ dependencies {
     implementation(libs.navigation.ui)
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
+    implementation(libs.gson)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
@@ -53,6 +54,8 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.0.1")
     implementation("com.github.yalantis:ucrop:2.2.8")
     implementation("com.google.android.gms:play-services-auth:21.0.0")
+
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
 
     // Import the Firebase BoM
     implementation(platform("com.google.firebase:firebase-bom:34.7.0"))
@@ -70,4 +73,3 @@ dependencies {
 
 
 }
-

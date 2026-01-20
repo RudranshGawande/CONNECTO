@@ -154,6 +154,30 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.UrbanSpace.Light" />
+        <activity
+            android:name=".ReportIssueDetailsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.UrbanSpace.Light" />
+        <activity
+            android:name=".ReportSuccessActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.UrbanSpace.Light" />
+        <activity
+            android:name=".MapSelectionActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.UrbanSpace.Light" />
+        <activity
+            android:name=".MyReportsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.UrbanSpace.Light" />
+            
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDvgUM2NZaG3q98BhV0W2xqAkSfjU5u5dg" />
     </application>
 
 </manifest>

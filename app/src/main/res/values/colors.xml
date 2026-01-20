@@ -48,6 +48,7 @@
 
     <!-- Waste Type Colors -->
     <color name="gray_500">#6B7280</color>
+    <color name="blue_50">#EFF6FF</color>
     <color name="blue_500">#3B82F6</color>
     <color name="green_500">#10B981</color>
     <color name="red_500">#EF4444</color>
@@ -181,5 +182,3 @@
     <color name="app_theme_icon_bg_dark">#101922</color>
 
 </resources>
-
-
