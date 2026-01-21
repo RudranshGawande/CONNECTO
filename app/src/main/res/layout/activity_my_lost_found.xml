@@ -131,24 +131,26 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/chipActive"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:text="Active"
                     android:gravity="center"
                     android:paddingHorizontal="20dp"
-                    android:background="@drawable/bg_rounded_full_gray"
+                    android:background="@drawable/bg_chip_pill"
                     android:backgroundTint="@color/primary"
                     android:textColor="@color/white"
                     android:textStyle="bold"
                     android:textSize="14sp"/>
 
                 <TextView
+                    android:id="@+id/chipRecovered"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:text="Recovered"
                     android:gravity="center"
                     android:paddingHorizontal="20dp"
-                    android:background="@drawable/bg_white_rounded"
+                    android:background="@drawable/bg_chip_pill"
                     android:backgroundTint="@color/white"
                     android:textColor="@color/gray_700"
                     android:textStyle="bold"
@@ -156,12 +158,13 @@
                     android:layout_marginStart="8dp"/>
 
                 <TextView
+                    android:id="@+id/chipClosed"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:text="Closed"
                     android:gravity="center"
                     android:paddingHorizontal="20dp"
-                    android:background="@drawable/bg_white_rounded"
+                    android:background="@drawable/bg_chip_pill"
                     android:backgroundTint="@color/white"
                     android:textColor="@color/gray_700"
                     android:textStyle="bold"
@@ -169,12 +172,13 @@
                     android:layout_marginStart="8dp"/>
 
                 <TextView
+                    android:id="@+id/chipExpired"
                     android:layout_width="wrap_content"
                     android:layout_height="36dp"
                     android:text="Expired"
                     android:gravity="center"
                     android:paddingHorizontal="20dp"
-                    android:background="@drawable/bg_white_rounded"
+                    android:background="@drawable/bg_chip_pill"
                     android:backgroundTint="@color/white"
                     android:textColor="@color/gray_700"
                     android:textStyle="bold"

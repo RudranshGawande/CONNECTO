@@ -105,4 +105,16 @@
     <string name="theme_preview_light">Light Mode</string>
     <string name="theme_preview_dark">Dark Mode</string>
     <string name="connecto_caps">CONNECTO</string>
+    <string-array name="country_codes">
+        <item>🇮🇳 +91</item>
+        <item>🇺🇸 +1</item>
+        <item>🇬🇧 +44</item>
+        <item>🇨🇦 +1</item>
+        <item>🇦🇺 +61</item>
+        <item>🇯🇵 +81</item>
+        <item>🇩🇪 +49</item>
+        <item>🇫🇷 +33</item>
+        <item>🇨🇳 +86</item>
+        <item>🇷🇺 +7</item>
+    </string-array>
 </resources>

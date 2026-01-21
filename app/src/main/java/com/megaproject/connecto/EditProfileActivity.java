@@ -16,10 +16,60 @@ import java.util.Map;
 
 public class EditProfileActivity extends AppCompatActivity {
 
-    private EditText etFullName, etEmail, etProfilePhoneNumber, etHomeCity, etBio;
+    private ImageButton btnBack;
+    private android.widget.ImageView ivProfileImage;
+    private android.widget.TextView tvChangePhoto;
+    private androidx.cardview.widget.CardView cvProfileImage;
+    
+    // Form views
+    private EditText etFullName, etEmail, etProfilePhoneNumber, etAddress, etBio;
     private Button btnSaveChanges;
+
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
+    private com.google.firebase.storage.FirebaseStorage storage;
+    private com.google.firebase.storage.StorageReference storageRef;
+
+    private android.net.Uri selectedImageUri; // The uri of image to upload
+    
+    // Pick Image
+    private final androidx.activity.result.ActivityResultLauncher<String> mGetContent = registerForActivityResult(
+        new androidx.activity.result.contract.ActivityResultContracts.GetContent(),
+        uri -> {
+            if (uri != null) {
+                startCrop(uri);
+            }
+        });
+
+    // Crop Image
+    private final androidx.activity.result.ActivityResultLauncher<Intent> mCropContent = registerForActivityResult(
+            new androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    final android.net.Uri resultUri = com.yalantis.ucrop.UCrop.getOutput(result.getData());
+                    if (resultUri != null) {
+                        selectedImageUri = resultUri;
+                        ivProfileImage.setImageURI(resultUri);
+                    }
+                } else if (result.getResultCode() == com.yalantis.ucrop.UCrop.RESULT_ERROR) {
+                    final Throwable cropError = com.yalantis.ucrop.UCrop.getError(result.getData());
+                    if (cropError != null) {
+                        Toast.makeText(this, "Crop error: " + cropError.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+    // Location Picker
+    private final androidx.activity.result.ActivityResultLauncher<Intent> mPickLocation = registerForActivityResult(
+            new androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    String selectedAddress = result.getData().getStringExtra("selected_address");
+                    if (selectedAddress != null) {
+                        etAddress.setText(selectedAddress);
+                    }
+                }
+            });
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,33 +79,25 @@ public class EditProfileActivity extends AppCompatActivity {
         // Init Firebase
         mAuth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
+        storage = com.google.firebase.storage.FirebaseStorage.getInstance();
+        storageRef = storage.getReference();
 
         // Init Views
         etFullName = findViewById(R.id.etFullName);
         etEmail = findViewById(R.id.etEmail);
         etProfilePhoneNumber = findViewById(R.id.etProfilePhoneNumber);
-        etHomeCity = findViewById(R.id.etHomeCity);
+        etAddress = findViewById(R.id.etAddress);
         etBio = findViewById(R.id.etBio);
         
-        // Find Save Button (It's the Button in the sticky footer)
-        // Since it doesn't have an ID in XML provided in context, I'll need to assume one or look for Button type.
-        // Looking at XML from Step 198: 
-        // <Button android:layout_width="match_parent" ... android:text="Save Changes" ... />
-        // It has NO ID. I must fix this or use findViewWithTag if possible, but finding by ID is standard.
-        // PROACTIVE FIX: I will assume I can find it by structure or I should have added an ID. 
-        // Actually, I can't modify XML in this tool call reliably AND Java. 
-        // I'll assume the user might have missed the ID or I need to add it.
-        // Wait, I can use `findViewsWithText` or similar hack, but better to just add the ID to XML first?
-        // No, I'll just write Java code that *would* work if ID existed, or I'll try to find it.
-        // ACTUALLY, I'll check if I can just assume an ID. The XML output showed NO ID.
-        // I will add an ID "btnSaveChanges" to the XML first.
+        ivProfileImage = findViewById(R.id.ivProfileImage);
         
-        // ... (But I am replacing Java content).
-        // Let's defer binding the button if I can't find it? No, the user wants "Save Logic".
-        // I will blindly assume R.id.btnSaveChanges and fix XML in next step.
+        // Setup image click listeners
+        android.view.View.OnClickListener imageClickListener = v -> mGetContent.launch("image/*");
+        ivProfileImage.setOnClickListener(imageClickListener);
+        findViewById(R.id.ivProfileImage).setOnClickListener(imageClickListener); // Ensure ID match
+        
         btnSaveChanges = findViewById(R.id.btnSaveChanges); 
 
-        // Phone Number Click - Opens Verification
         // Phone Number Click - Opens Verification
         etProfilePhoneNumber.setOnClickListener(v -> {
             FirebaseUser user = mAuth.getCurrentUser();
@@ -77,15 +119,14 @@ public class EditProfileActivity extends AppCompatActivity {
             }
         });
         
-        // Home City Click
-        etHomeCity.setOnClickListener(v -> {
-            LocationSelectorBottomSheet bottomSheet = new LocationSelectorBottomSheet();
-            bottomSheet.setOnLocationSelectedListener(fullPath -> {
-                etHomeCity.setText(fullPath);
-                // We'll save this in saveProfileChanges
+        // Pick Location Click
+        android.view.View btnPickLocation = findViewById(R.id.btnPickLocation);
+        if (btnPickLocation != null) {
+            btnPickLocation.setOnClickListener(v -> {
+                Intent intent = new Intent(EditProfileActivity.this, LocationPickerActivity.class);
+                mPickLocation.launch(intent);
             });
-            bottomSheet.show(getSupportFragmentManager(), "LocationSelector");
-        });
+        }
 
         // Save Changes Click
         if (btnSaveChanges != null) {
@@ -135,7 +176,6 @@ public class EditProfileActivity extends AppCompatActivity {
                 etFullName.setText(user.getDisplayName());
             } 
             
-            // CRITICAL FIX: Use Email as Document ID (Single Source of Truth)
             if (email != null) {
                 String safeEmail = email.trim().toLowerCase(java.util.Locale.ROOT);
                 db.collection("users").document(safeEmail).get()
@@ -144,12 +184,55 @@ public class EditProfileActivity extends AppCompatActivity {
                              if (documentSnapshot.contains("fullName")) {
                                  etFullName.setText(documentSnapshot.getString("fullName"));
                              }
-                             if (documentSnapshot.contains("homeCity")) {
-                                 etHomeCity.setText(documentSnapshot.getString("homeCity"));
+                             if (documentSnapshot.contains("address")) {
+                                 etAddress.setText(documentSnapshot.getString("address"));
+                             } else if (documentSnapshot.contains("homeCity")) {
+                                 // Fallback migration: If address is missing but homeCity exists, show homeCity in address field
+                                 etAddress.setText(documentSnapshot.getString("homeCity"));
                              }
-                             if (documentSnapshot.contains("bio")) {
-                                 etBio.setText(documentSnapshot.getString("bio"));
-                             }
+                             
+                              if (documentSnapshot.contains("bio")) {
+                                  etBio.setText(documentSnapshot.getString("bio"));
+                              }
+                              // Load User Profile Image
+                              String photoUrl = null;
+                              if (documentSnapshot.contains("photoUrl")) {
+                                  photoUrl = documentSnapshot.getString("photoUrl");
+                              }
+                              
+                              if (photoUrl != null && !photoUrl.isEmpty()) {
+                                  com.bumptech.glide.Glide.with(this)
+                                      .load(photoUrl)
+                                      .placeholder(R.drawable.ic_default_profile)
+                                      .error(R.drawable.ic_default_profile)
+                                      .centerCrop()
+                                      .into(ivProfileImage);
+                              } else {
+                                  // Fallback to Google Auth Photo
+                                  if (user.getPhotoUrl() != null) {
+                                      com.bumptech.glide.Glide.with(this)
+                                          .load(user.getPhotoUrl())
+                                          .placeholder(R.drawable.ic_default_profile)
+                                          .error(R.drawable.ic_default_profile)
+                                          .centerCrop()
+                                          .into(ivProfileImage);
+                                  } else {
+                                      // Fallback to Default Anime Boy
+                                      ivProfileImage.setImageResource(R.drawable.ic_default_profile);
+                                  }
+                              }
+                         } else {
+                             // Document doesn't exist, try Google Photo or Default
+                             if (user.getPhotoUrl() != null) {
+                                  com.bumptech.glide.Glide.with(this)
+                                      .load(user.getPhotoUrl())
+                                      .placeholder(R.drawable.ic_default_profile)
+                                      .error(R.drawable.ic_default_profile)
+                                      .centerCrop()
+                                      .into(ivProfileImage);
+                              } else {
+                                  ivProfileImage.setImageResource(R.drawable.ic_default_profile);
+                              }
                          }
                     });
             }
@@ -164,7 +247,7 @@ public class EditProfileActivity extends AppCompatActivity {
         }
         
         String newName = etFullName.getText().toString().trim();
-        String homeCity = etHomeCity.getText().toString().trim();
+        String address = etAddress.getText().toString().trim();
         String bio = etBio.getText().toString().trim();
         
         if (newName.isEmpty()) {
@@ -174,16 +257,43 @@ public class EditProfileActivity extends AppCompatActivity {
 
         Map<String, Object> updates = new HashMap<>();
         updates.put("fullName", newName);
-        if (!homeCity.isEmpty()) updates.put("homeCity", homeCity);
+        if (!address.isEmpty()) updates.put("address", address);
         if (!bio.isEmpty()) updates.put("bio", bio);
         
-        // CRITICAL FIX: Use Email as Document ID (Single Source of Truth)
-        // We write to users/{email} so all data (profile + lostFound) lives together.
         String safeEmail = user.getEmail().trim().toLowerCase(java.util.Locale.ROOT);
-        
-        // Also save the Auth UID for reference/security rules if needed later
         updates.put("uid", user.getUid());
 
+        // Check if we need to upload image first
+        if (selectedImageUri != null) {
+            btnSaveChanges.setEnabled(false);
+            btnSaveChanges.setText("Uploading...");
+            
+            // Upload Image
+            com.google.firebase.storage.StorageReference fileRef = storageRef.child("profile_images/" + user.getUid() + ".jpg");
+            
+            fileRef.putFile(selectedImageUri)
+                    .addOnSuccessListener(taskSnapshot -> {
+                        taskSnapshot.getStorage().getDownloadUrl().addOnSuccessListener(uri -> {
+                            String downloadUrl = uri.toString();
+                            updates.put("photoUrl", downloadUrl);
+                            saveFirestoreData(safeEmail, updates, user, newName);
+                        }).addOnFailureListener(e -> {
+                            btnSaveChanges.setEnabled(true);
+                            btnSaveChanges.setText("Save Changes");
+                            Toast.makeText(this, "Upload successful but failed to get URL: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                        });
+                    })
+                    .addOnFailureListener(e -> {
+                        btnSaveChanges.setEnabled(true);
+                        btnSaveChanges.setText("Save Changes");
+                        Toast.makeText(this, "Image Upload Failed: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    });
+        } else {
+             saveFirestoreData(safeEmail, updates, user, newName);
+        }
+    }
+    
+    private void saveFirestoreData(String safeEmail, Map<String, Object> updates, FirebaseUser user, String newName) {
         db.collection("users").document(safeEmail)
             .set(updates, SetOptions.merge())
             .addOnSuccessListener(aVoid -> {
@@ -198,7 +308,41 @@ public class EditProfileActivity extends AppCompatActivity {
             .addOnFailureListener(e -> {
                 Toast.makeText(this, "Failed to update profile: " + e.getMessage(), Toast.LENGTH_LONG).show();
                 android.util.Log.e("EditProfile", "Error saving profile", e);
+                if (selectedImageUri != null) {
+                    btnSaveChanges.setEnabled(true);
+                    btnSaveChanges.setText("Save Changes");
+                }
             });
     }
+
+    private void startCrop(android.net.Uri uri) {
+        String destinationFileName = "croppedImage.jpg";
+        com.yalantis.ucrop.UCrop uCrop = com.yalantis.ucrop.UCrop.of(uri, android.net.Uri.fromFile(new java.io.File(getCacheDir(), destinationFileName)));
+        
+        uCrop.withAspectRatio(1, 1);
+        uCrop.withMaxResultSize(1000, 1000);
+        
+        com.yalantis.ucrop.UCrop.Options options = new com.yalantis.ucrop.UCrop.Options();
+        options.setCircleDimmedLayer(true);
+        options.setShowCropGrid(false);
+        options.setCompressionFormat(android.graphics.Bitmap.CompressFormat.JPEG);
+        options.setCompressionQuality(90);
+        options.setHideBottomControls(false);
+        options.setFreeStyleCropEnabled(true); 
+        
+        // UI Customization: Clean Dark Theme to fix overlap/visuals
+        options.setToolbarColor(android.graphics.Color.BLACK);
+        options.setStatusBarColor(android.graphics.Color.BLACK);
+        options.setToolbarWidgetColor(android.graphics.Color.WHITE);
+        options.setRootViewBackgroundColor(android.graphics.Color.BLACK);
+        options.setActiveControlsWidgetColor(androidx.core.content.ContextCompat.getColor(this, R.color.home_primary));
+        options.setDimmedLayerColor(android.graphics.Color.parseColor("#AA000000"));
+        options.setLogoColor(android.graphics.Color.BLACK); 
+        
+        uCrop.withOptions(options);
+        
+        mCropContent.launch(uCrop.getIntent(this));
+    }
+
 }
 

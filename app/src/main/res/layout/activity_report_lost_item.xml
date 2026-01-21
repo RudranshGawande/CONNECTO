@@ -4,40 +4,38 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white">
+    android:background="@color/white"
+    android:fitsSystemWindows="true">
 
     <!-- Header -->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:background="#FAFAFA"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        android:elevation="0dp"
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/btnBack"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:padding="10dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
             android:src="@drawable/ic_arrow_back_ios"
-            android:background="@drawable/bg_circle_shape"
-            android:backgroundTint="#00000000"
-            app:tint="@color/home_text_main"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="#111418"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Report Lost Item"
             android:textSize="18sp"
             android:textStyle="bold"
-            android:textColor="@color/home_text_main"
-            android:gravity="center"
-            android:layout_marginEnd="40dp"
-            app:layout_constraintStart_toEndOf="@id/btnBack"
+            android:textColor="#111418"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
@@ -47,6 +45,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:fillViewport="true"
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintBottom_toTopOf="@id/footer">
 
@@ -56,24 +55,24 @@
             android:orientation="vertical"
             android:padding="16dp">
 
-            <!-- Photo Upload -->
+            <!-- Item Photo -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Item Photo"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/home_text_main"
+                android:textColor="#111418"
                 android:layout_marginBottom="8dp"/>
 
             <FrameLayout
                 android:id="@+id/btnUploadPhoto"
                 android:layout_width="match_parent"
-                android:layout_height="192dp"
+                android:layout_height="180dp"
                 android:background="@drawable/bg_photo_upload_dashed"
                 android:clickable="true"
                 android:focusable="true">
-                
+
                 <LinearLayout
                     android:id="@+id/layoutUploadPlaceholder"
                     android:layout_width="wrap_content"
@@ -81,34 +80,35 @@
                     android:orientation="vertical"
                     android:gravity="center"
                     android:layout_gravity="center">
-                    
+
                     <FrameLayout
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:background="@drawable/bg_circle_shape"
-                        android:backgroundTint="#EBF5FF">
+                        android:backgroundTint="#EEF6FF">
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:src="@drawable/ic_add_a_photo"
                             android:layout_gravity="center"
-                            app:tint="@color/primary"/>
+                            app:tint="#2B8CEE"/>
                     </FrameLayout>
-                    
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Add Photo"
                         android:textSize="14sp"
                         android:textStyle="bold"
-                        android:textColor="@color/home_text_main"
+                        android:textColor="#111418"
                         android:layout_marginTop="8dp"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tap to upload image"
                         android:textSize="12sp"
-                        android:textColor="@color/home_text_secondary"/>
+                        android:textColor="#617589"/>
                 </LinearLayout>
 
                 <ImageView
@@ -116,22 +116,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:visibility="gone"
-                    android:src="@null"/>
+                    android:visibility="gone"/>
             </FrameLayout>
 
             <Space android:layout_width="match_parent" android:layout_height="24dp"/>
 
-            <!-- What did you lose? -->
+            <!-- Name Input -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="What did you lose?"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/home_text_main"
+                android:textColor="#111418"
                 android:layout_marginBottom="8dp"/>
-            
+
             <EditText
                 android:id="@+id/etItemName"
                 android:layout_width="match_parent"
@@ -139,10 +138,9 @@
                 android:background="@drawable/bg_input_field_default"
                 android:hint="e.g. Blue Leather Wallet"
                 android:paddingHorizontal="16dp"
-                android:textSize="16sp"
                 android:inputType="textCapWords"
-                android:textColor="@color/home_text_main"
-                android:textColorHint="@color/gray_400"/>
+                android:textColor="#111418"
+                android:textColorHint="#9AA2AC"/>
 
             <Space android:layout_width="match_parent" android:layout_height="24dp"/>
 
@@ -153,31 +151,29 @@
                 android:text="Category"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/home_text_main"
+                android:textColor="#111418"
                 android:layout_marginBottom="8dp"/>
-            
+
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@drawable/bg_input_field_default">
-                
+
                 <Spinner
                     android:id="@+id/spinnerCategory"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@null"
                     android:overlapAnchor="false"
-                    android:paddingStart="8dp"
-                    android:paddingEnd="40dp"
-                    android:spinnerMode="dropdown"/>
-                    
+                    android:paddingHorizontal="8dp" />
+
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/ic_arrow_drop_down"
                     android:layout_gravity="center_vertical|end"
                     android:layout_marginEnd="16dp"
-                    app:tint="@color/gray_500"/>
+                    app:tint="#617589"/>
             </FrameLayout>
 
             <Space android:layout_width="match_parent" android:layout_height="24dp"/>
@@ -187,8 +183,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:gravity="bottom">
-                
+                android:gravity="bottom"
+                android:layout_marginBottom="8dp">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -196,16 +192,14 @@
                     android:text="Description"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:textColor="@color/home_text_main"
-                    android:layout_marginBottom="8dp"/>
+                    android:textColor="#111418"/>
                 <TextView
                     android:id="@+id/tvDescriptionCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="0/300"
                     android:textSize="12sp"
-                    android:textColor="@color/gray_400"
-                    android:layout_marginBottom="8dp"/>
+                    android:textColor="#617589"/>
             </LinearLayout>
 
             <EditText
@@ -216,50 +210,79 @@
                 android:hint="Provide specific details like color, brand, or unique contents..."
                 android:gravity="top|start"
                 android:padding="16dp"
-                android:textSize="16sp"
                 android:inputType="textMultiLine"
                 android:maxLength="300"
-                android:textColor="@color/home_text_main"
-                android:textColorHint="@color/gray_400"/>
+                android:textColor="#111418"
+                android:textColorHint="#9AA2AC"/>
 
             <Space android:layout_width="match_parent" android:layout_height="24dp"/>
 
-            <!-- Last Known Location -->
+            <!-- Location -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Last Known Location"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/home_text_main"
+                android:textColor="#111418"
                 android:layout_marginBottom="8dp"/>
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="56dp">
-                
+
                 <EditText
                     android:id="@+id/etLocation"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/bg_input_field_default"
-                    android:hint="e.g. Central Park Entrance"
+                    android:hint="Enter address manually"
                     android:paddingStart="16dp"
-                    android:paddingEnd="48dp"
-                    android:textSize="16sp"
+                    android:paddingEnd="148dp" 
                     android:inputType="text"
-                    android:textColor="@color/home_text_main"
-                    android:textColorHint="@color/gray_400"/>
+                    android:textColor="#111418"
+                    android:textColorHint="#9AA2AC"/>
 
-                <ImageView
+                <!-- Pick on Map Button -->
+                <LinearLayout
                     android:id="@+id/btnMyLocation"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:src="@drawable/ic_my_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|end"
-                    android:layout_marginEnd="12dp"
-                    app:tint="@color/primary"/>
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/bg_blue_50_rounded_8dp"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="8dp"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_location_on_filled"
+                        app:tint="#2B8CEE"/>
+                    
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Pick on Map"
+                        android:textSize="12sp"
+                        android:textStyle="bold"
+                        android:textColor="#2B8CEE"
+                        android:layout_marginStart="4dp"/>
+                </LinearLayout>
             </FrameLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Enter text or select location from map"
+                android:textSize="12sp"
+                android:textColor="#617589"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="4dp"/>
 
             <Space android:layout_width="match_parent" android:layout_height="24dp"/>
 
@@ -270,13 +293,12 @@
                 android:text="Date Lost"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/home_text_main"
+                android:textColor="#111418"
                 android:layout_marginBottom="8dp"/>
 
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="56dp">
-
                 <EditText
                     android:id="@+id/etDateLost"
                     android:layout_width="match_parent"
@@ -285,31 +307,35 @@
                     android:hint="mm/dd/yyyy"
                     android:paddingStart="16dp"
                     android:paddingEnd="48dp"
-                    android:textSize="16sp"
                     android:focusable="false"
                     android:clickable="true"
                     android:inputType="none"
-                    android:textColor="@color/home_text_main"
-                    android:textColorHint="@color/gray_400"/>
-
+                    android:textColor="#111418"
+                    android:textColorHint="#9AA2AC"/>
+                
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:src="@drawable/ic_calendar"
+                    android:src="@drawable/ic_event"
                     android:layout_gravity="center_vertical|end"
                     android:layout_marginEnd="16dp"
-                    app:tint="@color/home_text_main"/>
+                    app:tint="#111418"/>
             </FrameLayout>
 
+             <!-- Extra space for scrolling -->
+            <Space android:layout_width="match_parent" android:layout_height="48dp"/>
         </LinearLayout>
     </ScrollView>
 
     <!-- Footer -->
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/footer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="#FFFFFF"
+        android:elevation="8dp"
         android:padding="16dp"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent">
 
         <com.google.android.material.button.MaterialButton
@@ -317,14 +343,16 @@
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:text="Submit Report"
-            android:textColor="@color/white"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:backgroundTint="@color/primary"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#2B8CEE"
             app:cornerRadius="28dp"
             app:icon="@drawable/ic_send"
             app:iconGravity="textEnd"
-            app:iconTint="@color/white"/>
-    </FrameLayout>
+            app:iconTint="#FFFFFF"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"/>
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

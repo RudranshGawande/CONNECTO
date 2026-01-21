@@ -53,6 +53,19 @@ public class ReportLostItemActivity extends AppCompatActivity {
                 }
             }
     );
+    
+    // Location Picker Launcher
+    private final ActivityResultLauncher<Intent> pickLocationLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                    String address = result.getData().getStringExtra("selected_address");
+                    if (address != null) {
+                        etLocation.setText(address);
+                    }
+                }
+            }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +120,11 @@ public class ReportLostItemActivity extends AppCompatActivity {
         });
 
         // My Location
-        findViewById(R.id.btnMyLocation).setOnClickListener(v -> getCurrentLocation());
+        // My Location / Pick on Map - Updated to open Map Screen
+        findViewById(R.id.btnMyLocation).setOnClickListener(v -> {
+            Intent intent = new Intent(ReportLostItemActivity.this, LocationPickerActivity.class);
+            pickLocationLauncher.launch(intent);
+        });
 
         // Submit Button
         findViewById(R.id.btnSubmit).setOnClickListener(v -> submitReport());

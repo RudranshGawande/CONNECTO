@@ -128,6 +128,26 @@ public class MyLostFoundAdapter extends RecyclerView.Adapter<MyLostFoundAdapter.
         holder.btnMarkRecovered.setOnClickListener(v -> {
             // Action to mark as recovered
         });
+
+        // Item Click Listener to Details
+        holder.itemView.setOnClickListener(v -> {
+            android.content.Intent intent = new android.content.Intent(context, com.megaproject.connecto.LostFoundItemDetailsActivity.class);
+            intent.putExtra("title", item.getTitle());
+            intent.putExtra("category", item.getCategory());
+            intent.putExtra("status", item.getType()); // Using type as status badge (LOST/FOUND)
+            intent.putExtra("date", item.getDateTime());
+            intent.putExtra("location", item.getLocation());
+            intent.putExtra("description", item.getDescription() != null ? item.getDescription() : "No description provided.");
+            intent.putExtra("image_res_id", item.getImageResourceId());
+            
+            if (item.getImageUris() != null && !item.getImageUris().isEmpty()) {
+                intent.putStringArrayListExtra("image_urls", new java.util.ArrayList<>(item.getImageUris()));
+            }
+            
+            intent.putExtra("reporter_name", item.getContactName() != null ? item.getContactName() : "You");
+            
+            context.startActivity(intent);
+        });
     }
 
     @Override

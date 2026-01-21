@@ -118,6 +118,11 @@ public class LostFoundAdapter extends RecyclerView.Adapter<LostFoundAdapter.View
             // Model has description field.
             intent.putExtra("description", item.getDescription() != null ? item.getDescription() : "No description provided.");
             intent.putExtra("image_res_id", item.getImageResourceId());
+            
+            if (item.getImageUris() != null && !item.getImageUris().isEmpty()) {
+                intent.putStringArrayListExtra("image_urls", new java.util.ArrayList<>(item.getImageUris()));
+            }
+            
             intent.putExtra("reporter_name", item.getContactName() != null ? item.getContactName() : "Community Member");
             
             context.startActivity(intent);

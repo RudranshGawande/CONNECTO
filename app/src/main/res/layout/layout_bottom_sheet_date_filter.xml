@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/bottomSheetContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_bottom_sheet_rounded"
+        android:orientation="vertical"
+        android:paddingBottom="24dp">
+
+        <!-- Drag Handle -->
+        <View
+            android:layout_width="48dp"
+            android:layout_height="6dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/bg_drag_handle_gray" />
+
+        <!-- Header -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:fontFamily="sans-serif-medium"
+                android:text="Filter by Date"
+                android:textColor="@color/home_text_main"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/btnClose"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:background="@drawable/bg_circle_light_gray"
+                android:padding="6dp"
+                android:src="@drawable/ic_close_small"
+                app:tint="@color/gray_500" />
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="24dp">
+
+                <!-- Presets -->
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="PRESETS"
+                    android:textAllCaps="true"
+                    android:textColor="@color/gray_400"
+                    android:textSize="14sp"
+                    android:letterSpacing="0.05"/>
+
+                <GridLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:columnCount="2"
+                    android:rowCount="2"
+                    android:useDefaultMargins="true"
+                    android:alignmentMode="alignMargins"
+                    android:columnOrderPreserved="false">
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnPresetToday"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/bg_filter_preset_selector"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Today"
+                        android:textAllCaps="false"
+                        android:textColor="@color/selector_filter_preset_text"
+                        android:stateListAnimator="@null"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnPresetYesterday"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@drawable/bg_filter_preset_selector"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Yesterday"
+                        android:textAllCaps="false"
+                        android:textColor="@color/selector_filter_preset_text"
+                        android:stateListAnimator="@null"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnPresetLast7"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/bg_filter_preset_selector"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Last 7 Days"
+                        android:textAllCaps="false"
+                        android:textColor="@color/selector_filter_preset_text"
+                        android:stateListAnimator="@null"/>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnPresetLast30"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/bg_filter_preset_selector"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="Last 30 Days"
+                        android:textAllCaps="false"
+                        android:textColor="@color/selector_filter_preset_text"
+                        android:stateListAnimator="@null"/>
+                </GridLayout>
+
+                <!-- Custom Range -->
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="16dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="CUSTOM RANGE"
+                        android:textAllCaps="true"
+                        android:textColor="@color/gray_400"
+                        android:textSize="14sp"
+                        android:letterSpacing="0.05"
+                        android:layout_centerVertical="true"/>
+
+                    <TextView
+                        android:id="@+id/tvDisplayDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="October 2023"
+                        android:textColor="@color/home_primary"
+                        android:textSize="14sp"
+                        android:layout_centerVertical="true"/>
+                </RelativeLayout>
+
+                <!-- Calendar Content -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_calendar_container"
+                    android:orientation="vertical"
+                    android:padding="16dp">
+
+                    <!-- Month Navigation -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp">
+                        
+                        <ImageView
+                            android:id="@+id/btnMonthPrev"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_chevron_left"
+                            app:tint="@color/gray_400"
+                            android:layout_alignParentStart="true"/>
+
+                        <TextView
+                            android:id="@+id/tvMonthYear"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerInParent="true"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="October 2023"
+                            android:textColor="@color/home_text_main"
+                            android:textSize="14sp"/>
+
+                        <ImageView
+                            android:id="@+id/btnMonthNext"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_chevron_right"
+                            app:tint="@color/gray_400"
+                            android:layout_alignParentEnd="true"/>
+                    </RelativeLayout>
+                    
+                    <!-- Week Days -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="7"
+                        android:layout_marginBottom="8dp">
+
+                        <TextView style="@style/CalendarDayHeader" android:text="S" />
+                        <TextView style="@style/CalendarDayHeader" android:text="M" />
+                        <TextView style="@style/CalendarDayHeader" android:text="T" />
+                        <TextView style="@style/CalendarDayHeader" android:text="W" />
+                        <TextView style="@style/CalendarDayHeader" android:text="T" />
+                        <TextView style="@style/CalendarDayHeader" android:text="F" />
+                        <TextView style="@style/CalendarDayHeader" android:text="S" />
+                    </LinearLayout>
+
+                    <!-- Days Grid -->
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvCalendarDays"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        tools:listitem="@layout/item_calendar_day"
+                        android:overScrollMode="never"/>
+
+                </LinearLayout>
+
+                <View android:layout_width="match_parent" android:layout_height="100dp"/> <!-- Spacer for bottom bar -->
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <!-- Fixed Bottom Buttons -->
+        <!-- Since we are in a LinearLayout, we actually want this at the bottom inside or outside logic. 
+             If we use CoordinatorLayout with BottomSheetBehaviour, this section might be outside the scrollview.
+             I put it in the main container linear layout which handles the bottom sheet content.
+        -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="16dp"
+            android:background="@drawable/bg_bottom_sheet_footer_blur"
+            android:layout_marginTop="-20dp">
+
+            <TextView
+                android:id="@+id/btnReset"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:paddingVertical="16dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Reset"
+                android:textColor="@color/gray_500"
+                android:textSize="16sp"
+                android:clickable="true"
+                android:foreground="?attr/selectableItemBackground"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnApply"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@drawable/bg_button_primary_rounded"
+                android:fontFamily="sans-serif-medium"
+                android:text="Apply Filter"
+                android:textColor="@color/white"
+                android:textAllCaps="false"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

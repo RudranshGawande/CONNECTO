@@ -12,8 +12,19 @@ import androidx.fragment.app.Fragment;
 
 import androidx.cardview.widget.CardView;
 import com.megaproject.connecto.R;
+import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.FirebaseFirestore;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class HomeFragment extends Fragment {
+
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+    private ImageView ivHeaderProfile;
+    private TextView tvGreeting;
 
     public HomeFragment() {
         // Required empty constructor
@@ -26,6 +37,15 @@ public class HomeFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        ivHeaderProfile = view.findViewById(R.id.ivHeaderProfile);
+        // Assuming there is a greeting textview, if not I'll just skip it or try to find it.
+        // Looking at xml line 120, it doesn't have an ID, it has text "@string/home_greeting".
+        // I won't try to change greeting text right now unless user asked, but user just said "dp".
+        // Code below focuses on DP.
 
         CardView cardLiveTransport = view.findViewById(R.id.cardLiveTransport);
         CardView cardWaste = view.findViewById(R.id.cardWaste);
@@ -154,8 +174,61 @@ public class HomeFragment extends Fragment {
                 }
             });
         }
+        
+        loadUserData();
 
         return view;
+    }
+    
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadUserData();
+    }
+
+    private void loadUserData() {
+        if (mAuth == null) return;
+        FirebaseUser user = mAuth.getCurrentUser();
+        if (user != null && ivHeaderProfile != null) {
+            String email = user.getEmail();
+            
+            // Default: Check Google Photo or Set Default
+            if (user.getPhotoUrl() != null) {
+                 Glide.with(this)
+                    .load(user.getPhotoUrl())
+                    .placeholder(R.drawable.ic_default_profile)
+                    .error(R.drawable.ic_default_profile)
+                    .centerCrop()
+                    .into(ivHeaderProfile);
+            } else {
+                ivHeaderProfile.setImageResource(R.drawable.ic_default_profile);
+            }
+
+            // Sync with Firestore
+            if (email != null) {
+                String safeEmail = email.trim().toLowerCase(java.util.Locale.ROOT);
+                db.collection("users").document(safeEmail).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                             String photoUrl = null;
+                             if (documentSnapshot.contains("photoUrl")) {
+                                 photoUrl = documentSnapshot.getString("photoUrl");
+                             }
+                             
+                             if (photoUrl != null && !photoUrl.isEmpty()) {
+                                 if (getActivity() != null) {
+                                     Glide.with(this)
+                                        .load(photoUrl)
+                                        .placeholder(R.drawable.ic_default_profile)
+                                        .error(R.drawable.ic_default_profile)
+                                        .centerCrop()
+                                        .into(ivHeaderProfile);
+                                 }
+                             }
+                        }
+                    });
+            }
+        }
     }
 
     private void navigateTo(@NonNull Fragment fragment) {

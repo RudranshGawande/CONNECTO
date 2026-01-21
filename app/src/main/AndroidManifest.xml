@@ -51,7 +51,7 @@
         <activity
             android:name="com.yalantis.ucrop.UCropActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.UCrop"/>
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -94,6 +94,11 @@
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
+            android:theme="@style/Theme.UrbanSpace.Light"
+            android:exported="false" />
+        <activity
+            android:name=".CompleteProfileOnboardingActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/Theme.UrbanSpace.Light"
             android:exported="false" />
         <activity
@@ -145,6 +150,11 @@
             android:screenOrientation="portrait"
             android:theme="@style/Theme.UrbanSpace.Light" />
         <activity
+            android:name=".ReportFoundItemActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.UrbanSpace.Light" />
+        <activity
             android:name=".MyLostFoundActivity"
             android:exported="false"
             android:screenOrientation="portrait"
@@ -154,30 +164,16 @@
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.UrbanSpace.Light" />
+
         <activity
-            android:name=".ReportIssueDetailsActivity"
+            android:name=".LocationPickerActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.UrbanSpace.Light" />
-        <activity
-            android:name=".ReportSuccessActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.UrbanSpace.Light" />
-        <activity
-            android:name=".MapSelectionActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.UrbanSpace.Light" />
-        <activity
-            android:name=".MyReportsActivity"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.UrbanSpace.Light" />
-            
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDvgUM2NZaG3q98BhV0W2xqAkSfjU5u5dg" />
+            android:value="AIzaSyCWX4F5OaOEodf2oDRpz9JmMDEt-V4AlT4" />
     </application>
 
 </manifest>
